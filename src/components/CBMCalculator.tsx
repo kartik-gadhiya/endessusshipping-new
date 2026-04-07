@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Plus, Trash2, Copy, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Plus, Trash2, Copy, Check, Package, Lightbulb } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface PackageItem {
   id: string;
@@ -84,13 +82,13 @@ const CBMCalculator = () => {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 bg-gradient-to-br from-[hsl(205_92%_23%)] to-[hsl(186_100%_50%)] rounded-lg flex items-center justify-center">
-              <span className="text-white text-lg font-bold">📦</span>
+              <Package size={20} className="text-white" />
             </div>
             <h2 className="text-3xl font-bold font-heading text-[hsl(205_92%_23%)]">
               CBM Calculator
             </h2>
           </div>
-          <p className="text-gray-600 ml-13">
+          <p className="ml-[3.25rem] text-gray-600">
             Calculate the cubic meter volume of your shipments instantly
           </p>
         </div>
@@ -269,7 +267,10 @@ const CBMCalculator = () => {
             {/* Tips Card */}
             <Card className="border-0 shadow-lg bg-white mt-6">
               <div className="p-6">
-                <h3 className="font-bold text-[hsl(205_92%_23%)] mb-4">💡 Tips</h3>
+                <h3 className="mb-4 flex items-center gap-2 font-bold text-[hsl(205_92%_23%)]">
+                  <Lightbulb size={16} className="text-[hsl(36_87%_55%)]" />
+                  Tips
+                </h3>
                 <ul className="space-y-3 text-sm text-gray-600">
                   <li className="flex gap-2">
                     <span className="text-[hsl(36_87%_55%)] font-bold">•</span>

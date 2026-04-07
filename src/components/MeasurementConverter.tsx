@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRightLeft } from 'lucide-react';
+import { ArrowRightLeft, ListChecks, Ruler } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import {
@@ -69,13 +69,13 @@ const MeasurementConverter = () => {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 bg-gradient-to-br from-[hsl(186_100%_50%)] to-[hsl(36_87%_55%)] rounded-lg flex items-center justify-center">
-              <span className="text-white text-lg font-bold">↔️</span>
+              <Ruler size={20} className="text-white" />
             </div>
             <h2 className="text-3xl font-bold font-heading text-[hsl(205_92%_23%)]">
               Measurement Converter
             </h2>
           </div>
-          <p className="text-gray-600 ml-13">
+          <p className="ml-[3.25rem] text-gray-600">
             Convert between different units of measurement instantly
           </p>
         </div>
@@ -208,7 +208,10 @@ const MeasurementConverter = () => {
         {/* Info Section */}
         <Card className="border-0 shadow-lg bg-white mt-6">
           <div className="p-6">
-            <h3 className="font-bold text-[hsl(205_92%_23%)] mb-4">📋 Supported Units</h3>
+            <h3 className="mb-4 flex items-center gap-2 font-bold text-[hsl(205_92%_23%)]">
+              <ListChecks size={16} className="text-[hsl(36_87%_55%)]" />
+              Supported Units
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <h4 className="font-semibold text-[hsl(186_100%_50%)] mb-2">Metric</h4>
