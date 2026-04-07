@@ -14,7 +14,7 @@ const CTASection = () => {
         backgroundImage: "url(https://endessusshipping.com/wp-content/uploads/2024/09/ship-loaded.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "scroll",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-navy-dark via-navy-dark/95 to-navy/80 mix-blend-multiply" />

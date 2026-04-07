@@ -93,6 +93,15 @@
     scroll-behavior: smooth;
   }
 
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
   section[id] {
     scroll-margin-top: 6rem;
   }
@@ -131,7 +140,7 @@
   }
 
   .home-highlight-panel {
-    @apply relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 shadow-[0_30px_90px_rgba(8,34,62,0.2)] backdrop-blur-xl;
+    @apply relative overflow-hidden rounded-[2rem] border border-[#e3ecfb] bg-[linear-gradient(145deg,#ffffff_0%,#f4f8ff_62%,#edf5ff_100%)] shadow-[0_34px_90px_rgba(8,34,62,0.2)] backdrop-blur-xl;
   }
 
   .home-highlight-panel::before {
@@ -144,6 +153,14 @@
 
   .home-section-shell {
     @apply rounded-[2rem] border border-[#d9e5f7] bg-white/80 p-6 shadow-[0_24px_70px_rgba(10,35,66,0.11)] backdrop-blur-xl md:p-8 lg:p-10;
+  }
+
+  .home-gallery-shell {
+    @apply rounded-[2rem] border border-[#d7e4f7] bg-white/70 p-5 shadow-[0_22px_60px_rgba(10,35,66,0.11)] backdrop-blur-xl sm:p-6;
+  }
+
+  .home-footer-shell {
+    @apply rounded-t-[2rem] border border-white/10 bg-white/[0.02] shadow-[0_30px_80px_rgba(0,0,0,0.28)];
   }
 
   .section-padding {

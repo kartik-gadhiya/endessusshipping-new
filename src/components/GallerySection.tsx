@@ -61,7 +61,7 @@ const GallerySection = () => {
         className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#f4f8ff_0%,#ffffff_58%,#eff6ff_100%)]"
         ref={ref}
       >
-        <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
+        <div className="home-gallery-shell max-w-7xl mx-auto relative z-10 px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}

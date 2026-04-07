@@ -9,21 +9,26 @@ import CTASection from "@/components/CTASection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
+import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
 
-const Index = () => (
-  <div className="home-canvas min-h-screen scroll-smooth overflow-x-hidden">
-    <Navbar />
-    <HeroSlider />
-    <HomepageHighlights />
-    <AboutSection />
-    <ServicesSection />
-    <ReviewsSection />
-    <ShipAnimationSection />
-    <CTASection />
-    <GallerySection />
-    <ContactSection />
-    <FooterSection />
-  </div>
-);
+const Index = () => {
+  useSmoothScrollAnimations();
+
+  return (
+    <div className="home-canvas min-h-screen scroll-smooth overflow-x-hidden">
+      <Navbar />
+      <HeroSlider />
+      <HomepageHighlights />
+      <AboutSection />
+      <ServicesSection />
+      <ReviewsSection />
+      <ShipAnimationSection />
+      <CTASection />
+      <GallerySection />
+      <ContactSection />
+      <FooterSection />
+    </div>
+  );
+};
 
 export default Index;
