@@ -1,613 +1,356 @@
-import { useState, useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import {
+  Anchor,
+  ArrowRight,
+  Award,
+  CheckCircle2,
+  Clock3,
+  Globe2,
+  ShieldCheck,
+  Ship,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
-import { Award, Globe, Zap, Users, CheckCircle2, ArrowRight, Star, Anchor } from "lucide-react";
+import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
 
-// Placeholder icons since they're not in lucide-react
-const Container = ({ className }: { className?: string }) => (
-  <div className={className}>📦</div>
-);
-const Truck = ({ className }: { className?: string }) => (
-  <div className={className}>🚚</div>
-);
-const Shield = ({ className }: { className?: string }) => (
-  <div className={className}>🛡️</div>
-);
-const Warehouse = ({ className }: { className?: string }) => (
-  <div className={className}>🏭</div>
-);
+type IconType = {
+  icon: typeof Anchor;
+  label: string;
+  value: string;
+};
 
-const stats = [
-  { value: "10", label: "Years of Experience", icon: Award },
-  { value: "500+", label: "Shipments per Annum", icon: Zap },
-  { value: "50+", label: "Tons Air Cargo per Annum", icon: Globe },
-  { value: "500+", label: "TEUs Cargo per Annum", icon: Users },
+type ValueCard = {
+  icon: typeof Anchor;
+  title: string;
+  description: string;
+};
+
+type TimelineItem = {
+  year: string;
+  title: string;
+  description: string;
+};
+
+const quickStats: IconType[] = [
+  { icon: Globe2, label: "Network Coverage", value: "100+ Countries" },
+  { icon: Clock3, label: "Operational Support", value: "24/7 Response" },
+  { icon: ShieldCheck, label: "Documentation", value: "Compliance-First" },
+  { icon: Ship, label: "Cargo Capacity", value: "Break Bulk + ODC" },
 ];
 
-const teamValues = [
+const valueCards: ValueCard[] = [
   {
     icon: Anchor,
-    title: "Reliable",
-    desc: "Consistent delivery on every promise",
-  },
-  {
-    icon: Globe,
-    title: "Global",
-    desc: "Connected across continents seamlessly",
-  },
-  {
-    icon: Zap,
-    title: "Efficient",
-    desc: "Optimized routes and processes",
+    title: "Reliability",
+    description: "We execute with discipline so every milestone is predictable and every delivery is dependable.",
   },
   {
     icon: Users,
-    title: "Partnership-Driven",
-    desc: "Your success is our mission",
+    title: "Partnership",
+    description: "Our team works as an extension of yours, with transparent communication from planning to discharge.",
+  },
+  {
+    icon: Award,
+    title: "Specialized Expertise",
+    description: "From project cargo to multimodal freight, we tailor practical solutions for complex movements.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Control & Compliance",
+    description: "Accurate documentation and route-level oversight keep your shipment moving without surprises.",
   },
 ];
 
-const reviews = [
+const timeline: TimelineItem[] = [
   {
-    name: "Tarun Jagani",
-    company: "Tech Solutions",
-    rating: 5,
-    comment: "Outstanding logistics partner with exceptional reliability.",
+    year: "2015",
+    title: "Foundation in Ahmedabad",
+    description: "En Dessus began with a focused mission: dependable freight execution backed by responsive service.",
   },
   {
-    name: "Darshak Patel",
-    company: "Manufacturing Co.",
-    rating: 5,
-    comment: "Professional team and seamless operations throughout.",
+    year: "2019",
+    title: "Expanded Project Cargo Operations",
+    description: "We scaled break bulk and heavy-lift capabilities to support larger industrial consignments.",
   },
   {
-    name: "Hemin Patel",
-    company: "Export Services",
-    rating: 5,
-    comment: "Fast, safe, and cost-effective shipping solutions.",
+    year: "2022",
+    title: "Integrated Visibility Systems",
+    description: "Operations and communication workflows were upgraded to provide clearer shipment coordination.",
+  },
+  {
+    year: "Today",
+    title: "Global Forwarding Partner",
+    description: "We continue serving importers and exporters with agile, compliant, and cost-conscious logistics.",
   },
 ];
-
-const coreServices = [
-  { icon: Container, title: "Supply Chain Solutions", desc: "End-to-end optimization" },
-  { icon: Truck, title: "Transportation", desc: "Multi-modal expertise" },
-  { icon: Shield, title: "Customs & Compliance", desc: "Seamless documentation" },
-  { icon: Warehouse, title: "Warehousing", desc: "Strategic distribution" },
-];
-
-const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const duration = 2000;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, target]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-};
 
 const About = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  useSmoothScrollAnimations(
+    ".about-hero-reveal, .about-shell, .about-card, .about-timeline-item, .about-cta-reveal, .home-footer-shell",
+    30
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50/50 to-white text-foreground">
+    <div className="about-canvas min-h-screen overflow-x-hidden text-foreground">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 px-6 lg:px-12 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-        {/* Animated background elements */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.2, 0.35, 0.2],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 right-10 w-96 h-96 bg-gradient-to-br from-secondary/40 via-cyan-400/15 to-transparent rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-primary/30 via-blue-700/10 to-transparent rounded-full blur-3xl"
-        />
+      <section id="about-top" className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_16%,rgba(34,211,238,0.18),transparent_26%),radial-gradient(circle_at_82%_4%,rgba(245,181,42,0.2),transparent_24%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.92)_100%)]" />
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center"
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-cyan-100/60 rounded-full border border-secondary/50 backdrop-blur-sm hover:bg-cyan-100/80 transition-colors"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-2 h-2 rounded-full bg-secondary"
-              />
-              <span className="text-secondary font-bold text-sm tracking-widest">OUR STORY</span>
-            </motion.div>
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div className="about-hero-reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-primary">
+              <Sparkles size={14} className="text-accent" />
+              About En Dessus Global Forwarding
+            </span>
 
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.1] text-slate-900">
-              <span className="inline-block">About</span>
-              <br />
-              <motion.span
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent"
-              >
-                En Dessus Global
-              </motion.span>
+            <h1 className="mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl lg:text-7xl">
+              Built Around
+              <span className="bg-gradient-to-r from-primary via-blue-700 to-secondary bg-clip-text text-transparent">
+                {" "}Reliable Global Logistics
+              </span>
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-            >
-              Leading the future of global logistics with innovation, reliability, and unwavering commitment to excellence.
-            </motion.p>
-          </motion.div>
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#496686] md:text-xl">
+              We are a service-first freight partner focused on heavy cargo, break bulk, and international forwarding.
+              Our team combines deep route knowledge with practical coordination to keep your movement smooth.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#about-story"
+                className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+              >
+                Our Story
+              </a>
+              <a
+                href="#about-values"
+                className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+              >
+                Core Values
+              </a>
+              <a
+                href="#about-journey"
+                className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+              >
+                Our Journey
+              </a>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
+              >
+                Explore Services
+                <ArrowRight size={18} />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+              >
+                Contact Team
+              </Link>
+            </div>
+          </div>
+
+          <div className="about-shell overflow-hidden rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-5 shadow-[0_28px_62px_rgba(11,36,68,0.14)] lg:p-6">
+            <div className="relative overflow-hidden rounded-[1.4rem] border border-[#d7e5f7]">
+              <img
+                src="/assets/about-image/wolfgang-weiser-467045605-20712621.jpg"
+                alt="En Dessus shipping operations"
+                className="h-[280px] w-full object-cover lg:h-[320px]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(170deg,rgba(8,37,71,0.1)_0%,rgba(8,37,71,0.58)_100%)]" />
+
+              <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/25 bg-white/12 p-4 backdrop-blur-md">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/75">Operational Focus</p>
+                <p className="mt-2 text-lg font-bold text-white md:text-xl">Precision planning from booking to final delivery</p>
+              </div>
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {quickStats.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-3 rounded-xl border border-[#d5e3f6] bg-white/95 px-3.5 py-3"
+                >
+                  <span className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <item.icon size={17} />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#4b688a]">{item.label}</p>
+                    <p className="text-sm font-semibold text-[#1a3c63]">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* History Section */}
-      <section className="py-20 px-6 lg:px-12 bg-white relative z-10 border-t border-slate-100" ref={ref}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center lg:items-start">
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7 }}
-              className="space-y-2"
-            >
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="inline-block text-secondary font-bold text-sm tracking-widest mb-4 uppercase"
-              >
-                OUR HISTORY
-              </motion.span>
-
-              <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-slate-900">
-                Trusted Partner in
-                <br />
-                <span className="bg-gradient-to-r from-primary via-blue-700 to-secondary bg-clip-text text-transparent">
-                  Global Logistics
-                </span>
+      <section id="about-story" className="px-6 pb-20 lg:px-12 lg:pb-24">
+        <div className="about-shell mx-auto max-w-7xl rounded-[2rem] border border-[#d7e4f7] bg-white/86 p-6 shadow-[0_24px_62px_rgba(10,35,66,0.11)] md:p-8 lg:p-10">
+          <div className="grid gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+            <div className="about-card rounded-[1.55rem] border border-[#d8e7f8] bg-[linear-gradient(160deg,#ffffff_0%,#f8fbff_100%)] p-6 md:p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Trusted Freight Partner</p>
+              <h2 className="mt-4 text-balance text-4xl font-black leading-[1.08] text-[#143257] md:text-5xl">
+                Cargo movement backed by clarity, speed, and accountability
               </h2>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="space-y-5 mb-10 text-base lg:text-lg text-slate-700 leading-relaxed"
-              >
-                <p className="border-l-4 border-secondary pl-4">
-                  Founded in Ahmedabad, Gujarat, India, En Dessus Global Forwarding has grown into a Fortune 500 service-oriented logistics powerhouse. We leverage unified technology systems connected through a worldwide network of <span className="font-semibold text-slate-900">340+ locations in 100+ countries</span> across six continents.
-                </p>
-                <p>
-                  Being service-oriented, we don't own the trucks, ships, or airplanes we utilize. This gives us exceptional flexibility to identify the most cost-effective and efficient routes for our clients while maintaining the highest standards of reliability.
-                </p>
-              </motion.div>
+              <p className="mt-5 text-base leading-relaxed text-[#476382] md:text-lg">
+                Founded in Ahmedabad, En Dessus Global Forwarding supports importers and exporters with structured
+                execution across sea, air, and multimodal freight. We stay agile because we focus on service quality,
+                route intelligence, and shipment-level ownership.
+              </p>
 
-              {/* Core Services */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                <h3 className="text-2xl font-bold mb-6 text-slate-900">Our Core Services</h3>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {[
-                    "Supply Chain Solutions",
-                    "Transportation",
-                    "Customs & Compliance",
-                    "Warehousing",
-                  ].map((service, i) => (
-                    <motion.div
-                      key={service}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={inView ? { opacity: 1, x: 0 } : {}}
-                      transition={{
-                        delay: 0.5 + i * 0.1,
-                        duration: 0.5,
-                      }}
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/5 transition-colors"
-                    >
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center">
-                        <CheckCircle2 className="text-secondary" size={18} />
-                      </div>
-                      <span className="font-semibold text-slate-900">{service}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
+              <p className="mt-4 text-base leading-relaxed text-[#476382] md:text-lg">
+                Our clients rely on us for proactive communication, documentation accuracy, and reliable coordination
+                across every milestone from pre-shipment planning to final handover.
+              </p>
 
-            {/* Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7 }}
-              className="relative group"
-            >
-              <div className="relative rounded-3xl overflow-hidden">
-                {/* Multi-layer gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/40 via-blue-300/30 to-secondary/40 z-20" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/10 to-transparent z-15" />
-                
-                {/* Image */}
-                <img
-                  src="assets/about-image/shipping-image-transparent.png"
-                  alt="Global Shipping"
-                  className="w-full h-auto object-cover relative z-10 group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Enhanced shadow */}
-                <div className="absolute inset-0 shadow-2xl shadow-primary/30 rounded-3xl z-5" />
-              </div>
-
-              {/* Animated floating circles */}
-              <motion.div
-                animate={{ y: [0, 25, 0], x: [-5, 5, -5] }}
-                transition={{ duration: 5, repeat: Infinity }}
-                className="absolute -top-8 -right-8 w-40 h-40 bg-gradient-to-br from-cyan-300/40 to-secondary/20 rounded-full blur-3xl z-0"
-              />
-              <motion.div
-                animate={{ y: [0, -20, 0], x: [5, -5, 5] }}
-                transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-                className="absolute -bottom-12 -left-12 w-48 h-48 bg-gradient-to-tr from-blue-400/20 to-cyan-300/10 rounded-full blur-3xl z-0"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-slate-900">Our Impact by Numbers</h2>
-            <p className="text-lg text-slate-600 mb-6">Proven track record in global logistics</p>
-            <div className="w-20 h-1.5 bg-gradient-to-r from-secondary via-cyan-400 to-secondary rounded-full mx-auto" />
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-6 lg:gap-8">
-            {stats.map((stat, i) => {
-              const Icon = stat.icon;
-              
-              // Define colorful icon styles for each stat
-              const iconStyles = [
-                { bg: "from-amber-300/70 to-amber-500/50", text: "text-amber-700", shadow: "shadow-amber-300/50", border: "border-amber-200/60" }, // Years - Gold
-                { bg: "from-cyan-300/70 to-cyan-500/50", text: "text-cyan-700", shadow: "shadow-cyan-300/50", border: "border-cyan-200/60" },   // Shipments - Cyan
-                { bg: "from-orange-300/70 to-orange-500/50", text: "text-orange-700", shadow: "shadow-orange-300/50", border: "border-orange-200/60" }, // Air Cargo - Orange
-                { bg: "from-purple-300/70 to-indigo-500/50", text: "text-indigo-700", shadow: "shadow-purple-300/50", border: "border-indigo-200/60" }  // TEUs - Purple
-              ];
-              
-              const style = iconStyles[i];
-              
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="group relative overflow-hidden rounded-2xl"
-                >
-                  {/* Background gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Card */}
-                  <div className={`relative p-8 lg:p-10 rounded-2xl bg-white border ${style.border} shadow-md hover:shadow-2xl hover:shadow-slate-200/80 transition-all duration-300 flex flex-col items-center justify-between min-h-[300px] text-center`}>
-                    {/* Icon Background */}
-                    <motion.div
-                      initial={{ scale: 0, rotate: -10 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }}
-                      viewport={{ once: true }}
-                      className={`inline-flex p-4 bg-gradient-to-br ${style.bg} rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg ${style.shadow}`}
-                    >
-                      <Icon className={style.text} size={32} />
-                    </motion.div>
-                    
-                    {/* Content Container */}
-                    <div className="flex-1 flex flex-col justify-center w-full">
-                      {/* Number */}
-                      <div className="text-5xl lg:text-6xl font-black text-slate-900 mb-3 leading-tight group-hover:text-slate-950 transition-colors">
-                        <AnimatedCounter target={parseInt(stat.value)} suffix={stat.value.includes("+") ? "+" : ""} />
-                      </div>
-                      
-                      {/* Label */}
-                      <p className="text-base lg:text-lg font-semibold text-slate-700 h-12 flex items-center justify-center">{stat.label}</p>
-                    </div>
-                    
-                    {/* Bottom accent bar */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-${style.text.split('-')[1]}-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Route planning tailored to cargo profile",
+                  "Transparent updates with quick response",
+                  "Compliance-first documentation handling",
+                  "Dedicated support through every phase",
+                ].map((point) => (
+                  <div key={point} className="flex items-start gap-2.5 rounded-lg border border-[#d9e7f8] bg-[#f7fbff] px-3 py-3">
+                    <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-accent" />
+                    <span className="text-sm font-semibold text-[#30567f]">{point}</span>
                   </div>
-                </motion.div>
-              );
-            })}
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              <article className="about-card rounded-[1.4rem] border border-[#d9e8f9] bg-white/95 p-6">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#4b688a]">Vision</p>
+                <h3 className="mt-3 text-2xl font-black text-[#143257]">A smarter global freight experience</h3>
+                <p className="mt-3 text-base leading-relaxed text-[#476382]">
+                  To be the preferred logistics partner for businesses that need dependable execution and real-time
+                  operational confidence.
+                </p>
+              </article>
+
+              <article className="about-card rounded-[1.4rem] border border-[#d9e8f9] bg-white/95 p-6">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#4b688a]">Mission</p>
+                <h3 className="mt-3 text-2xl font-black text-[#143257]">Deliver freight with precision</h3>
+                <p className="mt-3 text-base leading-relaxed text-[#476382]">
+                  To create cost-effective, compliant, and efficient shipping plans for every client through practical
+                  coordination and specialist cargo knowledge.
+                </p>
+              </article>
+
+              <article className="about-card rounded-[1.4rem] border border-[#d9e8f9] bg-[linear-gradient(160deg,#0a2f56_0%,#0b3c6a_55%,#092848_100%)] p-6 text-white shadow-[0_24px_50px_rgba(5,20,44,0.35)]">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Approach</p>
+                <h3 className="mt-3 text-2xl font-black">Execution first, always collaborative</h3>
+                <p className="mt-3 text-base leading-relaxed text-white/80">
+                  We combine close coordination, reliable partners, and disciplined operations to keep your cargo moving
+                  on plan.
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-white via-slate-50/50 to-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-slate-900">What Drives Us</h2>
-            <p className="text-lg text-slate-600 mb-6">Core values that define our commitment</p>
-            <div className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 via-secondary to-cyan-400 rounded-full mx-auto" />
-          </motion.div>
+      <section id="about-values" className="px-6 pb-20 lg:px-12 lg:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="about-shell rounded-[2rem] border border-[#d2e2f7] bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)] p-6 shadow-[0_24px_58px_rgba(10,35,66,0.1)] md:p-8 lg:p-10">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Core Values</p>
+            <h2 className="mt-3 text-balance text-4xl font-black leading-tight text-[#143257] md:text-5xl">
+              What shapes every shipment we handle
+            </h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-[#496686] md:text-lg">
+              Our culture is built around consistency, transparency, and ownership. These principles guide our decisions
+              and define the client experience.
+            </p>
 
-          <div className="grid md:grid-cols-4 gap-6 lg:gap-8">
-            {teamValues.map((value, i) => {
-              const Icon = value.icon;
-              
-              // Define colorful icon styles for each value
-              const iconStyles = [
-                { bg: "from-cyan-300/70 to-cyan-500/50", text: "text-cyan-700", shadow: "shadow-cyan-300/50", border: "border-cyan-200/60" }, // Reliable - Cyan
-                { bg: "from-emerald-300/70 to-emerald-500/50", text: "text-emerald-700", shadow: "shadow-emerald-300/50", border: "border-emerald-200/60" }, // Global - Green
-                { bg: "from-blue-300/70 to-blue-500/50", text: "text-blue-700", shadow: "shadow-blue-300/50", border: "border-blue-200/60" }, // Efficient - Blue
-                { bg: "from-indigo-300/70 to-indigo-500/50", text: "text-indigo-700", shadow: "shadow-indigo-300/50", border: "border-indigo-200/60" } // Partnership - Indigo
-              ];
-              
-              const style = iconStyles[i];
-              
-              return (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="group relative overflow-hidden rounded-2xl"
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {valueCards.map((item) => (
+                <article
+                  key={item.title}
+                  className="about-card rounded-[1.3rem] border border-[#d8e7f8] bg-white/92 p-5 shadow-[0_15px_34px_rgba(10,35,66,0.08)]"
                 >
-                  {/* Background gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Card */}
-                  <div className={`relative p-8 lg:p-10 rounded-2xl bg-white border ${style.border} shadow-md hover:shadow-2xl hover:shadow-slate-200/80 transition-all duration-300`}>
-                    {/* Icon Background */}
-                    <motion.div
-                      initial={{ scale: 0, rotate: -10 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }}
-                      viewport={{ once: true }}
-                      className={`inline-flex p-4 bg-gradient-to-br ${style.bg} rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg ${style.shadow}`}
-                    >
-                      <Icon className={style.text} size={32} />
-                    </motion.div>
-                    
-                    {/* Title */}
-                    <h3 className="text-2xl font-bold mb-3 text-slate-900 group-hover:text-slate-950 transition-colors">{value.title}</h3>
-                    
-                    {/* Description */}
-                    <p className="text-base text-slate-600 leading-relaxed">{value.desc}</p>
-                    
-                    {/* Bottom accent bar */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-${style.text.split('-')[1]}-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  </div>
-                </motion.div>
-              );
-            })}
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <item.icon size={21} />
+                  </span>
+                  <h3 className="mt-4 text-xl font-black text-[#143257]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#4e6b8a]">{item.description}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-white via-slate-50/50 to-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Vision */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-            >
-              {/* Top gradient bar with icon */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="h-24 bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300 origin-left"
-              >
-                <Globe className="text-white group-hover:scale-110 transition-transform duration-300" size={48} />
-              </motion.div>
-              
-              {/* Card content */}
-              <div className="bg-gradient-to-br from-blue-50/60 via-blue-50/40 to-slate-50 p-10 lg:p-12 flex flex-col min-h-[380px]">
-                {/* Title */}
-                <h3 className="text-3xl lg:text-4xl font-bold mb-8 text-slate-900">Our Vision</h3>
-                
-                {/* Description */}
-                <p className="text-base lg:text-lg text-slate-600 leading-relaxed mb-8 flex-1">
-                  To become the top shipping and logistics service provider globally by putting client needs first and creating specialized solutions that save costs while improving experience.
-                </p>
-                
-                {/* Bottom tagline bar */}
-                <div className="bg-gradient-to-r from-blue-100/80 to-blue-50/80 border-t-2 border-blue-300/60 p-6 -mx-10 lg:-mx-12 -mb-12 px-10 lg:px-12 rounded-b-3xl">
-                  <p className="text-lg font-bold text-blue-700">Leading international commerce through innovation and reliability.</p>
-                </div>
-              </div>
-            </motion.div>
+      <section id="about-journey" className="px-6 pb-24 lg:px-12 lg:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="about-shell rounded-[1.8rem] border border-[#d4e3f7] bg-white/88 p-6 shadow-[0_22px_52px_rgba(10,35,66,0.1)] md:p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Our Journey</p>
+            <h2 className="mt-3 text-4xl font-black leading-tight text-[#143257] md:text-5xl">Built for long-term logistics partnerships</h2>
+            <p className="mt-4 text-base leading-relaxed text-[#496686] md:text-lg">
+              We continue evolving our processes, partner network, and operational standards so your business can scale
+              with confidence.
+            </p>
 
-            {/* Mission */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            <Link
+              to="/contact"
+              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.33)]"
             >
-              {/* Top gradient bar with icon */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="h-24 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 flex items-center justify-center group-hover:from-cyan-600 group-hover:via-teal-600 group-hover:to-emerald-600 transition-all duration-300 origin-left"
-              >
-                <Award className="text-white group-hover:scale-110 transition-transform duration-300" size={48} />
-              </motion.div>
-              
-              {/* Card content */}
-              <div className="bg-gradient-to-br from-cyan-50/60 via-cyan-50/40 to-slate-50 p-10 lg:p-12 flex flex-col min-h-[380px]">
-                {/* Title */}
-                <h3 className="text-3xl lg:text-4xl font-bold mb-8 text-slate-900">Our Mission</h3>
-                
-                {/* Description */}
-                <p className="text-base lg:text-lg text-slate-600 leading-relaxed mb-8 flex-1">
-                  To deliver the most reliable, cost-effective, and efficient freight services for heavy lift, break bulk, projects logistics, RORO, and super ODC goods.
-                </p>
-                
-                {/* Bottom tagline bar */}
-                <div className="bg-gradient-to-r from-cyan-100/80 to-cyan-50/80 border-t-2 border-cyan-300/60 p-6 -mx-10 lg:-mx-12 -mb-12 px-10 lg:px-12 rounded-b-3xl">
-                  <p className="text-lg font-bold text-cyan-700">Excellence through teamwork and outstanding execution.</p>
-                </div>
-              </div>
-            </motion.div>
+              Start a Conversation
+              <ArrowRight size={17} />
+            </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Reviews Section */}
-      {/* <section className="py-20 px-6 lg:px-12 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-slate-900">What Our Clients Say</h2>
-            <p className="text-muted-foreground mb-4">Trusted by leading businesses worldwide</p>
-            <div className="w-16 h-1 bg-gradient-to-r from-secondary to-cyan-400 rounded-full mx-auto" />
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {reviews.map((review, i) => (
-              <motion.div
-                key={review.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-secondary/50 hover:shadow-2xl hover:shadow-secondary/15 transition-all duration-300"
+          <div className="relative space-y-4 pl-5 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-[2px] before:bg-[linear-gradient(to_bottom,rgba(19,50,87,0.26),rgba(19,50,87,0.04))]">
+            {timeline.map((item) => (
+              <article
+                key={item.title}
+                className="about-timeline-item relative rounded-[1.3rem] border border-[#d8e7f8] bg-white/94 p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)]"
               >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, j) => (
-                    <Star
-                      key={j}
-                      size={16}
-                      className="fill-accent text-accent"
-                    />
-                  ))}
-                </div>
-                <p className="text-slate-700 mb-6 leading-relaxed">{review.comment}</p>
-                <div>
-                  <h4 className="font-bold text-foreground">{review.name}</h4>
-                  <p className="text-sm text-secondary font-semibold">{review.company}</p>
-                </div>
-              </motion.div>
+                <span className="absolute -left-[22px] top-6 inline-flex h-4 w-4 rounded-full border-2 border-white bg-accent shadow-[0_0_0_3px_rgba(243,173,31,0.2)]" />
+                <p className="text-xs font-bold uppercase tracking-[0.17em] text-[#4b688a]">{item.year}</p>
+                <h3 className="mt-2 text-2xl font-black text-[#143257]">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#4e6b8a] md:text-base">{item.description}</p>
+              </article>
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
-      {/* CTA Section */}
-      {/* <section className="py-32 px-6 lg:px-12 bg-gradient-to-r from-primary via-blue-700 to-secondary relative overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent -z-10"
-        />
+      <section className="about-cta-reveal px-6 pb-24 lg:px-12">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Ready To Move</p>
+          <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
+            Let's design your next shipping plan with confidence
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">
+            Share your route, timeline, and cargo profile. We'll recommend the right service mix and execution flow for
+            reliable movement.
+          </p>
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl lg:text-5xl font-bold text-white mb-8"
-          >
-            Ready to Experience Better Logistics?
-          </motion.h2>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/services">
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 165, 116, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all flex items-center gap-2 shadow-lg"
-              >
-                Explore Services
-                <ArrowRight size={20} />
-              </motion.button>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
+            >
+              Request Free Quote
+              <ArrowRight size={18} />
             </Link>
-            <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-white text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all"
-              >
-                Get in Touch
-              </motion.button>
+            <Link
+              to="/services"
+              className="inline-flex items-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white/90 transition-colors hover:bg-white/18"
+            >
+              Browse Services
             </Link>
-          </motion.div>
+          </div>
         </div>
-      </section> */}
+      </section>
 
       <FooterSection />
     </div>
@@ -615,4 +358,3 @@ const About = () => {
 };
 
 export default About;
-
