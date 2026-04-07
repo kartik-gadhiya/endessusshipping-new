@@ -1,32 +1,44 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock3,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { MapPin, Phone, Mail, Clock, Send, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
 
-const contactInfo = [
+const quickContact = [
   {
     icon: Phone,
-    title: "Phone",
-    details: ["079 4604 6354"],
-    gradient: "from-primary to-secondary",
+    title: "Call Office",
+    value: "079 4604 6354",
+    helper: "Mon - Sat support",
+    href: "tel:+917946046354",
   },
   {
     icon: Mail,
-    title: "Email",
-    details: ["inquiry@endessusshipping.com"],
-    gradient: "from-accent to-yellow-500",
+    title: "Email Team",
+    value: "inquiry@endessusshipping.com",
+    helper: "Fast shipping consultation",
+    href: "mailto:inquiry@endessusshipping.com",
   },
   {
-    icon: Clock,
-    title: "Hours",
-    details: ["Mon - Sat: 10 AM - 7 PM"],
-    gradient: "from-secondary to-accent",
+    icon: Clock3,
+    title: "Response Window",
+    value: "Within 24 hours",
+    helper: "Typical first reply time",
+    href: "#contact-form",
   },
 ];
 
@@ -37,25 +49,29 @@ const offices = [
     address: "A-1035/1036, Sun west bank, Ashram Rd, opp. City Gold cinema",
     fullAddress: "Ahmedabad, Gujarat 380009",
     isHead: true,
-    delay: 0,
   },
   {
     title: "Branch Office",
     city: "Vadodara",
     address: "203, 2nd Floor, Neptune Edge, Vikram Sarabhai Compound",
     fullAddress: "Vadodara, Gujarat - 390 007",
-    delay: 0.1,
+    isHead: false,
   },
   {
     title: "Branch Office",
     city: "Surat",
     address: "C2-1314, Pragati IT Park, Sudama Chowk Road, Meta Varacha",
     fullAddress: "Surat, Gujarat - 394101",
-    delay: 0.2,
+    isHead: false,
   },
 ];
 
 const Contact = () => {
+  useSmoothScrollAnimations(
+    ".contact-hero-reveal, .contact-panel, .contact-card, .contact-form-shell, .contact-office-card, .contact-cta-reveal, .home-footer-shell",
+    30
+  );
+
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -64,19 +80,17 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Send form data to the API endpoint
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -90,14 +104,11 @@ const Contact = () => {
         throw new Error(errorData.error || "Failed to send message");
       }
 
-      const data = await response.json();
-
       toast({
         title: "Message Sent Successfully!",
         description: "Thank you for reaching out. We'll get back to you within 24 hours.",
       });
 
-      // Reset form
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Failed to send message. Please try again.";
@@ -113,505 +124,266 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white text-foreground">
+    <div className="contact-canvas min-h-screen overflow-x-hidden text-foreground">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-32 px-6 lg:px-12 overflow-hidden">
-        {/* Animated background elements */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 right-10 w-96 h-96 bg-gradient-to-br from-accent/20 via-yellow-400/10 to-transparent rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-primary/20 via-cyan-400/10 to-transparent rounded-full blur-3xl"
-        />
+      <main>
+        <section className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_15%,rgba(34,211,238,0.18),transparent_28%),radial-gradient(circle_at_86%_7%,rgba(245,181,42,0.2),transparent_25%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.94)_100%)]" />
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center"
-          >
-            {/* Animated badge */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-gradient-to-r from-accent/10 to-yellow-300/10 rounded-full border border-accent/30 backdrop-blur-sm"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-2 h-2 rounded-full bg-accent"
-              />
-              <span className="text-accent font-bold text-sm tracking-widest">GET IN TOUCH</span>
-            </motion.div>
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
+            <div className="contact-hero-reveal">
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-primary">
+                <Sparkles size={14} className="text-accent" />
+                Let Us Plan Your Shipment
+              </span>
 
-            {/* Main heading */}
-            <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.1]">
-              <span className="inline-block">Let's Connect</span>
-              <br />
-              <motion.span
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent"
-              >
-                & Grow Together
-              </motion.span>
-            </h1>
-
-            {/* Subheading */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-2xl lg:text-3xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-            >
-              Have a shipment? Let us ship it. We're here to handle your logistics with excellence.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Quick Contact Cards */}
-      <section className="py-20 px-6 lg:px-12 bg-white relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {contactInfo.map((info, index) => {
-              const IconComponent = info.icon;
-              return (
-                <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                >
-                  <div className="relative h-full p-8 rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-blue-50/50 hover:border-accent/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/10 overflow-hidden">
-                    {/* Gradient background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    <div className="relative z-10">
-                      <motion.div
-                        whileHover={{ scale: 1.2, rotate: 10 }}
-                        className={`w-16 h-16 bg-gradient-to-br ${info.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-md`}
-                      >
-                        <IconComponent className="text-white" size={32} />
-                      </motion.div>
-
-                      <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                        {info.title}
-                      </h3>
-
-                      <div className="space-y-1">
-                        {info.details.map((detail) => {
-                          if (info.title === "Phone") {
-                            return (
-                              <a
-                                key={detail}
-                                href={`tel:${detail.replace(/\s+/g, "")}`}
-                                className="text-lg font-semibold text-primary hover:text-accent transition-colors cursor-pointer inline-block"
-                              >
-                                {detail}
-                              </a>
-                            );
-                          } else if (info.title === "Email") {
-                            return (
-                              <a
-                                key={detail}
-                                href={`mailto:${detail}`}
-                                className="text-lg font-semibold text-primary hover:text-accent transition-colors cursor-pointer inline-block break-all"
-                              >
-                                {detail}
-                              </a>
-                            );
-                          } else {
-                            return (
-                              <p key={detail} className="text-lg font-semibold text-primary">
-                                {detail}
-                              </p>
-                            );
-                          }
-                        })}
-                      </div>
-
-                      <motion.div
-                        initial={{ scaleX: 0 }}
-                        whileHover={{ scaleX: 1 }}
-                        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-yellow-400 origin-left"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-      </div>
-
-      {/* Office Locations Section */}
-      <section className="py-20 px-6 lg:px-12 bg-gradient-to-b from-white to-blue-50/50 relative overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.05, 1], opacity: [0.1, 0.15, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-full blur-3xl -z-10"
-        />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="inline-block px-4 py-2 bg-primary/10 text-primary font-bold text-sm tracking-widest rounded-full mb-6 border border-primary/30"
-            >
-              LOCATIONS
-            </motion.span>
-
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Global Presence</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Strategic offices across India to serve you better
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {offices.map((office) => (
-              <div
-                key={office.city}
-                className="group h-full"
-              >
-                <div className="relative h-full rounded-3xl bg-white border-2 border-slate-200 hover:border-primary/40 transition-all duration-300 overflow-hidden hover:shadow-lg hover:shadow-primary/10">
-                  {/* Top accent stripe */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
-
-                  {/* Head Office Badge */}
-                  {office.isHead && (
-                    <div className="absolute top-3 right-3 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg shadow-md">
-                      HEADQUARTERS
-                    </div>
-                  )}
-
-                  <div className="relative z-10 p-8 h-full flex flex-col">
-                    {/* Icon */}
-                    <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-md group-hover:shadow-primary/20 transition-shadow">
-                      <Building2 className="text-white" size={28} />
-                    </div>
-
-                    {/* Office Type */}
-                    <p className="text-xs font-bold text-primary tracking-widest mb-2">
-                      {office.title.toUpperCase()}
-                    </p>
-
-                    {/* City Name */}
-                    <h3 className="text-2xl font-bold text-foreground mb-6">
-                      {office.city}
-                    </h3>
-
-                    {/* Address Section */}
-                    <div className="flex-1 space-y-4 mb-6">
-                      {/* Street address */}
-                      <div className="flex gap-3">
-                        <div className="shrink-0 mt-1">
-                          <MapPin className="text-primary" size={18} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-medium text-foreground leading-relaxed">
-                            {office.address}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Postal address */}
-                      <div className="pl-6 pt-2 border-l-2 border-slate-200 group-hover:border-primary/30 transition-colors">
-                        <p className="text-xs font-bold text-primary tracking-wide mb-1">POSTAL ADDRESS</p>
-                        <p className="text-sm font-medium text-slate-700">{office.fullAddress}</p>
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <a
-                      href={`https://maps.google.com/maps?q=${encodeURIComponent(office.fullAddress)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3 px-4 bg-primary text-white font-bold rounded-xl text-center hover:shadow-lg hover:shadow-primary/30 hover:bg-primary/90 transition-all duration-300 text-sm"
-                    >
-                      View on Map
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-      </div>
-
-      {/* Contact Form & Map Section */}
-      <section className="py-20 px-6 lg:px-12 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <span className="inline-block px-4 py-2 bg-accent/10 text-accent font-bold text-sm tracking-widest rounded-full mb-6 border border-accent/30">
-                  CONTACT FORM
+              <h1 className="mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl lg:text-7xl">
+                Contact
+                <span className="bg-gradient-to-r from-primary via-blue-700 to-secondary bg-clip-text text-transparent">
+                  {" "}Our Logistics Team
                 </span>
-              </motion.div>
+              </h1>
 
-              <h2 className="text-5xl lg:text-6xl font-bold mb-4 leading-tight text-foreground">
-                Have a
-              </h2>
-              <motion.h2
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-5xl lg:text-6xl font-bold mb-12 leading-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-              >
-                Shipment?
-              </motion.h2>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#496686] md:text-xl">
+                Share your cargo details, timeline, and destination. We will guide you with a clear service plan and
+                dependable execution support.
+              </p>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-2xl font-semibold text-foreground mb-12"
-              >
-                Let us Ship It.....
-              </motion.p>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <Input
-                      name="name"
-                      placeholder="Full Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="bg-white border-2 border-slate-200 focus:border-primary rounded-xl h-12 px-4 py-3 text-base placeholder:text-slate-400 transition-colors"
-                    />
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <Input
-                      name="email"
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-white border-2 border-slate-200 focus:border-primary rounded-xl h-12 px-4 py-3 text-base placeholder:text-slate-400 transition-colors"
-                    />
-                  </motion.div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <Input
-                      name="phone"
-                      placeholder="Phone Number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="bg-white border-2 border-slate-200 focus:border-primary rounded-xl h-12 px-4 py-3 text-base placeholder:text-slate-400 transition-colors"
-                    />
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.45, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <Input
-                      name="subject"
-                      placeholder="Subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="bg-white border-2 border-slate-200 focus:border-primary rounded-xl h-12 px-4 py-3 text-base placeholder:text-slate-400 transition-colors"
-                    />
-                  </motion.div>
-                </div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#contact-form"
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
                 >
-                  <Textarea
-                    name="message"
-                    placeholder="Message"
-                    value={formData.message}
+                  Send Inquiry
+                  <ArrowRight size={18} />
+                </a>
+                <a
+                  href="tel:+917946046354"
+                  className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+                >
+                  Call Now
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-panel rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-6 shadow-[0_26px_62px_rgba(11,36,68,0.14)] lg:p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Contact Highlights</p>
+
+              <div className="mt-5 grid gap-3">
+                {quickContact.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="contact-card flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 transition-colors hover:border-primary/30"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <item.icon size={17} />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-[#1a3c63]">{item.title}</p>
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b688a]">{item.helper}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#35557c]">{item.value}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact-form" className="px-6 pb-24 lg:px-12 lg:pb-28">
+          <div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">
+            <div className="contact-form-shell rounded-[1.9rem] border border-[#d8e5f7] bg-white/92 p-6 shadow-[0_24px_58px_rgba(10,35,66,0.1)] md:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Inquiry Form</p>
+              <h2 className="mt-3 text-balance text-4xl font-black leading-tight text-[#143257] md:text-5xl">
+                Tell us what you need to ship
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#496686] md:text-lg">
+                The more detail you provide, the faster we can prepare the right route and service recommendation.
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input
+                    name="name"
+                    placeholder="Full Name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="bg-white border-2 border-slate-200 focus:border-primary rounded-xl px-4 py-3 resize-none text-base placeholder:text-slate-400 transition-colors"
+                    className="h-12 rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
                   />
-                </motion.div>
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="h-12 rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
+                  />
+                </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="h-12 rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
+                  />
+                  <Input
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="h-12 rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
+                  />
+                </div>
+
+                <Textarea
+                  name="message"
+                  placeholder="Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className="rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
+                />
+
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary/90 px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-blue-700 to-primary px-6 py-3.5 text-base font-extrabold text-white shadow-[0_14px_28px_rgba(10,35,66,0.28)] transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <motion.div
-                    animate={!isSubmitting ? { x: [0, 5, 0] } : {}}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <Send size={20} />
-                  </motion.div>
+                  <Send size={18} />
                   {isSubmitting ? "Sending..." : "Send Message"}
-                </motion.button>
+                </button>
+
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#496686]">
+                  <CheckCircle2 size={16} className="text-accent" />
+                  We typically respond within 24 hours.
+                </div>
               </form>
+            </div>
 
-              {/* Form Info */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="mt-8 flex items-center gap-3 text-muted-foreground"
-              >
-                <CheckCircle2 className="text-accent" size={20} />
-                <span>We typically respond within 24 hours</span>
-              </motion.div>
-            </motion.div>
-
-            {/* Google Map */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="h-full min-h-[600px] relative"
-            >
-              <div className="absolute inset-0 rounded-3xl overflow-hidden border-2 border-slate-200">
+            <div className="contact-form-shell rounded-[1.9rem] border border-[#d8e5f7] bg-white/92 p-5 shadow-[0_24px_58px_rgba(10,35,66,0.1)] md:p-6">
+              <div className="overflow-hidden rounded-[1.2rem] border border-[#dce8f8]">
                 <iframe
                   loading="lazy"
                   src="https://maps.google.com/maps?q=EN%20DESSUS%20GLOBAL%20FORWARDING%20PVT.%20LTD.&t=m&z=16&output=embed&iwloc=near"
                   title="EN DESSUS GLOBAL FORWARDING PVT. LTD."
                   aria-label="EN DESSUS GLOBAL FORWARDING PVT. LTD."
                   width="100%"
-                  height="100%"
+                  height="420"
                   style={{ border: 0 }}
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
+                  className="w-full"
                 />
               </div>
-            </motion.div>
+
+              <div className="mt-5 rounded-xl border border-[#d9e7f8] bg-[#f7fbff] p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">Primary Office</p>
+                <p className="mt-2 text-sm font-semibold text-[#1a3c63]">
+                  A-1035/1036, Sun west bank, Ashram Rd, opp. City Gold cinema, Ahmedabad, Gujarat 380009
+                </p>
+                <a
+                  href="https://maps.google.com/maps?q=Ahmedabad%2C%20Gujarat%20380009"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-primary"
+                >
+                  Open in Google Maps
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+
+              <div className="mt-4 rounded-xl border border-primary/20 bg-primary/10 p-4 text-sm font-semibold text-[#1f446f]">
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-primary" />
+                  Reliable cargo coordination from inquiry to final delivery.
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 lg:px-12 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 relative overflow-hidden">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-40 -right-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl"
-        />
+        <section className="px-6 pb-24 lg:px-12">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-4 md:grid-cols-3">
+              {offices.map((office) => (
+                <article
+                  key={office.city}
+                  className="contact-office-card rounded-[1.3rem] border border-[#d7e4f7] bg-white/90 p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)]"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">{office.title}</p>
+                      <h3 className="mt-1 text-2xl font-black text-[#143257]">{office.city}</h3>
+                    </div>
+                    {office.isHead && (
+                      <span className="rounded-full border border-accent/40 bg-accent/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#6d5011]">
+                        HQ
+                      </span>
+                    )}
+                  </div>
 
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Ship?</span>
+                  <div className="mt-4 flex gap-2.5">
+                    <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
+                    <p className="text-sm font-semibold leading-relaxed text-[#35557c]">{office.address}</p>
+                  </div>
+
+                  <p className="mt-3 border-l-2 border-[#d8e7f8] pl-3 text-sm font-semibold text-[#4e6b8a]">
+                    {office.fullAddress}
+                  </p>
+
+                  <a
+                    href={`https://maps.google.com/maps?q=${encodeURIComponent(office.fullAddress)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-primary"
+                  >
+                    View on Map
+                    <ArrowRight size={14} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="contact-cta-reveal px-6 pb-24 lg:px-12">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Ready To Move</p>
+            <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
+              Start your next shipment with a confident plan
             </h2>
-            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Our logistics experts are available 24/7. Contact us today and let's start your shipping journey!
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">
+              Our freight specialists can recommend the best service mix for your cargo type, route, and timeline.
             </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            >
-              <a href="tel:079-4604-6354">
-                <Button className="bg-gradient-to-r from-accent via-yellow-400 to-accent px-10 py-6 text-lg font-bold text-primary hover:shadow-md hover:shadow-accent/20 rounded-full transition-all duration-300">
-                  Call Us Now
-                </Button>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="tel:+917946046354"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
+              >
+                Call Us Now
+                <ArrowRight size={18} />
               </a>
-              <a href="mailto:inquiry@endessusshipping.com">
-                <Button variant="outline" className="px-10 py-6 text-lg font-bold border-2 border-primary text-primary hover:bg-primary/5 rounded-full transition-all duration-300">
-                  Send Email
-                </Button>
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+              <Link
+                to="/services"
+                className="inline-flex items-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white/90 transition-colors hover:bg-white/18"
+              >
+                Explore Services
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <FooterSection />
     </div>
