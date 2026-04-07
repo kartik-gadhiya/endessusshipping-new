@@ -8,10 +8,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import FooterSection from "@/components/FooterSection";
 import CBMCalculator from "@/components/CBMCalculator";
 import MeasurementConverter from "@/components/MeasurementConverter";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
+import { absoluteUrl, createBreadcrumbSchema } from "@/lib/seo";
 
 const highlights = [
   { icon: Boxes, label: "CBM Precision", value: "Multi-package volume" },
@@ -19,6 +21,22 @@ const highlights = [
   { icon: Clock3, label: "Fast Workflow", value: "Real-time calculation" },
   { icon: ShieldCheck, label: "Reliable Output", value: "Shipping-ready figures" },
 ];
+
+const toolsSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "CBM Calculator and Measurement Converter",
+  url: absoluteUrl("/tools"),
+  description:
+    "Use En Dessus tools to calculate CBM and convert cargo measurements for faster shipping and freight planning.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "All",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "INR",
+  },
+};
 
 const Tools = () => {
   useSmoothScrollAnimations(
@@ -28,6 +46,25 @@ const Tools = () => {
 
   return (
     <div className="tools-canvas min-h-screen overflow-x-hidden text-foreground">
+      <SEO
+        title="CBM Calculator and Measurement Converter for Shipping"
+        description="Use practical shipping tools to calculate CBM, convert measurements, and prepare accurate import-export freight plans."
+        path="/tools"
+        keywords={[
+          "cbm calculator for shipping",
+          "freight measurement converter",
+          "cargo volume calculator",
+          "import export planning tools",
+          "shipping utility tools",
+        ]}
+        schema={[
+          createBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Tools", path: "/tools" },
+          ]),
+          toolsSchema,
+        ]}
+      />
       <Navbar />
 
       <main>

@@ -13,8 +13,10 @@ import {
   X,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import FooterSection from "@/components/FooterSection";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
+import { absoluteUrl, createBreadcrumbSchema } from "@/lib/seo";
 
 type GalleryCategory =
   | "All"
@@ -64,6 +66,25 @@ const galleryImages: GalleryItem[] = [
   { id: 23, image: "/assets/gallery/IMG-20241017-WA0086-1.jpg", alt: "Global Shipping", category: "Port Operations" },
   { id: 24, image: "/assets/gallery/IMG-20241017-WA0087-1.jpg", alt: "Customs Clearance", category: "Container Handling" },
 ];
+
+const galleryCollectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Import Export Logistics Gallery",
+  url: absoluteUrl("/gallery"),
+  description:
+    "Gallery of container handling, cargo movement, warehouse operations, and global shipping activity by En Dessus Global Forwarding.",
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: galleryImages.length,
+    itemListElement: galleryImages.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.alt,
+      url: absoluteUrl(item.image),
+    })),
+  },
+};
 
 const Gallery = () => {
   useSmoothScrollAnimations(
@@ -136,6 +157,25 @@ const Gallery = () => {
 
   return (
     <div className="gallery-canvas min-h-screen overflow-x-hidden text-foreground">
+      <SEO
+        title="Shipping and Logistics Operations Gallery"
+        description="Explore real photos of port operations, container handling, cargo movement, and warehouse logistics managed by En Dessus Global Forwarding."
+        path="/gallery"
+        keywords={[
+          "shipping operations gallery",
+          "container handling photos",
+          "logistics company gallery",
+          "port operations images",
+          "cargo movement examples",
+        ]}
+        schema={[
+          createBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Gallery", path: "/gallery" },
+          ]),
+          galleryCollectionSchema,
+        ]}
+      />
       <Navbar />
 
       <main>
@@ -281,6 +321,8 @@ const Gallery = () => {
                       <img
                         src={item.image}
                         alt={item.alt}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         onError={(event) => {
                           event.currentTarget.src = "/placeholder.svg";

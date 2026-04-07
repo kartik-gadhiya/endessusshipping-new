@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const services = [
   {
     id: "sea-freight",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/1-2.jpg",
+    image: "/assets/service-gallery/1-2.jpg",
     icon: Ship,
     title: "SEA FREIGHT",
     subtitle: "Import/Export",
@@ -15,7 +15,7 @@ const services = [
   },
   {
     id: "air-freight",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/2-1.jpg",
+    image: "/assets/service-gallery/2-1.jpg",
     icon: Plane,
     title: "AIR FREIGHT",
     subtitle: "Import/Export",
@@ -24,7 +24,7 @@ const services = [
   },
   {
     id: "cross-country",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/3-1.jpg",
+    image: "/assets/service-gallery/3-1.jpg",
     icon: Truck,
     title: "GROUND TRANSPORT",
     subtitle: "Domestic & International",
@@ -33,7 +33,7 @@ const services = [
   },
   {
     id: "customs-clearance",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/4-1.jpg",
+    image: "/assets/service-gallery/4-1.jpg",
     icon: FileCheck,
     title: "CUSTOMS CLEARANCE",
     subtitle: "Documentation",
@@ -42,7 +42,7 @@ const services = [
   },
   {
     id: "transport-services",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/5-1.jpg",
+    image: "/assets/service-gallery/5-1.jpg",
     icon: Truck,
     title: "TRANSPORT SERVICES",
     subtitle: "Logistics",
@@ -51,7 +51,7 @@ const services = [
   },
   {
     id: "project-cargo",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/6-2.jpg",
+    image: "/assets/service-gallery/6-2.jpg",
     icon: Package,
     title: "PROJECT CARGO",
     subtitle: "Heavy Equipment",
@@ -60,7 +60,7 @@ const services = [
   },
   {
     id: "chartering",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/7.jpg",
+    image: "/assets/service-gallery/7.jpg",
     icon: Anchor,
     title: "BREAK BULK",
     subtitle: "Chartering",
@@ -69,7 +69,7 @@ const services = [
   },
   {
     id: "value-added",
-    image: "https://endessusshipping.com/wp-content/uploads/2024/09/8.jpg",
+    image: "/assets/service-gallery/8.jpg",
     icon: Package,
     title: "VALUE-ADDED",
     subtitle: "Premium Services",
@@ -150,7 +150,9 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
       <div className="aspect-video overflow-hidden relative">
         <img
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} logistics service`}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
         {/* Overlay */}

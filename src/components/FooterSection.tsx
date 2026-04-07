@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Anchor, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Anchor, Facebook, Linkedin, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -31,25 +31,25 @@ const FooterSection = () => (
           </p>
           <div className="flex gap-3">
             <motion.a
-              href="https://facebook.com/endessusshipping"
+              href="https://www.facebook.com/endessus/"
               whileHover={{ scale: 1.1 }}
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
             >
               <Facebook size={18} />
             </motion.a>
             <motion.a
-              href="https://linkedin.com/company/endessusshipping"
+              href="https://www.linkedin.com/company/en-dessus-global-forwarding-pvt-ltd/?originalSubdomain=in"
               whileHover={{ scale: 1.1 }}
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
             >
               <Linkedin size={18} />
             </motion.a>
             <motion.a
-              href="https://twitter.com/endessusshipping"
+              href="https://www.instagram.com/en_dessus"
               whileHover={{ scale: 1.1 }}
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
             >
-              <Twitter size={18} />
+              <Instagram size={18} />
             </motion.a>
           </div>
         </motion.div>

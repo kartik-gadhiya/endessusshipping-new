@@ -12,8 +12,10 @@ import {
   Users,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import FooterSection from "@/components/FooterSection";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
+import { absoluteUrl, createBreadcrumbSchema } from "@/lib/seo";
 
 type IconType = {
   icon: typeof Anchor;
@@ -86,6 +88,15 @@ const timeline: TimelineItem[] = [
   },
 ];
 
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About En Dessus Global Forwarding",
+  url: absoluteUrl("/about"),
+  description:
+    "Learn about En Dessus Global Forwarding, our logistics background, mission, and service-first approach for import export businesses.",
+};
+
 const About = () => {
   useSmoothScrollAnimations(
     ".about-hero-reveal, .about-shell, .about-card, .about-timeline-item, .about-cta-reveal, .home-footer-shell",
@@ -94,9 +105,29 @@ const About = () => {
 
   return (
     <div className="about-canvas min-h-screen overflow-x-hidden text-foreground">
+      <SEO
+        title="About En Dessus Global Forwarding"
+        description="Discover En Dessus Global Forwarding’s story, mission, and logistics expertise in sea freight, project cargo, break bulk, and import-export coordination."
+        path="/about"
+        keywords={[
+          "about freight forwarding company",
+          "import export logistics partner",
+          "project cargo specialists",
+          "break bulk shipping company",
+          "Ahmedabad logistics experts",
+        ]}
+        schema={[
+          createBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+          aboutPageSchema,
+        ]}
+      />
       <Navbar />
 
-      <section id="about-top" className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
+      <main>
+        <section id="about-top" className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_16%,rgba(34,211,238,0.18),transparent_26%),radial-gradient(circle_at_82%_4%,rgba(245,181,42,0.2),transparent_24%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.92)_100%)]" />
 
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
@@ -160,7 +191,8 @@ const About = () => {
             <div className="relative overflow-hidden rounded-[1.4rem] border border-[#d7e5f7]">
               <img
                 src="/assets/about-image/wolfgang-weiser-467045605-20712621.jpg"
-                alt="En Dessus shipping operations"
+                alt="En Dessus Global Forwarding cargo and shipping operations"
+                decoding="async"
                 className="h-[280px] w-full object-cover lg:h-[320px]"
               />
               <div className="absolute inset-0 bg-[linear-gradient(170deg,rgba(8,37,71,0.1)_0%,rgba(8,37,71,0.58)_100%)]" />
@@ -191,7 +223,7 @@ const About = () => {
         </div>
       </section>
 
-      <section id="about-story" className="px-6 pb-20 lg:px-12 lg:pb-24">
+        <section id="about-story" className="px-6 pb-20 lg:px-12 lg:pb-24">
         <div className="about-shell mx-auto max-w-7xl rounded-[2rem] border border-[#d7e4f7] bg-white/86 p-6 shadow-[0_24px_62px_rgba(10,35,66,0.11)] md:p-8 lg:p-10">
           <div className="grid gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
             <div className="about-card rounded-[1.55rem] border border-[#d8e7f8] bg-[linear-gradient(160deg,#ffffff_0%,#f8fbff_100%)] p-6 md:p-7">
@@ -258,7 +290,7 @@ const About = () => {
         </div>
       </section>
 
-      <section id="about-values" className="px-6 pb-20 lg:px-12 lg:pb-24">
+        <section id="about-values" className="px-6 pb-20 lg:px-12 lg:pb-24">
         <div className="mx-auto max-w-7xl">
           <div className="about-shell rounded-[2rem] border border-[#d2e2f7] bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)] p-6 shadow-[0_24px_58px_rgba(10,35,66,0.1)] md:p-8 lg:p-10">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Core Values</p>
@@ -288,7 +320,7 @@ const About = () => {
         </div>
       </section>
 
-      <section id="about-journey" className="px-6 pb-24 lg:px-12 lg:pb-28">
+        <section id="about-journey" className="px-6 pb-24 lg:px-12 lg:pb-28">
         <div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="about-shell rounded-[1.8rem] border border-[#d4e3f7] bg-white/88 p-6 shadow-[0_22px_52px_rgba(10,35,66,0.1)] md:p-8">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Our Journey</p>
@@ -323,7 +355,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="about-cta-reveal px-6 pb-24 lg:px-12">
+        <section className="about-cta-reveal px-6 pb-24 lg:px-12">
         <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Ready To Move</p>
           <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
@@ -350,7 +382,8 @@ const About = () => {
             </Link>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <FooterSection />
     </div>

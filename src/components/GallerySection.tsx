@@ -230,6 +230,8 @@ const GallerySection = () => {
                   key={active.src}
                   src={active.src}
                   alt={active.title}
+                  loading="lazy"
+                  decoding="async"
                   initial={{ opacity: 0.2, scale: 1.06 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 1.03 }}
@@ -314,6 +316,8 @@ const GallerySection = () => {
                           <img
                             src={item.src}
                             alt={item.title}
+                            loading="lazy"
+                            decoding="async"
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>
@@ -361,7 +365,13 @@ const GallerySection = () => {
                       : "border-[#d5e4f7] opacity-70 hover:opacity-100"
                   }`}
                 >
-                  <img src={item.src} alt={item.title} className="h-full w-full object-cover" />
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(9,29,54,0.72)_100%)]" />
                   <span className="absolute bottom-1.5 left-2 text-[10px] font-bold uppercase tracking-[0.1em] text-white/85">
                     {String(index + 1).padStart(2, "0")}

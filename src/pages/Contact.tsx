@@ -12,11 +12,18 @@ import {
   Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import FooterSection from "@/components/FooterSection";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
+import {
+  BRAND_LEGAL_NAME,
+  BUSINESS_CONTACT,
+  absoluteUrl,
+  createBreadcrumbSchema,
+} from "@/lib/seo";
 
 const quickContact = [
   {
@@ -65,6 +72,30 @@ const offices = [
     isHead: false,
   },
 ];
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact En Dessus Global Forwarding",
+  url: absoluteUrl("/contact"),
+  description:
+    "Contact En Dessus Global Forwarding for import-export shipping support, freight rates, and cargo planning help.",
+  mainEntity: {
+    "@type": "Organization",
+    name: BRAND_LEGAL_NAME,
+    telephone: BUSINESS_CONTACT.internationalPhone,
+    email: BUSINESS_CONTACT.email,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: BUSINESS_CONTACT.internationalPhone,
+        email: BUSINESS_CONTACT.email,
+        availableLanguage: ["en"],
+      },
+    ],
+  },
+};
 
 const Contact = () => {
   useSmoothScrollAnimations(
@@ -125,6 +156,25 @@ const Contact = () => {
 
   return (
     <div className="contact-canvas min-h-screen overflow-x-hidden text-foreground">
+      <SEO
+        title="Contact Our Import Export Logistics Team"
+        description="Get in touch with En Dessus Global Forwarding for shipping quotes, customs guidance, project cargo support, and import-export logistics planning."
+        path="/contact"
+        keywords={[
+          "contact freight forwarding company",
+          "shipping quote request",
+          "import export logistics contact",
+          "customs clearance consultation",
+          "project cargo inquiry",
+        ]}
+        schema={[
+          createBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+          contactPageSchema,
+        ]}
+      />
       <Navbar />
 
       <main>

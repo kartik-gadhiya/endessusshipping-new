@@ -15,6 +15,8 @@ const ReviewCard = ({ review, index }: { review: GoogleReview; index: number }) 
       <img
         src={review.avatar}
         alt={review.name}
+        loading="lazy"
+        decoding="async"
         className="w-12 h-12 rounded-full object-cover border-2 border-accent/20"
       />
       <div>
@@ -108,7 +110,7 @@ const ReviewsSection = () => {
                 role="button" 
                 aria-label="Write a review to Google" 
                 target="_blank" 
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="bg-[#4285F4] hover:bg-[#3367d6] text-white font-semibold py-3 px-6 rounded-lg transition-colors text-sm w-full shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2"
               >
                 Write a review
