@@ -178,7 +178,7 @@ const Contact = () => {
       <Navbar />
 
       <main>
-        <section className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
+        <section className="relative overflow-hidden px-6 pb-20 pt-40 sm:pt-44 lg:px-12 lg:pb-24 lg:pt-40">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_15%,rgba(34,211,238,0.18),transparent_28%),radial-gradient(circle_at_86%_7%,rgba(245,181,42,0.2),transparent_25%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.94)_100%)]" />
 
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
@@ -225,18 +225,20 @@ const Contact = () => {
                   <a
                     key={item.title}
                     href={item.href}
-                    className="contact-card flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 transition-colors hover:border-primary/30"
+                    className="contact-card flex flex-col gap-3 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 transition-colors hover:border-primary/30 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex min-w-0 items-center gap-3">
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                         <item.icon size={17} />
                       </span>
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-sm font-semibold text-[#1a3c63]">{item.title}</p>
                         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b688a]">{item.helper}</p>
                       </div>
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#35557c]">{item.value}</span>
+                    <span className="w-full break-all text-left text-sm font-bold tracking-[0.04em] text-[#35557c] sm:w-auto sm:text-right sm:text-xs sm:uppercase sm:tracking-[0.12em]">
+                      {item.value}
+                    </span>
                   </a>
                 ))}
               </div>
