@@ -125,6 +125,15 @@
       linear-gradient(180deg, rgba(242, 247, 255, 0.55) 0%, rgba(255, 255, 255, 1) 26%, rgba(247, 251, 255, 1) 100%);
   }
 
+  .services-canvas {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 8% 10%, rgba(14, 116, 144, 0.09), transparent 24%),
+      radial-gradient(circle at 90% 6%, rgba(245, 181, 42, 0.1), transparent 30%),
+      linear-gradient(180deg, rgba(245, 249, 255, 1) 0%, rgba(255, 255, 255, 1) 44%, rgba(241, 247, 255, 1) 100%);
+  }
+
   .home-canvas::before {
     content: "";
     position: absolute;

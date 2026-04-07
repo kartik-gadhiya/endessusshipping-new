@@ -1,243 +1,205 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { servicesData } from "@/data/services";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock3,
+  Globe2,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { servicesData } from "@/data/services";
+import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
+
+const quickStats = [
+  { icon: Globe2, label: "Global Lanes", value: "50+" },
+  { icon: Clock3, label: "Support", value: "24/7" },
+  { icon: ShieldCheck, label: "Compliance", value: "Trusted" },
+];
 
 const Services = () => {
+  useSmoothScrollAnimations(
+    ".services-hero-reveal, .services-panel, .services-card, .services-cta-reveal, .home-footer-shell",
+    30
+  );
+
   return (
-    <div className="min-h-screen bg-white text-foreground">
+    <div className="services-canvas min-h-screen overflow-x-hidden text-foreground">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 bg-gradient-to-b from-slate-50 via-blue-50/30 to-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 -left-32 w-64 h-64 bg-primary/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 2 }}
-          className="absolute -bottom-32 -right-32 w-64 h-64 bg-accent/20 rounded-full blur-3xl"
-        />
+      <section id="services-top" className="relative overflow-hidden px-6 pb-24 pt-36 lg:px-12 lg:pb-28 lg:pt-40">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(34,211,238,0.17),transparent_28%),radial-gradient(circle_at_86%_8%,rgba(245,181,42,0.2),transparent_26%),linear-gradient(180deg,rgba(245,249,255,0.9)_0%,rgba(255,255,255,0.95)_42%,rgba(239,246,255,0.95)_100%)]" />
 
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <span className="inline-block px-4 py-2 bg-accent/10 text-accent font-bold text-sm tracking-widest uppercase rounded-full mb-6 border border-accent/30">
-              Complete Solutions
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div className="services-hero-reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-primary">
+              <Sparkles size={14} className="text-accent" />
+              Complete Logistics Portfolio
             </span>
-            <h1 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
-                Global Shipping
+
+            <h1 className="mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl lg:text-7xl">
+              Services Designed For
+              <span className="bg-gradient-to-r from-primary via-blue-700 to-secondary bg-clip-text text-transparent">
+                {" "}Reliable Global Cargo
               </span>
-              <br />
-              <span className="text-foreground">Made Simple & Reliable</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-2">
-              From sea and air freight to customs clearance and premium logistics,
+
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#476382] md:text-xl">
+              From planning and documentation to freight execution and final-mile coordination,
+              our team delivers end-to-end shipping solutions with speed and control.
             </p>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              we deliver comprehensive solutions for your international business.
-            </p>
-          </motion.div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              {servicesData.slice(0, 4).map((service) => (
+                <a
+                  key={service.id}
+                  href={`#${service.id}`}
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  {service.title}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="services-panel rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-6 shadow-[0_26px_62px_rgba(11,36,68,0.14)] lg:p-7">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Why Businesses Choose Us</p>
+
+            <div className="mt-5 grid gap-3">
+              {quickStats.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <item.icon size={17} />
+                    </span>
+                    <span className="text-sm font-semibold text-[#1a3c63]">{item.label}</span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">{item.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_14px_30px_rgba(243,173,31,0.35)]"
+            >
+              Discuss Your Shipment
+              <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Zigzag Services Section */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-white via-blue-50/20 to-white relative">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 pb-24 lg:px-12 lg:pb-28">
+        <div className="mx-auto max-w-7xl space-y-10">
           {servicesData.map((service, index) => {
             const IconComponent = service.icon;
-            const isEven = index % 2 === 0;
+            const imageFirst = index % 2 === 0;
 
             return (
-              <motion.div
+              <article
                 key={service.id}
                 id={service.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="mb-24 last:mb-0 scroll-mt-36"
+                className="services-card scroll-mt-36 grid gap-6 overflow-hidden rounded-[1.9rem] border border-[#d8e5f7] bg-white/90 p-4 shadow-[0_24px_55px_rgba(10,35,66,0.1)] lg:grid-cols-2 lg:items-stretch lg:p-6"
               >
-                <div
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                    isEven ? "lg:grid-cols-[1fr_1fr]" : "lg:grid-cols-[1fr_1fr]"
-                  }`}
-                >
-                  {/* Image Side */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -50 : 50, scale: 0.95 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ duration: 0.7, ease: "easeOut" }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`group relative overflow-hidden rounded-3xl ${
-                      isEven ? "lg:order-1" : "lg:order-2"
-                    }`}
-                  >
-                    <div className="relative h-96 overflow-hidden rounded-3xl">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "https://images.unsplash.com/photo-1616400619596-5f3379eaa59d?w=800&h=600&fit=crop";
-                        }}
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                      {/* Icon Badge */}
-                      <motion.div
-                        whileHover={{ scale: 1.15, rotate: 5 }}
-                        className="absolute top-6 right-6 bg-gradient-to-br from-accent to-yellow-500 p-4 rounded-2xl shadow-2xl shadow-accent/40"
-                      >
-                        <IconComponent className="text-white" size={32} />
-                      </motion.div>
+                <div className={`${imageFirst ? "lg:order-1" : "lg:order-2"}`}>
+                  <div className="relative h-72 overflow-hidden rounded-2xl lg:h-full">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
+                    <div className="absolute right-5 top-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/25 bg-white/90 text-primary shadow-lg">
+                      <IconComponent size={24} />
                     </div>
+                  </div>
+                </div>
 
-                    {/* Decorative accent line */}
-                    <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-accent via-yellow-400 to-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  </motion.div>
-
-                  {/* Content Side */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className={`${isEven ? "lg:order-2" : "lg:order-1"}`}
-                  >
-                    {/* Service Number Badge */}
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-accent/20 to-yellow-400/20 rounded-full mb-6 border border-accent/30">
-                      <span className="text-accent font-bold text-lg">
+                <div className={`flex flex-col justify-between ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
+                  <div>
+                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent/25 text-[10px] text-primary">
                         {String(index + 1).padStart(2, "0")}
                       </span>
+                      Core Service
                     </div>
 
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight">
-                      {service.title}
-                    </h2>
+                    <h2 className="text-3xl font-black leading-tight text-[#143257] md:text-4xl">{service.title}</h2>
 
-                    <div className="w-16 h-1.5 bg-gradient-to-r from-accent to-yellow-400 rounded-full mb-8" />
-
-                    <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                    <p className="mt-5 text-base leading-relaxed text-[#4a6686] md:text-lg">
                       {service.description}
                     </p>
 
-                    {/* Features or highlights could go here in the future */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Link to="/contact" className="flex-1 sm:flex-none">
-                        <motion.button
-                          whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 165, 116, 0.3)" }}
-                          whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center gap-2 bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 rounded-full font-bold text-primary shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all duration-300"
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {[
+                        "Dedicated Coordination",
+                        "End-to-End Visibility",
+                        "Regulatory Support",
+                      ].map((point) => (
+                        <span
+                          key={point}
+                          className="inline-flex items-center gap-1 rounded-full border border-[#d3e1f3] bg-[#f6f9ff] px-3 py-1 text-xs font-semibold text-[#35557c]"
                         >
-                          MAKE INQUIRY
-                          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </motion.button>
-                      </Link>
+                          <CheckCircle2 size={12} className="text-accent" />
+                          {point}
+                        </span>
+                      ))}
                     </div>
-                  </motion.div>
+                  </div>
+
+                  <div className="mt-7 flex flex-wrap gap-3">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_26px_rgba(243,173,31,0.32)]"
+                    >
+                      Make Inquiry
+                      <ArrowRight size={17} />
+                    </Link>
+                    <a
+                      href="#services-top"
+                      className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+                    >
+                      Back to Top
+                    </a>
+                  </div>
                 </div>
-              </motion.div>
+              </article>
             );
           })}
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="px-6 lg:px-12">
-        <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-      </div>
+      <section className="services-cta-reveal px-6 pb-24 lg:px-12">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#cadcf5] bg-[linear-gradient(160deg,#09274a_0%,#0c335e_55%,#0a2341_100%)] p-8 text-white shadow-[0_28px_70px_rgba(3,15,34,0.42)] md:p-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Let’s Build Your Shipping Plan</p>
+          <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
+            Ready to move your cargo with confidence?
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">
+            Share your timeline, route, and cargo details. We’ll propose the right service mix with
+            transparent coordination and dependable execution.
+          </p>
 
-      {/* Final CTA Section */}
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-white to-blue-50/30 relative overflow-hidden">
-        {/* Decorative elements */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-0"
-        />
-
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Ready to Partner
-              </span>
-              <br />
-              <span className="text-foreground">with us?</span>
-            </h2>
-
-            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              Our team of logistics experts is ready to provide you with customized solutions
-              tailored to your unique shipping and cargo requirements.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link to="/contact" className="block">
-                  <Button className="bg-gradient-to-r from-accent via-yellow-400 to-accent px-10 py-6 text-lg font-bold text-primary hover:shadow-xl hover:shadow-accent/40 rounded-full transition-all duration-300">
-                    Get Free Quote
-                  </Button>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link to="/">
-                  <Button
-                    variant="outline"
-                    className="px-10 py-6 text-lg font-bold border-2 border-primary text-primary hover:bg-primary/5 rounded-full transition-all duration-300"
-                  >
-                    Back to Homepage
-                  </Button>
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="flex justify-center gap-8 text-muted-foreground text-sm"
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
             >
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full" />
-                <span>24/7 Support</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full" />
-                <span>Global Network</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full" />
-                <span>Expert Team</span>
-              </div>
-            </motion.div>
-          </motion.div>
+              Get Free Quote
+              <ArrowRight size={18} />
+            </Link>
+            <Link
+              to="/"
+              className="inline-flex items-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white/90 transition-colors hover:bg-white/18"
+            >
+              Back to Homepage
+            </Link>
+          </div>
         </div>
       </section>
 
