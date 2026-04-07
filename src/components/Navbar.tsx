@@ -49,7 +49,7 @@ const Navbar = () => {
       <div
         className={`mx-auto flex h-20 max-w-7xl items-center justify-between rounded-2xl border px-4 shadow-xl transition-all duration-500 sm:px-6 ${
           scrolled
-            ? "border-slate-300/90 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.18)]"
+            ? "border-slate-300/75 bg-white/80 backdrop-blur-lg shadow-[0_18px_50px_rgba(15,23,42,0.15)]"
             : "border-white/20 bg-[#0c2442]/55 backdrop-blur-md shadow-[0_14px_36px_rgba(7,22,45,0.28)]"
         }`}
       >
