@@ -28,20 +28,41 @@ import {
 const quickContact = [
   {
     icon: Phone,
-    title: "Call Office",
-    value: "079 4604 6354",
+    kind: "phone",
+    title: "Mobile",
+    value: BUSINESS_CONTACT.phone,
     helper: "Mon - Sat support",
-    href: "tel:+917946046354",
+    href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
+  },
+  {
+    icon: Phone,
+    kind: "phone",
+    title: "Landline",
+    value: BUSINESS_CONTACT.landline,
+    helper: "Office desk line",
+    href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
   },
   {
     icon: Mail,
+    kind: "email",
     title: "Email Team",
-    value: "inquiry@endessusshipping.com",
+    value: BUSINESS_CONTACT.email,
     helper: "Fast shipping consultation",
-    href: "mailto:inquiry@endessusshipping.com",
+    href: `mailto:${BUSINESS_CONTACT.email}`,
+    opensInNewTab: true,
+  },
+  {
+    icon: Mail,
+    kind: "email",
+    title: "Direct Email",
+    value: BUSINESS_CONTACT.alternateEmail,
+    helper: "Account-specific support",
+    href: `mailto:${BUSINESS_CONTACT.alternateEmail}`,
+    opensInNewTab: true,
   },
   {
     icon: Clock3,
+    kind: "meta",
     title: "Response Window",
     value: "Within 24 hours",
     helper: "Typical first reply time",
@@ -91,6 +112,13 @@ const contactPageSchema = {
         contactType: "sales",
         telephone: BUSINESS_CONTACT.internationalPhone,
         email: BUSINESS_CONTACT.email,
+        availableLanguage: ["en"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: BUSINESS_CONTACT.internationalLandline,
+        email: BUSINESS_CONTACT.alternateEmail,
         availableLanguage: ["en"],
       },
     ],
@@ -209,7 +237,7 @@ const Contact = () => {
                   <ArrowRight size={18} />
                 </a>
                 <a
-                  href="tel:+917946046354"
+                  href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
                   className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
                 >
                   Call Now
@@ -225,6 +253,8 @@ const Contact = () => {
                   <a
                     key={item.title}
                     href={item.href}
+                    target={item.opensInNewTab ? "_blank" : undefined}
+                    rel={item.opensInNewTab ? "noopener noreferrer" : undefined}
                     className="contact-card flex flex-col gap-3 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 transition-colors hover:border-primary/30 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div className="flex min-w-0 items-center gap-3">
@@ -236,7 +266,14 @@ const Contact = () => {
                         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#4b688a]">{item.helper}</p>
                       </div>
                     </div>
-                    <span className="w-full break-all text-left text-sm font-bold tracking-[0.04em] text-[#35557c] sm:w-auto sm:text-right sm:text-xs sm:uppercase sm:tracking-[0.12em]">
+                    <span
+                      className={[
+                        "w-full text-left text-sm font-bold text-[#35557c] sm:w-auto sm:text-right sm:text-xs",
+                        item.kind === "email"
+                          ? "break-words normal-case tracking-[0.04em] sm:normal-case sm:tracking-[0.04em]"
+                          : "break-all tracking-[0.04em] sm:uppercase sm:tracking-[0.12em]",
+                      ].join(" ")}
+                    >
                       {item.value}
                     </span>
                   </a>
@@ -420,7 +457,7 @@ const Contact = () => {
 
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href="tel:+917946046354"
+                href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
               >
                 Call Us Now

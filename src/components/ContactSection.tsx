@@ -5,27 +5,48 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { BUSINESS_CONTACT } from "@/lib/seo";
 
 const contactInfo = [
   {
     icon: MapPin,
     title: "Our Office",
-    details: ["India"],
+    details: [{ label: "India" }],
   },
   {
     icon: Phone,
     title: "Phone",
-    details: ["Contact for details"],
+    details: [
+      {
+        label: BUSINESS_CONTACT.phone,
+        href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
+      },
+      {
+        label: BUSINESS_CONTACT.landline,
+        href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
+      },
+    ],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["info@endessusshipping.com"],
+    details: [
+      {
+        label: BUSINESS_CONTACT.email,
+        href: `mailto:${BUSINESS_CONTACT.email}`,
+        opensInNewTab: true,
+      },
+      {
+        label: BUSINESS_CONTACT.alternateEmail,
+        href: `mailto:${BUSINESS_CONTACT.alternateEmail}`,
+        opensInNewTab: true,
+      },
+    ],
   },
   {
     icon: Clock,
     title: "Working Hours",
-    details: ["Mon - Sat: 9:00 AM - 6:00 PM"],
+    details: [{ label: "Mon - Sat: 9:00 AM - 6:00 PM" }],
   },
 ];
 
@@ -122,8 +143,22 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
-                  {item.details.map((d) => (
-                    <p key={d} className="text-sm text-muted-foreground">{d}</p>
+                  {item.details.map((detail) => (
+                    detail.href ? (
+                      <a
+                        key={detail.label}
+                        href={detail.href}
+                        target={detail.opensInNewTab ? "_blank" : undefined}
+                        rel={detail.opensInNewTab ? "noopener noreferrer" : undefined}
+                        className="block text-sm text-muted-foreground transition-colors hover:text-accent"
+                      >
+                        {detail.label}
+                      </a>
+                    ) : (
+                      <p key={detail.label} className="text-sm text-muted-foreground">
+                        {detail.label}
+                      </p>
+                    )
                   ))}
                 </div>
               </motion.div>

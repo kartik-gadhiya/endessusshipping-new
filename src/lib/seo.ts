@@ -21,9 +21,12 @@ export const DEFAULT_KEYWORDS = [
 ];
 
 export const BUSINESS_CONTACT = {
-  phone: "+91 79 4604 6354",
-  internationalPhone: "+917946046354",
-  email: "inquiry@endessusshipping.com",
+  phone: "+91 9427289636",
+  internationalPhone: "+919427289636",
+  landline: "0265-4605517",
+  internationalLandline: "+912654605517",
+  email: "info@endessusshipping.com",
+  alternateEmail: "tushar@endessusshipping.com",
 };
 
 export const BUSINESS_ADDRESS = {
@@ -91,6 +94,14 @@ export const organizationSchema = {
       contactType: "sales",
       telephone: BUSINESS_CONTACT.internationalPhone,
       email: BUSINESS_CONTACT.email,
+      availableLanguage: ["en"],
+      areaServed: "Worldwide",
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: BUSINESS_CONTACT.internationalLandline,
+      email: BUSINESS_CONTACT.alternateEmail,
       availableLanguage: ["en"],
       areaServed: "Worldwide",
     },

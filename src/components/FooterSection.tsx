@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin, Anchor, Facebook, Linkedin, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { BUSINESS_CONTACT } from "@/lib/seo";
 
 const FooterSection = () => (
   <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#0b2545_0%,#081b33_45%,#061426_100%)] text-white">
@@ -202,14 +203,36 @@ const FooterSection = () => (
             </li>
             <li className="flex items-center gap-3 group hover:text-accent transition-colors">
               <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a href="tel:+917946046354" className="hover:text-accent transition-colors">
-                079 4604 6354
+              <a href={`tel:${BUSINESS_CONTACT.internationalPhone}`} className="hover:text-accent transition-colors">
+                {BUSINESS_CONTACT.phone}
+              </a>
+            </li>
+            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
+              <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <a href={`tel:${BUSINESS_CONTACT.internationalLandline}`} className="hover:text-accent transition-colors">
+                {BUSINESS_CONTACT.landline}
               </a>
             </li>
             <li className="flex items-center gap-3 group hover:text-accent transition-colors">
               <Mail size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a href="mailto:inquiry@endessusshipping.com" className="hover:text-accent transition-colors">
-                inquiry@endessusshipping.com
+              <a
+                href={`mailto:${BUSINESS_CONTACT.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                {BUSINESS_CONTACT.email}
+              </a>
+            </li>
+            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
+              <Mail size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <a
+                href={`mailto:${BUSINESS_CONTACT.alternateEmail}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                {BUSINESS_CONTACT.alternateEmail}
               </a>
             </li>
           </ul>
