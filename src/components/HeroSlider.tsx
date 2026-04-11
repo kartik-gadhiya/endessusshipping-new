@@ -55,18 +55,18 @@ const HeroSlider = () => {
   return (
     <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#071a33] lg:min-h-[860px]">
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full scale-[1.02] object-cover brightness-[1.15] contrast-[1.08] saturate-[1.1]"
         autoPlay
         muted
         playsInline
         loop
       >
-        <source src="/assets/videos/shipping1.mp4" type="video/mp4" />
+        <source src="/assets/videos/shipping.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(7,26,51,0.95)_0%,rgba(12,36,66,0.86)_42%,rgba(12,36,66,0.56)_100%)]" />
-      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.22),transparent_36%),radial-gradient(circle_at_14%_84%,rgba(217,119,6,0.18),transparent_30%)]" />
+      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(7,26,51,0.78)_0%,rgba(12,36,66,0.62)_42%,rgba(12,36,66,0.34)_100%)]" />
+      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_14%_84%,rgba(217,119,6,0.12),transparent_32%)]" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-start px-6 pb-36 pt-32 lg:px-12 lg:pb-28">
         <div className="grid w-full gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -151,7 +151,7 @@ const HeroSlider = () => {
             </motion.div>
           </AnimatePresence>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.25 }}
@@ -177,7 +177,7 @@ const HeroSlider = () => {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
 
