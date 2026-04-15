@@ -221,11 +221,13 @@ const ContactSection = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="gradient-red text-accent-foreground px-8 py-3 h-auto font-semibold hover:opacity-90 transition-opacity disabled:opacity-70"
+                variant="accent"
+                size="lg"
+                className="w-full"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-accent-foreground border-t-transparent"></div>
+                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
                     Sending...
                   </>
                 ) : (

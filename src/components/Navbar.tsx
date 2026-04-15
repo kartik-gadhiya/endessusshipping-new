@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 type NavItem = {
   label: string;
@@ -108,14 +109,20 @@ const Navbar = () => {
 
         <div className="hidden md:block">
           <Link to="/contact">
-            <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 text-sm font-bold text-primary shadow-lg shadow-accent/35"
+            <Button
+              asChild
+              variant="accent"
+              size="lg"
+              className="gap-2"
             >
-              Get a Quote
-              <ArrowUpRight size={16} />
-            </motion.button>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get a Quote
+                <ArrowUpRight size={16} />
+              </motion.div>
+            </Button>
           </Link>
         </div>
 
@@ -173,9 +180,13 @@ const Navbar = () => {
             </div>
 
             <Link to="/contact" onClick={() => setMobileOpen(false)}>
-              <button className="mt-4 w-full rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-4 py-3 text-sm font-bold text-primary">
+              <Button
+                variant="accent"
+                size="lg"
+                className="w-full"
+              >
                 Get a Quote
-              </button>
+              </Button>
             </Link>
           </motion.div>
         )}

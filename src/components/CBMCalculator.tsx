@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Trash2, Copy, Check, Package, Lightbulb } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 interface PackageItem {
   id: string;
@@ -184,13 +185,15 @@ const CBMCalculator = () => {
                 </div>
 
                 {/* Add Button */}
-                <button
+                <Button
                   onClick={addPackage}
-                  className="mt-6 w-full py-3 px-4 bg-[hsl(36_87%_55%)] hover:bg-[hsl(36_87%_60%)] text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl"
+                  variant="accent"
+                  size="lg"
+                  className="mt-6 w-full"
                 >
                   <Plus size={20} />
                   Add Another Package
-                </button>
+                </Button>
               </div>
             </Card>
           </div>
@@ -229,12 +232,12 @@ const CBMCalculator = () => {
                 </div>
 
                 {/* Copy Button */}
-                <button
+                <Button
                   onClick={copyResults}
-                  className={`w-full py-3 px-4 font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl ${
-                    copied
-                      ? 'bg-green-500 text-white scale-105'
-                      : 'bg-[hsl(36_87%_55%)] hover:bg-[hsl(36_87%_60%)] text-white'
+                  variant="accent"
+                  size="lg"
+                  className={`w-full ${
+                    copied ? 'bg-green-500 hover:bg-green-600 scale-105' : ''
                   }`}
                 >
                   {copied ? (
@@ -248,19 +251,21 @@ const CBMCalculator = () => {
                       Copy Results
                     </>
                   )}
-                </button>
+                </Button>
 
                 {/* Reset Button */}
-                <button
+                <Button
                   onClick={() => {
                     setPackages([
                       { id: '1', length: '', width: '', height: '', quantity: '', unit: 'meter' },
                     ]);
                   }}
-                  className="w-full mt-3 py-3 px-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg transition-all"
+                  variant="ghost"
+                  size="lg"
+                  className="mt-3 w-full bg-white/20 text-white hover:bg-white/30"
                 >
                   Clear All
-                </button>
+                </Button>
               </div>
             </Card>
 

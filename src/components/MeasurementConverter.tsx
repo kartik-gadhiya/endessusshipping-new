@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowRightLeft, ListChecks, Ruler } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -116,13 +117,15 @@ const MeasurementConverter = () => {
 
             {/* Swap Button */}
             <div className="flex justify-center mb-8">
-              <button
+              <Button
                 onClick={swap}
-                className="p-3 bg-[hsl(186_100%_50%)] hover:bg-[hsl(186_100%_55%)] text-white rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110"
+                variant="accent"
+                size="icon"
+                className="h-14 w-14 rounded-full p-3"
                 title="Swap units"
               >
                 <ArrowRightLeft size={24} />
-              </button>
+              </Button>
             </div>
 
             {/* Output Section */}

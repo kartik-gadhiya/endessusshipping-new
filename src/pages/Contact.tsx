@@ -14,6 +14,7 @@ import {
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 import FooterSection from "@/components/FooterSection";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -229,19 +230,23 @@ const Contact = () => {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#contact-form"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
+                <Button
+                  asChild
+                  variant="accent"
+                  size="lg"
                 >
-                  Send Inquiry
-                  <ArrowRight size={18} />
-                </a>
-                <a
-                  // href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
-                  className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+                  <a href="#contact-form">
+                    Send Inquiry
+                    <ArrowRight size={18} />
+                  </a>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-[#d6e3f7] text-[#295078] hover:border-primary/30 hover:text-primary"
                 >
                   Call Now
-                </a>
+                </Button>
               </div>
             </div>
 
@@ -343,14 +348,16 @@ const Contact = () => {
                   className="rounded-xl border-[#d6e3f7] bg-white text-[#1c3d63] placeholder:text-[#7992ae] focus-visible:ring-primary/20"
                 />
 
-                <button
+                <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-blue-700 to-primary px-6 py-3.5 text-base font-extrabold text-white shadow-[0_14px_28px_rgba(10,35,66,0.28)] transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+                  variant="cta"
+                  size="lg"
+                  className="w-full"
                 >
                   <Send size={18} />
                   {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
+                </Button>
 
                 <div className="flex items-center gap-2 text-sm font-semibold text-[#496686]">
                   <CheckCircle2 size={16} className="text-accent" />
@@ -456,19 +463,24 @@ const Contact = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                // href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
+              <Button
+                variant="accent"
+                size="xl"
+                className="px-8"
               >
                 Call Us Now
                 <ArrowRight size={18} />
-              </a>
-              <Link
-                to="/services"
-                className="inline-flex items-center rounded-xl border border-white/25 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white/90 transition-colors hover:bg-white/18"
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="xl"
+                className="border-white/25 bg-white/10 text-white/90 hover:bg-white/18 uppercase tracking-[0.12em]"
               >
-                Explore Services
-              </Link>
+                <Link to="/services">
+                  Explore Services
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
