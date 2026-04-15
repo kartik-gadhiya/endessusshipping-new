@@ -68,8 +68,8 @@ const HeroSlider = () => {
       <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(7,26,51,0.78)_0%,rgba(12,36,66,0.62)_42%,rgba(12,36,66,0.34)_100%)]" />
       <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_14%_84%,rgba(217,119,6,0.12),transparent_32%)]" />
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-start px-6 pb-36 pt-32 lg:px-12 lg:pb-28">
-        <div className="grid w-full gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-6 pb-32 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
+        <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -89,7 +89,7 @@ const HeroSlider = () => {
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{slide.tag}</span>
               </motion.div>
 
-              <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+              <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl lg:max-w-3xl">
                 {titleWords.map((word, i) => (
                   <motion.span
                     key={word + i}
@@ -120,7 +120,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.68, duration: 0.45 }}
-                className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70 md:text-base"
+                className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base lg:max-w-xl"
               >
                 {slide.blurb}
               </motion.p>
@@ -129,7 +129,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.78, duration: 0.45 }}
-                className="mt-7 flex flex-wrap items-center gap-3"
+                className="mt-8 flex flex-wrap items-center gap-4"
               >
                 <motion.a
                   href="#services"
@@ -143,7 +143,7 @@ const HeroSlider = () => {
                   href="#contact"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white backdrop-blur-sm"
+                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
                 >
                   Request a Quote
                 </motion.a>
@@ -205,7 +205,7 @@ const HeroSlider = () => {
         </motion.button>
       </div>
 
-      <div className="absolute bottom-24 left-1/2 z-[46] -translate-x-1/2 md:bottom-24 lg:bottom-28">
+      <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
         <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#0c2442]/72 px-3 py-2.5 shadow-[0_18px_35px_rgba(3,10,22,0.45)] backdrop-blur-md">
           <button
             onClick={() => scrollToSection("#about")}
