@@ -45,7 +45,7 @@ export const servicesData: Service[] = [
     id: "customs-clearance",
     title: "Customs Clearance",
     description:
-      "We provide clients with a hassle-free customs clearance service by means of a team that is well-versed in protocol and has a great working relationship with customs officials. We primarily work out of ICD Ahmedabad, the seaports of Mundra, Nhava Sheva, Pipavav, and Hazira.",
+      "We provide clients with a hassle-free customs clearance service by means of a team that is well-versed in protocol and has a great working relationship with customs officials..",
     icon: FileCheck,
     image: "/assets/service-gallery/4-1.jpg",
   },

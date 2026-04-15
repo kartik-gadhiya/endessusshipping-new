@@ -154,7 +154,7 @@ const About = () => {
                 href="#about-story"
                 className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
               >
-                Our Story
+                Our Ethics
               </a>
               <a
                 href="#about-values"
@@ -227,7 +227,7 @@ const About = () => {
         <div className="about-shell mx-auto max-w-7xl rounded-[2rem] border border-[#d7e4f7] bg-white/86 p-6 shadow-[0_24px_62px_rgba(10,35,66,0.11)] md:p-8 lg:p-10">
           <div className="grid gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
             <div className="about-card rounded-[1.55rem] border border-[#d8e7f8] bg-[linear-gradient(160deg,#ffffff_0%,#f8fbff_100%)] p-6 md:p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Trusted Freight Partner</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Our Ethics</p>
               <h2 className="mt-4 text-balance text-4xl font-black leading-[1.08] text-[#143257] md:text-5xl">
                 Cargo movement backed by clarity, speed, and accountability
               </h2>

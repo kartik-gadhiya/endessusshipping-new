@@ -20,9 +20,9 @@ const slides = [
       "Reliable ocean logistics, proactive communication, and end-to-end execution for importers and exporters.",
   },
   {
-    title: "Reliable Break Bulk Services",
+    title: "Reliable Project Cargo Services",
     subtitle: "Expert handling of project cargo and specialized freight.",
-    tag: "Break Bulk Specialists",
+    tag: "Project Cargo Specialists",
     blurb:
       "From route planning to final delivery, we coordinate precision-heavy shipments with speed and care.",
   },
@@ -41,7 +41,7 @@ const HeroSlider = () => {
   const prev = useCallback(() => setCurrent((p) => (p - 1 + slides.length) % slides.length), []);
 
   useEffect(() => {
-    const timer = setInterval(next, 7000);
+    const timer = setInterval(next, 10000);
     return () => clearInterval(timer);
   }, [next]);
 
