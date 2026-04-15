@@ -21,8 +21,8 @@ export const DEFAULT_KEYWORDS = [
 ];
 
 export const BUSINESS_CONTACT = {
-  phone: "+91 9427289636",
-  internationalPhone: "+919427289636",
+  phone: "+91 94272 89636",
+  internationalPhone: "+9194272 89636",
   landline: "0265-4605517",
   internationalLandline: "+912654605517",
   email: "info@endessusshipping.com",

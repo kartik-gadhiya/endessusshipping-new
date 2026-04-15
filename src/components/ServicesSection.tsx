@@ -3,80 +3,28 @@ import { motion, useInView, useMotionValue, useSpring, useTransform } from "fram
 import { ArrowRight, Ship, Plane, Truck, FileCheck, Package, Anchor } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const services = [
-  {
-    id: "sea-freight",
-    image: "/assets/service-gallery/1-2.jpg",
-    icon: Ship,
-    title: "SEA FREIGHT",
-    subtitle: "Import/Export",
-    desc: "Comprehensive sea freight solutions with flexible options for LCL and FCL shipments worldwide.",
-    iconColor: "blueGradient"
-  },
-  {
-    id: "air-freight",
-    image: "/assets/service-gallery/2-1.jpg",
-    icon: Plane,
-    title: "AIR FREIGHT",
-    subtitle: "Import/Export",
-    desc: "Fast, reliable air cargo services for time-sensitive shipments with complete tracking.",
-    iconColor: "indigoGradient"
-  },
-  {
-    id: "cross-country",
-    image: "/assets/service-gallery/3-1.jpg",
-    icon: Truck,
-    title: "GROUND TRANSPORT",
-    subtitle: "Domestic & International",
-    desc: "Professional cross-country and local transportation with GPS tracking and real-time updates.",
-    iconColor: "cyanGradient"
-  },
-  {
-    id: "customs-clearance",
-    image: "/assets/service-gallery/4-1.jpg",
-    icon: FileCheck,
-    title: "CUSTOMS CLEARANCE",
-    subtitle: "Documentation",
-    desc: "Expert customs brokerage ensuring smooth clearance and compliance with all regulations.",
-    iconColor: "amberGradient"
-  },
-  {
-    id: "transport-services",
-    image: "/assets/service-gallery/5-1.jpg",
-    icon: Truck,
-    title: "TRANSPORT SERVICES",
-    subtitle: "Logistics",
-    desc: "Dedicated transport solutions with experienced operators and modern fleet management.",
-    iconColor: "blueGradient"
-  },
-  {
-    id: "project-cargo",
-    image: "/assets/service-gallery/6-2.jpg",
-    icon: Package,
-    title: "PROJECT CARGO",
-    subtitle: "Heavy Equipment",
-    desc: "Specialized handling of heavy and oversized cargo with precision engineering.",
-    iconColor: "indigoGradient"
-  },
-  {
-    id: "chartering",
-    image: "/assets/service-gallery/7.jpg",
-    icon: Anchor,
-    title: "BREAK BULK",
-    subtitle: "Chartering",
-    desc: "Break bulk and chartering services for non-containerized cargo movements.",
-    iconColor: "cyanGradient"
-  },
-  {
-    id: "value-added",
-    image: "/assets/service-gallery/8.jpg",
-    icon: Package,
-    title: "VALUE-ADDED",
-    subtitle: "Premium Services",
-    desc: "Insurance, surveys, palletization, fumigation, and comprehensive warehouse solutions.",
-    iconColor: "amberGradient"
-  },
-];
+import { servicesData } from "@/data/services";
+
+const serviceUIOptions: Record<string, { subtitle: string; iconColor: string }> = {
+  "sea-freight": { subtitle: "Import/Export", iconColor: "blueGradient" },
+  "air-freight": { subtitle: "Import/Export", iconColor: "indigoGradient" },
+  "land-freight": { subtitle: "Domestic & International", iconColor: "cyanGradient" },
+  "customs-clearance": { subtitle: "Documentation", iconColor: "amberGradient" },
+  "project-cargo": { subtitle: "Heavy Equipment", iconColor: "indigoGradient" },
+  "chartering": { subtitle: "Chartering", iconColor: "cyanGradient" },
+  "value-added": { subtitle: "Premium Services", iconColor: "amberGradient" },
+  "warehousing": { subtitle: "Storage", iconColor: "blueGradient" },
+};
+
+const services = servicesData.map(service => ({
+  id: service.id,
+  image: service.image,
+  icon: service.icon,
+  title: service.title.toUpperCase(),
+  subtitle: serviceUIOptions[service.id]?.subtitle || "Services",
+  desc: service.description,
+  iconColor: serviceUIOptions[service.id]?.iconColor || "blueGradient"
+}));
 
 const SVGIconGradients = () => (
   <svg width="0" height="0" className="absolute">

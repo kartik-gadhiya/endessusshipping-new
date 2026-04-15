@@ -32,7 +32,7 @@ const quickContact = [
     title: "Mobile",
     value: BUSINESS_CONTACT.phone,
     helper: "Mon - Sat support",
-    href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
+    // href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
   },
   {
     icon: Phone,
@@ -40,7 +40,7 @@ const quickContact = [
     title: "Landline",
     value: BUSINESS_CONTACT.landline,
     helper: "Office desk line",
-    href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
+    // href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
   },
   {
     icon: Mail,
@@ -237,7 +237,7 @@ const Contact = () => {
                   <ArrowRight size={18} />
                 </a>
                 <a
-                  href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
+                  // href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
                   className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
                 >
                   Call Now
@@ -457,7 +457,7 @@ const Contact = () => {
 
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
+                // href={`tel:${BUSINESS_CONTACT.internationalPhone}`}
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
               >
                 Call Us Now

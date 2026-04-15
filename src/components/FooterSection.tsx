@@ -203,13 +203,13 @@ const FooterSection = () => (
             </li>
             <li className="flex items-center gap-3 group hover:text-accent transition-colors">
               <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a href={`tel:${BUSINESS_CONTACT.internationalPhone}`} className="hover:text-accent transition-colors">
+              <a className="hover:text-accent transition-colors">
                 {BUSINESS_CONTACT.phone}
               </a>
             </li>
             <li className="flex items-center gap-3 group hover:text-accent transition-colors">
               <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a href={`tel:${BUSINESS_CONTACT.internationalLandline}`} className="hover:text-accent transition-colors">
+              <a className="hover:text-accent transition-colors">
                 {BUSINESS_CONTACT.landline}
               </a>
             </li>

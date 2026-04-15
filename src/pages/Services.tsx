@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -32,6 +33,55 @@ const servicesSchema = {
     name: service.title,
     url: absoluteUrl(`/services#${service.id}`),
   })),
+};
+
+const ServiceImageGallery = ({ images, title, icon: IconComponent }: { images: string[]; title: string; icon: any }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images]);
+
+  if (!images || images.length === 0) return null;
+
+  return (
+    <div className="relative h-72 overflow-hidden rounded-2xl lg:h-full group">
+      {images.map((img, idx) => (
+        <img
+          key={img + idx}
+          src={img}
+          alt={`${title} logistics service image ${idx + 1}`}
+          loading="lazy"
+          decoding="async"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+            idx === currentIndex ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent pointer-events-none" />
+      <div className="absolute right-5 top-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/25 bg-white/90 text-primary shadow-lg z-10 transition-transform duration-500 group-hover:scale-110">
+        <IconComponent size={24} />
+      </div>
+      {images.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5 z-10">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === currentIndex ? "w-6 bg-accent" : "w-2 bg-white/50 hover:bg-white/80"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 const Services = () => {
@@ -144,19 +194,11 @@ const Services = () => {
                   className="services-card scroll-mt-36 grid gap-6 overflow-hidden rounded-[1.9rem] border border-[#d8e5f7] bg-white/90 p-4 shadow-[0_24px_55px_rgba(10,35,66,0.1)] lg:grid-cols-2 lg:items-stretch lg:p-6"
                 >
                   <div className={`${imageFirst ? "lg:order-1" : "lg:order-2"}`}>
-                    <div className="relative h-72 overflow-hidden rounded-2xl lg:h-full">
-                      <img
-                        src={service.image}
-                        alt={`${service.title} import export logistics service`}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
-                      <div className="absolute right-5 top-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/25 bg-white/90 text-primary shadow-lg">
-                        <IconComponent size={24} />
-                      </div>
-                    </div>
+                    <ServiceImageGallery 
+                      images={service.sliderImages && service.sliderImages.length > 0 ? service.sliderImages : [service.image]} 
+                      title={service.title} 
+                      icon={IconComponent} 
+                    />
                   </div>
 
                   <div className={`flex flex-col justify-between ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
@@ -175,16 +217,16 @@ const Services = () => {
                       </p>
 
                       <div className="mt-5 flex flex-wrap gap-2">
-                        {[
+                        {(service.tags || [
                           "Dedicated Coordination",
                           "End-to-End Visibility",
                           "Regulatory Support",
-                        ].map((point) => (
+                        ]).map((point) => (
                           <span
                             key={point}
-                            className="inline-flex items-center gap-1 rounded-full border border-[#d3e1f3] bg-[#f6f9ff] px-3 py-1 text-xs font-semibold text-[#35557c]"
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[#d3e1f3] bg-[#f6f9ff] px-3.5 py-1.5 text-xs font-semibold text-[#35557c] transition-colors hover:border-primary/20 hover:bg-white"
                           >
-                            <CheckCircle2 size={12} className="text-accent" />
+                            <CheckCircle2 size={13} className="text-accent" />
                             {point}
                           </span>
                         ))}

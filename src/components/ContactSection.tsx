@@ -19,11 +19,11 @@ const contactInfo = [
     details: [
       {
         label: BUSINESS_CONTACT.phone,
-        href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
+        // href: `tel:${BUSINESS_CONTACT.internationalPhone}`,
       },
       {
         label: BUSINESS_CONTACT.landline,
-        href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
+        // href: `tel:${BUSINESS_CONTACT.internationalLandline}`,
       },
     ],
   },
