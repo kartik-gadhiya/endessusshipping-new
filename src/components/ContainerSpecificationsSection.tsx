@@ -590,7 +590,7 @@ const ContainerSpecificationsSection = ({
                                           alt={container.name}
                                           loading="lazy"
                                           decoding="async"
-                                          className="max-h-[72px] w-auto object-contain sm:max-h-[84px]"
+                                          className="h-full w-full object-contain p-2"
                                         />
                                       </div>
                                       <p className="relative mt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
@@ -868,7 +868,7 @@ const ContainerSpecificationsSection = ({
                     alt={previewContainer.name}
                     loading="lazy"
                     decoding="async"
-                    className="max-h-[64vh] w-auto max-w-full object-contain"
+                    className="max-h-[64vh] w-full object-contain"
                   />
                 </div>
               </div>
