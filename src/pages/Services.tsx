@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
+import CrossCountryShippingSection from "@/components/CrossCountryShippingSection";
 import FooterSection from "@/components/FooterSection";
 import { servicesData } from "@/data/services";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
@@ -86,7 +87,7 @@ const ServiceImageGallery = ({ images, title, icon: IconComponent }: { images: s
 
 const Services = () => {
   useSmoothScrollAnimations(
-    ".services-hero-reveal, .services-panel, .services-card, .services-cta-reveal, .home-footer-shell",
+    ".services-hero-reveal, .services-panel, .services-card, .services-cross-country-reveal, .services-cta-reveal, .home-footer-shell",
     30
   );
 
@@ -147,6 +148,12 @@ const Services = () => {
                     {service.title}
                   </a>
                 ))}
+                <a
+                  href="#cross-country-shipping"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  Cross-Country Shipping
+                </a>
               </div>
             </div>
 
@@ -254,6 +261,8 @@ const Services = () => {
             })}
           </div>
         </section>
+
+        <CrossCountryShippingSection />
 
         <section className="services-cta-reveal px-6 pb-24 lg:px-12">
           <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#cadcf5] bg-[linear-gradient(160deg,#09274a_0%,#0c335e_55%,#0a2341_100%)] p-8 text-white shadow-[0_28px_70px_rgba(3,15,34,0.42)] md:p-12">
