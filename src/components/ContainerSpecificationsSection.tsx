@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import {
   categoryOptions,
   containers,
@@ -188,6 +189,7 @@ const ContainerSpecificationsSection = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState<ContainerCategory>("All");
   const [expandedContainerId, setExpandedContainerId] = useState<string>();
+  const [previewContainer, setPreviewContainer] = useState<ContainerSpec | null>(null);
 
   const reeferCount = containers.filter((container) => container.name.includes("Reefer")).length;
   const highCubeCount = containers.filter((container) => container.name.includes("High Cube")).length;
@@ -570,107 +572,124 @@ const ContainerSpecificationsSection = ({
                                 id={accordionValue}
                                 className="overflow-hidden rounded-[1.35rem] border border-white/80 bg-white/88 px-4 shadow-[0_14px_34px_rgba(10,35,66,0.06)]"
                               >
-                                <AccordionTrigger className="items-start gap-4 py-0 text-left hover:no-underline [&>svg]:mt-5 [&>svg]:rounded-full [&>svg]:border [&>svg]:border-[#d7e4f7] [&>svg]:bg-white [&>svg]:p-1.5 [&>svg]:text-[#264c75] [&>svg]:shadow-sm">
-                                  <div className="grid flex-1 gap-4 py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr] xl:items-center">
-                                    <div className="grid gap-4 sm:grid-cols-[148px_1fr] sm:items-center">
-                                      <div className="relative overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
-                                        <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
-                                        <div className="relative flex h-[92px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
-                                          <img
-                                            src={container.image}
-                                            alt={container.name}
-                                            loading="lazy"
-                                            decoding="async"
-                                            className="max-h-[72px] w-auto object-contain sm:max-h-[84px]"
-                                          />
+                                <div className="grid gap-4 py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr_auto] xl:items-center">
+                                  <div className="grid gap-4 sm:grid-cols-[148px_1fr] sm:items-center">
+                                    <button
+                                      type="button"
+                                      onClick={() => setPreviewContainer(container)}
+                                      className="group relative overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25"
+                                      aria-label={`Enlarge image for ${container.name}`}
+                                    >
+                                      <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
+                                      <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105">
+                                        <Search size={14} />
+                                      </span>
+                                      <div className="relative flex h-[92px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
+                                        <img
+                                          src={container.image}
+                                          alt={container.name}
+                                          loading="lazy"
+                                          decoding="async"
+                                          className="max-h-[72px] w-auto object-contain sm:max-h-[84px]"
+                                        />
+                                      </div>
+                                      <p className="relative mt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
+                                        Container Preview
+                                      </p>
+                                    </button>
+
+                                    <div>
+                                      <div className="flex flex-wrap items-center gap-2">
+                                        <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
+                                          Type {String(container.id).padStart(2, "0")}
+                                        </span>
+                                        <span
+                                          className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${meta.badgeClassName}`}
+                                        >
+                                          {group.category}
+                                        </span>
+                                      </div>
+
+                                      <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
+
+                                      {tags.length > 0 && (
+                                        <div className="mt-3 flex flex-wrap gap-2">
+                                          {tags.map((tag) => (
+                                            <span
+                                              key={tag}
+                                              className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${meta.pillClassName}`}
+                                            >
+                                              {tag}
+                                            </span>
+                                          ))}
                                         </div>
-                                        <p className="relative mt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
-                                          Container Preview
-                                        </p>
-                                      </div>
-
-                                      <div>
-                                        <div className="flex flex-wrap items-center gap-2">
-                                          <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
-                                            Type {String(container.id).padStart(2, "0")}
-                                          </span>
-                                          <span
-                                            className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${meta.badgeClassName}`}
-                                          >
-                                            {group.category}
-                                          </span>
-                                        </div>
-
-                                        <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
-
-                                        {tags.length > 0 && (
-                                          <div className="mt-3 flex flex-wrap gap-2">
-                                            {tags.map((tag) => (
-                                              <span
-                                                key={tag}
-                                                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${meta.pillClassName}`}
-                                              >
-                                                {tag}
-                                              </span>
-                                            ))}
-                                          </div>
-                                        )}
-                                      </div>
+                                      )}
                                     </div>
+                                  </div>
 
-                                    <div className="space-y-2">
-                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Interior Snapshot
+                                  <div className="space-y-2">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                      Interior Snapshot
+                                    </p>
+                                    <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                      <p className="text-lg font-black leading-tight text-[#143257]">{interiorSummary}</p>
+                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                        Full metric and imperial interior dimensions are available in the expanded view.
                                       </p>
-                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                        <p className="text-lg font-black leading-tight text-[#143257]">{interiorSummary}</p>
-                                        <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
-                                          Full metric and imperial interior dimensions are available in the expanded view.
-                                        </p>
-                                      </div>
                                     </div>
+                                  </div>
 
-                                    <div className="space-y-2">
-                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Access Snapshot
+                                  <div className="space-y-2">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                      Access Snapshot
+                                    </p>
+                                    <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                      <p className="text-lg font-black leading-tight text-[#143257]">{doorSummary}</p>
+                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                        {topAccessSummary}
                                       </p>
-                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                        <p className="text-lg font-black leading-tight text-[#143257]">{doorSummary}</p>
-                                        <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
-                                          {topAccessSummary}
-                                        </p>
-                                      </div>
                                     </div>
+                                  </div>
 
-                                    <div className="space-y-2">
-                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Load Snapshot
-                                      </p>
-                                      <div className="grid gap-2">
+                                  <div className="space-y-2">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                      Load Snapshot
+                                    </p>
+                                    <div className="grid gap-2">
+                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
+                                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                          {capacityLabel}
+                                        </p>
+                                        <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.capacity}</p>
+                                      </div>
+                                      <div className="grid gap-2 sm:grid-cols-2">
                                         <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
                                           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                            {capacityLabel}
+                                            Tare
                                           </p>
-                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.capacity}</p>
+                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.tare}</p>
                                         </div>
-                                        <div className="grid gap-2 sm:grid-cols-2">
-                                          <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
-                                            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                              Tare
-                                            </p>
-                                            <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.tare}</p>
-                                          </div>
-                                          <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
-                                            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                              Payload
-                                            </p>
-                                            <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.payload}</p>
-                                          </div>
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
+                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                            Payload
+                                          </p>
+                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.payload}</p>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                </AccordionTrigger>
+
+                                  <div className="flex items-center xl:justify-end">
+                                    <AccordionTrigger className="w-full rounded-[1.15rem] border border-[#d9e5f7] bg-white/95 px-4 py-3 text-left shadow-sm transition-colors hover:border-primary/30 hover:bg-white hover:no-underline data-[state=open]:border-primary/25 data-[state=open]:bg-primary/5 xl:w-[160px] [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-[#264c75]">
+                                      <div className="flex flex-col">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                          More Details
+                                        </span>
+                                        <span className="mt-1 text-sm font-black text-[#143257]">Open Below</span>
+                                      </div>
+                                    </AccordionTrigger>
+                                  </div>
+                                </div>
 
                                 <AccordionContent className="pb-0 pt-0">
                                   <div className="border-t border-[#e1ebf8] pb-5 pt-5">
@@ -828,6 +847,35 @@ const ContainerSpecificationsSection = ({
           </div>
         </section>
       )}
+
+      <Dialog open={Boolean(previewContainer)} onOpenChange={(open) => !open && setPreviewContainer(null)}>
+        <DialogContent className="w-[min(92vw,960px)] max-w-[960px] rounded-[1.5rem] border border-[#d7e4f7] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_100%)] p-4 sm:p-6">
+          {previewContainer && (
+            <>
+              <div className="pr-10">
+                <DialogTitle className="text-balance text-2xl font-black text-[#143257]">
+                  {previewContainer.name}
+                </DialogTitle>
+                <DialogDescription className="mt-2 text-sm font-semibold text-[#5d7898]">
+                  Enlarged preview from the container specifications catalog.
+                </DialogDescription>
+              </div>
+
+              <div className="overflow-hidden rounded-[1.35rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.98),rgba(234,244,255,0.94)_58%,rgba(223,236,252,0.9)_100%)] p-4">
+                <div className="flex min-h-[240px] max-h-[72vh] items-center justify-center rounded-[1.15rem] border border-white/85 bg-white/85 p-4 sm:min-h-[320px]">
+                  <img
+                    src={previewContainer.image}
+                    alt={previewContainer.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-[64vh] w-auto max-w-full object-contain"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
