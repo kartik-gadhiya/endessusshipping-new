@@ -10,6 +10,10 @@ type DangerousGoodsPlacardGalleryProps = {
 };
 
 const AUTOPLAY_DELAY_MS = 3600;
+const screenshotPillClassName =
+  "inline-flex h-[25px] min-w-[50px] items-center justify-center rounded-full border border-[#cfe0f8] bg-white/95 px-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#35557c] shadow-[0_3px_10px_rgba(51,93,145,0.045)]";
+const counterPillClassName =
+  "inline-flex h-[25px] min-w-[50px] items-center justify-center rounded-full border border-[#cfe0f8] bg-white/95 px-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#35557c] shadow-[0_3px_10px_rgba(51,93,145,0.045)]";
 
 const DangerousGoodsPlacardSlide = ({
   badgeClassName,
@@ -38,8 +42,8 @@ const DangerousGoodsPlacardSlide = ({
       </div>
       <span
         className={cn(
-          "shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]",
-          badgeClassName,
+          "shrink-0",
+          screenshotPillClassName,
         )}
       >
         {label.division}
@@ -56,6 +60,7 @@ const DangerousGoodsPlacardGallery = ({
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(1);
   const multiple = labels.length > 1;
+  const total = labels.length;
 
   useEffect(() => {
     if (!api) return;
@@ -84,8 +89,8 @@ const DangerousGoodsPlacardGallery = ({
 
   return (
     <div className="mt-5 rounded-[1.3rem] border border-white/80 bg-white/72 p-4">
-      <div className="flex items-center justify-between gap-3">
-        <div>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Image Gallery</p>
           <p className="mt-1 text-xs font-semibold text-[#6682a0]">
             {multiple
@@ -93,9 +98,10 @@ const DangerousGoodsPlacardGallery = ({
               : "This is the image provided for this Dangerous Goods category."}
           </p>
         </div>
-        <span className="rounded-full border border-[#d9e5f7] bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#35557c]">
-          {multiple ? `${current} / ${labels.length}` : "1 Image"}
-        </span>
+
+        <div className={cn("shrink-0 whitespace-nowrap", counterPillClassName)}>
+          {multiple ? `${current} / ${total}` : "1 Image"}
+        </div>
       </div>
 
       <Carousel className="mt-4" setApi={setApi} opts={{ align: "start", loop: multiple }}>
