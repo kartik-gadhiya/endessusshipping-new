@@ -29,10 +29,94 @@ type ContainerSpecificationsSectionProps = {
   headingAs?: "h1" | "h2";
 };
 
+type DangerousGoodsClass = {
+  id: number;
+  title: string;
+  summary: string;
+  examples: string;
+  accentClassName: string;
+  badgeClassName: string;
+};
+
 const categoryDisplayOrder: Exclude<ContainerCategory, "All">[] = [
   "Dry Container",
   "Reefer Container",
   "Special Container",
+];
+
+const dangerousGoodsClasses: DangerousGoodsClass[] = [
+  {
+    id: 1,
+    title: "Explosives",
+    summary: "Articles and substances that can rapidly release gas and heat.",
+    examples: "Fireworks, ammunition",
+    accentClassName: "border-[#ffd4d4] bg-[linear-gradient(180deg,#fff8f8_0%,#fff1f1_100%)]",
+    badgeClassName: "border-[#f6c4c4] bg-[#fff0f0] text-[#9b3030]",
+  },
+  {
+    id: 2,
+    title: "Gases",
+    summary: "Compressed, liquefied, or dissolved gases that need controlled handling.",
+    examples: "Aerosols, camping gas",
+    accentClassName: "border-[#d7e5ff] bg-[linear-gradient(180deg,#f8fbff_0%,#eef5ff_100%)]",
+    badgeClassName: "border-[#c8dafd] bg-[#eff5ff] text-[#24538b]",
+  },
+  {
+    id: 3,
+    title: "Flammable Liquids",
+    summary: "Liquids that can ignite easily during storage, handling, or transit.",
+    examples: "Kerosene, oil-based paints",
+    accentClassName: "border-[#ffd9c5] bg-[linear-gradient(180deg,#fff9f5_0%,#fff2ea_100%)]",
+    badgeClassName: "border-[#f7ceb8] bg-[#fff2ea] text-[#9a4b14]",
+  },
+  {
+    id: 4,
+    title: "Flammable Solids",
+    summary: "Includes substances liable to spontaneous combustion or those that emit flammable gas with water.",
+    examples: "Matches, waste rubber",
+    accentClassName: "border-[#f5e0ba] bg-[linear-gradient(180deg,#fffdf7_0%,#fff7ea_100%)]",
+    badgeClassName: "border-[#ecd6ac] bg-[#fff7e6] text-[#8a5a08]",
+  },
+  {
+    id: 5,
+    title: "Oxidizing Substances And Organic Peroxides",
+    summary: "Materials that can intensify combustion or create unstable reactive conditions.",
+    examples: "Oxygen generators, ammonium dichromate",
+    accentClassName: "border-[#f2d9ff] bg-[linear-gradient(180deg,#fdf9ff_0%,#f7efff_100%)]",
+    badgeClassName: "border-[#e7cbfb] bg-[#f8f0ff] text-[#7443a1]",
+  },
+  {
+    id: 6,
+    title: "Toxic And Infectious Substances",
+    summary: "Goods that can cause serious harm through exposure, contamination, or infection.",
+    examples: "Cyanide, insecticides",
+    accentClassName: "border-[#ffd5ea] bg-[linear-gradient(180deg,#fff8fc_0%,#fff0f7_100%)]",
+    badgeClassName: "border-[#f6c4de] bg-[#fff1f8] text-[#9a3564]",
+  },
+  {
+    id: 7,
+    title: "Radioactive Material",
+    summary: "Materials that emit ionizing radiation and require tightly controlled transport.",
+    examples: "Uranium oxide, X-ray machines",
+    accentClassName: "border-[#fff0b8] bg-[linear-gradient(180deg,#fffef6_0%,#fff9df_100%)]",
+    badgeClassName: "border-[#f0df9b] bg-[#fff8dd] text-[#8d6a00]",
+  },
+  {
+    id: 8,
+    title: "Corrosives",
+    summary: "Substances that can damage skin, metals, or packaging through chemical action.",
+    examples: "Sulfuric acid, acid batteries",
+    accentClassName: "border-[#cfe7ea] bg-[linear-gradient(180deg,#f8feff_0%,#edf8fa_100%)]",
+    badgeClassName: "border-[#bfe0e5] bg-[#edf9fb] text-[#0f6b78]",
+  },
+  {
+    id: 9,
+    title: "Miscellaneous Dangerous Substances And Articles",
+    summary: "Covers regulated hazardous goods that do not fall neatly under Classes 1 to 8.",
+    examples: "Dry ice, asbestos, consumer goods",
+    accentClassName: "border-[#dfe1f7] bg-[linear-gradient(180deg,#fafbff_0%,#f1f4ff_100%)]",
+    badgeClassName: "border-[#d1d5f2] bg-[#f3f5ff] text-[#4b5f95]",
+  },
 ];
 
 const categoryMeta: Record<
@@ -813,6 +897,83 @@ const ContainerSpecificationsSection = ({
                 Use these references with your cargo details to reduce handling surprises and improve execution flow.
               </p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className={embedded ? "px-6 pb-16 lg:px-8 lg:pb-20" : "px-6 pb-24 lg:px-12 lg:pb-28"}>
+        <div className={`${contentWidthClassName} space-y-6`}>
+          <Card className="container-card overflow-hidden rounded-[1.7rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-6 shadow-[0_18px_46px_rgba(10,35,66,0.08)] md:p-8">
+            <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+              <div className="max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b688a]">
+                  Dangerous Goods Classification
+                </p>
+                <h3 className="mt-3 text-balance text-2xl font-black leading-tight text-[#143257] md:text-3xl">
+                  What are the nine classes of Dangerous Goods?
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a] md:text-base">
+                  The nine classifications of DG are:
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                    9 DG classes
+                  </span>
+                  <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                    Clear examples included
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Classes</p>
+                  <p className="mt-2 text-3xl font-black text-[#143257]">9</p>
+                  <p className="mt-1 text-xs font-semibold text-[#52708f]">From explosives to misc. DG</p>
+                </div>
+
+                <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Use Case</p>
+                  <p className="mt-2 text-lg font-black text-[#143257]">Fast Screening</p>
+                  <p className="mt-1 text-xs font-semibold text-[#52708f]">Helpful before compliance review</p>
+                </div>
+
+                <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Format</p>
+                  <p className="mt-2 text-lg font-black text-[#143257]">Examples + Summary</p>
+                  <p className="mt-1 text-xs font-semibold text-[#52708f]">Built for quick scanning</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {dangerousGoodsClasses.map((dangerousGoodsClass) => (
+              <Card
+                key={dangerousGoodsClass.id}
+                className={`container-info-card rounded-[1.45rem] border p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)] ${dangerousGoodsClass.accentClassName}`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${dangerousGoodsClass.badgeClassName}`}
+                  >
+                    Class {dangerousGoodsClass.id}
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#6a83a0]">DG</span>
+                </div>
+
+                <h4 className="mt-4 text-xl font-black leading-tight text-[#143257]">{dangerousGoodsClass.title}</h4>
+                <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a]">{dangerousGoodsClass.summary}</p>
+
+                <div className="mt-5 rounded-2xl border border-white/80 bg-white/72 p-4">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Examples</p>
+                  <p className="mt-2 text-sm font-semibold leading-relaxed text-[#30567f]">
+                    {dangerousGoodsClass.examples}
+                  </p>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
