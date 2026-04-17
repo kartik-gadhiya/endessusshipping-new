@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ChevronLeft,
-  ChevronRight,
   ArrowRight,
   Anchor,
   Clock3,
@@ -14,6 +12,7 @@ import {
 const slides = [
   {
     title: "Global Shipping Made Simple",
+    titlePhrases: ["Global", "Shipping Made", "Simple"],
     subtitle: "Seamless logistics solutions connecting your business to the world.",
     tag: "Sea Freight Solutions",
     blurb:
@@ -21,6 +20,7 @@ const slides = [
   },
   {
     title: "Reliable Project Cargo Services",
+    titlePhrases: ["Reliable", "Project Cargo", "Services"],
     subtitle: "Expert handling of project cargo and specialized freight.",
     tag: "Project Cargo Specialists",
     blurb:
@@ -38,10 +38,9 @@ const HeroSlider = () => {
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), []);
-  const prev = useCallback(() => setCurrent((p) => (p - 1 + slides.length) % slides.length), []);
 
   useEffect(() => {
-    const timer = setInterval(next, 10000);
+    const timer = setInterval(next, 15000);
     return () => clearInterval(timer);
   }, [next]);
 
@@ -50,7 +49,7 @@ const HeroSlider = () => {
   };
 
   const slide = slides[current];
-  const titleWords = slide.title.split(" ");
+  const titlePhrases = slide.titlePhrases;
 
   return (
     <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#071a33] lg:min-h-[860px]">
@@ -90,19 +89,19 @@ const HeroSlider = () => {
               </motion.div>
 
               <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl lg:max-w-3xl">
-                {titleWords.map((word, i) => (
+                {titlePhrases.map((phrase, i) => (
                   <motion.span
-                    key={word + i}
+                    key={phrase + i}
                     initial={{ opacity: 0, y: 22 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + i * 0.06, duration: 0.42 }}
                     className={`mr-3 inline-block ${
-                      i === titleWords.length - 1
+                      i === titlePhrases.length - 1
                         ? "bg-gradient-to-r from-accent via-yellow-300 to-accent bg-clip-text text-transparent"
                         : ""
                     }`}
                   >
-                    {word}
+                    {phrase}
                   </motion.span>
                 ))}
               </h1>
@@ -181,29 +180,7 @@ const HeroSlider = () => {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-[45] hidden items-center pl-4 md:flex lg:pl-8">
-        <motion.button
-          onClick={prev}
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.92 }}
-          aria-label="Previous slide"
-          className="pointer-events-auto inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/35 bg-[#0c2442]/75 text-white shadow-[0_15px_35px_rgba(0,0,0,0.38)] backdrop-blur-md"
-        >
-          <ChevronLeft size={24} />
-        </motion.button>
-      </div>
 
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-[45] hidden items-center pr-4 md:flex lg:pr-8">
-        <motion.button
-          onClick={next}
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.92 }}
-          aria-label="Next slide"
-          className="pointer-events-auto inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/35 bg-[#0c2442]/75 text-white shadow-[0_15px_35px_rgba(0,0,0,0.38)] backdrop-blur-md"
-        >
-          <ChevronRight size={24} />
-        </motion.button>
-      </div>
 
       <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
         <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#0c2442]/72 px-3 py-2.5 shadow-[0_18px_35px_rgba(3,10,22,0.45)] backdrop-blur-md">
@@ -230,7 +207,7 @@ const HeroSlider = () => {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
-                    transition={{ duration: 7, ease: "linear" }}
+                    transition={{ duration: 15, ease: "linear" }}
                     className="absolute inset-y-0 left-0 rounded-full bg-accent"
                   />
                 )}
