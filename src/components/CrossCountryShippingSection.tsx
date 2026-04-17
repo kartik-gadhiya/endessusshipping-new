@@ -38,30 +38,66 @@ const serviceHighlights = [
 const journeySteps = [
   {
     title: "Origin Pickup",
-    description: "Dispatch scheduling, cargo readiness checks, and vehicle placement built around your loading window.",
+    description:
+      "Dispatch scheduling, cargo readiness checks, and vehicle placement built around your loading window.",
   },
   {
     title: "Line-Haul Movement",
-    description: "Long-distance transit planning with route discipline, cargo supervision, and timeline-focused execution.",
+    description:
+      "Long-distance transit planning with route discipline, cargo supervision, and timeline-focused execution.",
   },
   {
     title: "Destination Delivery",
-    description: "Final coordination for unloading, handover, and onward business continuity at the receiving point.",
+    description:
+      "Final coordination for unloading, handover, and onward business continuity at the receiving point.",
   },
 ];
 
 const imagePath = "/assets/images/corss_country_shipping.png";
 
+const shellStyle = {
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(241,247,255,0.96) 100%)",
+};
+
+const shellGlowStyle = {
+  background:
+    "radial-gradient(circle at 9% 12%, rgba(34,211,238,0.11), transparent 24%), radial-gradient(circle at 92% 10%, rgba(245,181,42,0.14), transparent 24%), linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.28))",
+};
+
+const heroPanelStyle = {
+  background:
+    "radial-gradient(circle at 18% 18%, rgba(34,211,238,0.16), transparent 26%), radial-gradient(circle at 88% 14%, rgba(245,181,42,0.17), transparent 20%), linear-gradient(160deg, #0b2d53 0%, #0f3763 52%, #12355d 100%)",
+};
+
+const coverageHeaderStyle = {
+  background:
+    "linear-gradient(135deg, rgba(248,251,255,0.98), rgba(237,246,255,0.92))",
+};
+
+const mapShellStyle = {
+  background:
+    "radial-gradient(circle at 18% 18%, rgba(255,255,255,0.14), transparent 24%), linear-gradient(160deg, #0b2d53 0%, #123d69 100%)",
+};
+
+const mapInnerStyle = {
+  background:
+    "linear-gradient(180deg, rgba(7,26,47,0.5), rgba(8,31,57,0.25))",
+};
+
 const CrossCountryShippingSection = () => {
   return (
     <section id="cross-country-shipping" className="services-cross-country-reveal px-6 pb-24 lg:px-12 lg:pb-28">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[#d7e4f7] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(241,247,255,0.96)_100%)] shadow-[0_28px_70px_rgba(10,35,66,0.12)]">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[#d7e4f7] shadow-[0_28px_70px_rgba(10,35,66,0.12)]" style={shellStyle}>
         <div className="relative p-4 md:p-6 lg:p-7">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_9%_12%,rgba(34,211,238,0.11),transparent_24%),radial-gradient(circle_at_92%_10%,rgba(245,181,42,0.14),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.28))]" />
+          <div className="pointer-events-none absolute inset-0" style={shellGlowStyle} />
 
           <div className="relative grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
-            <div className="rounded-[1.8rem] border border-[#d2e2f4] bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.16),transparent_26%),radial-gradient(circle_at_88%_14%,rgba(245,181,42,0.17),transparent_20%),linear-gradient(160deg,#0b2d53_0%,#0f3763_52%,#12355d_100%)] p-6 text-white shadow-[0_24px_60px_rgba(8,31,57,0.18)] md:p-7">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.08] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/[0.9]">
+            <div
+              className="rounded-[1.8rem] border border-[#d2e2f4] p-6 text-white shadow-[0_24px_60px_rgba(8,31,57,0.18)] md:p-7"
+              style={heroPanelStyle}
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/90">
                 <Truck size={14} className="text-accent" />
                 Cross-Country Shipping
               </span>
@@ -70,14 +106,14 @@ const CrossCountryShippingSection = () => {
                 Reliable long-haul shipping built for cargo moving across India.
               </h2>
 
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/[0.8] md:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
                 Cross-country shipping needs more than transport capacity. It needs a route plan that protects your
                 cargo, respects delivery windows, and keeps the movement coordinated from pickup through final
                 handover. We manage that flow with practical planning, steady communication, and disciplined
                 execution across long distances.
               </p>
 
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/[0.68] md:text-base">
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/68 md:text-base">
                 This service is ideal for industrial supply, replenishment freight, project support cargo, and urgent
                 interstate dispatches that need dependable handling and clear delivery control.
               </p>
@@ -86,7 +122,7 @@ const CrossCountryShippingSection = () => {
                 {servicePills.map((pill) => (
                   <span
                     key={pill}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/[0.86]"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/86"
                   >
                     <CheckCircle2 size={14} className="text-accent" />
                     {pill}
@@ -98,13 +134,13 @@ const CrossCountryShippingSection = () => {
                 {serviceHighlights.map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-[1.35rem] border border-white/[0.12] bg-white/[0.08] p-4 backdrop-blur"
+                    className="rounded-[1.35rem] border border-white/12 bg-white/8 p-4 backdrop-blur"
                   >
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.12] bg-white/[0.12] text-accent">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/12 bg-white/12 text-accent">
                       <item.icon size={18} />
                     </span>
                     <h3 className="mt-4 text-base font-bold text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/[0.72]">{item.description}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/72">{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -119,15 +155,18 @@ const CrossCountryShippingSection = () => {
                 </Link>
                 <a
                   href="#land-freight"
-                  className="inline-flex items-center rounded-xl border border-white/[0.15] bg-white/[0.08] px-5 py-3 text-sm font-bold text-white/90 transition-colors hover:bg-white/[0.14]"
+                  className="inline-flex items-center rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-white/90 transition-colors hover:bg-white/14"
                 >
                   View Land Freight Service
                 </a>
               </div>
             </div>
 
-            <div className="rounded-[1.8rem] border border-[#d8e5f7] bg-white/[0.88] p-4 shadow-[0_24px_60px_rgba(10,35,66,0.08)] md:p-5">
-              <div className="flex flex-wrap items-start justify-between gap-3 rounded-[1.45rem] border border-[#dce8f7] bg-[linear-gradient(135deg,rgba(248,251,255,0.98),rgba(237,246,255,0.92))] px-4 py-4">
+            <div className="rounded-[1.8rem] border border-[#d8e5f7] bg-white/88 p-4 shadow-[0_24px_60px_rgba(10,35,66,0.08)] md:p-5">
+              <div
+                className="flex flex-wrap items-start justify-between gap-3 rounded-[1.45rem] border border-[#dce8f7] px-4 py-4"
+                style={coverageHeaderStyle}
+              >
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5b7696]">Cross-Country Coverage</p>
                   <h3 className="mt-2 text-xl font-black text-[#143257] md:text-2xl">
@@ -141,8 +180,14 @@ const CrossCountryShippingSection = () => {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-[1.55rem] border border-[#d8e5f7] bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.14),transparent_24%),linear-gradient(160deg,#0b2d53_0%,#123d69_100%)] p-4 shadow-[0_20px_48px_rgba(8,31,57,0.14)]">
-                <div className="flex min-h-[280px] items-center justify-center rounded-[1.25rem] border border-white/[0.12] bg-[linear-gradient(180deg,rgba(7,26,47,0.5),rgba(8,31,57,0.25))] p-4 sm:min-h-[360px] lg:min-h-[520px]">
+              <div
+                className="mt-4 rounded-[1.55rem] border border-[#d8e5f7] p-4 shadow-[0_20px_48px_rgba(8,31,57,0.14)]"
+                style={mapShellStyle}
+              >
+                <div
+                  className="flex min-h-[280px] items-center justify-center rounded-[1.25rem] border border-white/12 p-4 sm:min-h-[360px] lg:min-h-[520px]"
+                  style={mapInnerStyle}
+                >
                   <img
                     src={imagePath}
                     alt="Cross-country shipping route visual for long-distance cargo delivery"
@@ -176,7 +221,7 @@ const CrossCountryShippingSection = () => {
             </div>
           </div>
 
-          <div className="relative mt-6 rounded-[1.8rem] border border-[#d9e6f7] bg-white/[0.82] p-5 shadow-[0_18px_40px_rgba(10,35,66,0.06)] md:p-6">
+          <div className="relative mt-6 rounded-[1.8rem] border border-[#d9e6f7] bg-white/82 p-5 shadow-[0_18px_40px_rgba(10,35,66,0.06)] md:p-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#607c9b]">Execution Journey</p>
