@@ -56,18 +56,18 @@ export const servicesData: Service[] = [
     id: "land-freight",
     title: "Land Freight",
     description:
-      "Our team of experts carefully assesses your cargo requirements and collaborates with our extensive network of partners to identify the most suitable transportation solution. We have a comprehensive fleet of trailers, including 20/40/50/60/80 feet trailers, high bed, low bed, and semi-low bed trailers, to accommodate diverse cargo needs. For heavy lift movements across India, we partner with specialized companies that possess HYDRAULIC AXLE and PULLER EQUIPMENT.",
+      "Our team of experts carefully evaluates your cargo requirements and works closely with our extensive network of partners to determine the most efficient transportation solution. We maintain a versatile fleet of trailers, including 20/40/50/60/80 feet trailers, as well as high bed, low bed, and semi-low bed options, to handle a wide range of cargo needs. For heavy lift operations across India, we collaborate with specialized companies equipped with hydraulic axle and puller equipment.",
     icon: Truck,
     image: "/assets/service-gallery/road_transport_1776256724000.png",
     tags: [
       "General cargo transportation", 
       "Heavy and over-dimensional cargo transportation", 
-      "Arranging all clearance from PWD / RTO / Police / Forest dept. etc.", 
-      "Port and road feasibility assessment", 
+      // "Arranging all clearance from PWD / RTO / Police / Forest dept. etc.", 
+      // "Port and road feasibility assessment", 
       "Multimodal transportation solutions", 
       "Hydraulic axle trailer transportation", 
-      "Specialized structure design and fabrication", 
-      "Placement of foundation/erection of heavy and over-dimensional consignment"
+      // "Specialized structure design and fabrication", 
+      // "Placement of foundation/erection of heavy and over-dimensional consignment"
     ],
     sliderImages: [
       "/assets/service-gallery/india_surface_transport.jpeg",
