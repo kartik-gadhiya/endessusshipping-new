@@ -107,13 +107,16 @@ export const servicesData: Service[] = [
     description:
       "We offer a variety of valuable supplementary services, such as Cargo Maintenance, Pallets / Wooden Packaging / Wrapping, Fumigation, Lashing & Chocking, surveying containers during stuffing, and marine transport insurance services.",
     icon: Package,
-    image: "/assets/service-gallery/india_vas_packaging.png",
+    image: "/assets/service-gallery/value_added1.jpeg",
     tags: ["Cargo Maintenance", "Pallets / Wooden Packaging / Wrapping", "Fumigation", "Lashing & Chocking"],
     sliderImages: [
-      "/assets/service-gallery/india_vas_packaging.png",
-      "/assets/service-gallery/india_vas_maintenance.png",
-      "/assets/service-gallery/india_vas_fumigation.png",
-      "/assets/service-gallery/india_vas_lashing.png"
+      "/assets/service-gallery/value_added1.jpeg",
+      "/assets/service-gallery/value_added2.jpeg",
+      "/assets/service-gallery/value_added3.jpeg",
+      "/assets/service-gallery/value_added4.jpeg",
+      "/assets/service-gallery/value_added5.jpeg",
+      "/assets/service-gallery/value_added6.jpeg",
+      "/assets/service-gallery/value_added7.jpeg"
     ]
   },
   {
