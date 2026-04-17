@@ -107,22 +107,22 @@ export const servicesData: Service[] = [
     description:
       "We offer a variety of valuable supplementary services, such as Cargo Maintenance, Pallets / Wooden Packaging / Wrapping, Fumigation, Lashing & Chocking, surveying containers during stuffing, and marine transport insurance services.",
     icon: Package,
-    image: "/assets/service-gallery/vas_cargo_maintenance_1776258876389.png",
+    image: "/assets/service-gallery/india_vas_packaging.png",
     tags: ["Cargo Maintenance", "Pallets / Wooden Packaging / Wrapping", "Fumigation", "Lashing & Chocking"],
     sliderImages: [
-      "/assets/service-gallery/vas_cargo_maintenance_1776258876389.png",
-      "/assets/service-gallery/vas_packaging_1776258684995.png",
-      "/assets/service-gallery/vas_fumigation_1776258705190.png",
-      "/assets/service-gallery/vas_lashing_1776258721881.png"
+      "/assets/service-gallery/india_vas_packaging.png",
+      "/assets/service-gallery/india_vas_maintenance.png",
+      "/assets/service-gallery/india_vas_fumigation.png",
+      "/assets/service-gallery/india_vas_lashing.png"
     ]
   },
   {
     id: "warehousing",
-    title: "Warehousing",
+    title: "Warehouse",
     description:
       "Secure and scalable warehousing solutions designed for your inventory. With state-of-the-art security, climate control options, and strategic location placement, we provide comprehensive storage coverage.",
     icon: Warehouse,
-    image: "/assets/service-gallery/vas_packaging_1776258684995.png",
+    image: "/assets/service-gallery/india_warehouse.png",
     tags: ["Secure Storage", "Inventory Management", "Distribution"]
   }
 ];
