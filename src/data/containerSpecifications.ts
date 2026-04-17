@@ -43,7 +43,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 1,
     name: "45' High Cube Container",
-    image: "/assets/container_specifications/45ft_hc.png",
+    image: "/assets/container_specifications/45ft_hc_v2.png",
     interiorDimensions: {
       length: "L: 13.583 m 44' 6.5\"",
       width: "W: 2.347 m 7'8\"",
@@ -61,7 +61,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 2,
     name: "40' High Cube Container",
-    image: "/assets/container_specifications/40ft_hc.png",
+    image: "/assets/container_specifications/40ft_hc_v2.png",
     interiorDimensions: {
       length: "L: 12.056 m 39' 6 1/2\"",
       width: "W: 2.347 m 7'8 1/4\"",
@@ -79,7 +79,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 3,
     name: "40' Dry Freight Container",
-    image: "/assets/container_specifications/40ft_dry.png",
+    image: "/assets/container_specifications/40ft_dry_v2.png",
     interiorDimensions: {
       length: "L: 12.031 m 39' 5 1/2\"",
       width: "W: 2.340 m 7'8\"",
@@ -97,7 +97,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 4,
     name: "20' Dry Freight Container",
-    image: "/assets/container_specifications/20ft_dry.png",
+    image: "/assets/container_specifications/20ft_dry_v2.png",
     interiorDimensions: {
       length: "L: 5.918 m 19' 5\"",
       width: "W: 2.340 m 7'8\"",
@@ -115,7 +115,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 5,
     name: "20' Open Top Container",
-    image: "/assets/container_specifications/20ft_ot.png",
+    image: "/assets/container_specifications/20ft_ot_v2.png",
     interiorDimensions: {
       length: "L: 5.918 m 19' 5\"",
       width: "W: 2.315 m 7'7\"",
@@ -133,7 +133,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 6,
     name: "40' Open Top Container",
-    image: "/assets/container_specifications/40ft_ot.png",
+    image: "/assets/container_specifications/40ft_ot_v2.png",
     interiorDimensions: {
       length: "L: 12.043 m 39' 6\"",
       width: "W: 2.338 m 7'8\"",
@@ -205,7 +205,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 10,
     name: "20' Flat Rack Container",
-    image: "/assets/container_specifications/20ft_fr.png",
+    image: "/assets/container_specifications/20ft_fr_v2.png",
     interiorDimensions: {
       length: "L: 5.702 m 18'8 1/2\"",
       width: "W: 2.438 m 8'",
@@ -220,7 +220,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 11,
     name: "40' Flat Rack Container",
-    image: "/assets/container_specifications/40ft_fr.png",
+    image: "/assets/container_specifications/40ft_fr_v2.png",
     interiorDimensions: {
       length: "L: 11.800 m 38'9 1/4\"",
       width: "W: 2.438 m 7'6\"",
@@ -235,7 +235,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 12,
     name: "40' Articled Tweedeck",
-    image: "/assets/container_specifications/40ft_at.png",
+    image: "/assets/container_specifications/40ft_at_v2.png",
     interiorDimensions: {
       length: "L: 12.065 m 39'7\"",
       width: "W: 2.438 m 7'3 1/4\"",
@@ -250,7 +250,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 13,
     name: "40' Collapsible Flat Rack",
-    image: "/assets/container_specifications/40ft_cfr.png",
+    image: "/assets/container_specifications/40ft_cfr_v2.png",
     interiorDimensions: {
       length: "L: 12.08 m 39'7 1/2\"",
       width: "W: 2.238 m 6'8\"",
