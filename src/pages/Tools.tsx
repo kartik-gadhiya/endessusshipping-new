@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
+import ContainerSpecificationsSection from "@/components/ContainerSpecificationsSection";
 import FooterSection from "@/components/FooterSection";
 import CBMCalculator from "@/components/CBMCalculator";
 import MeasurementConverter from "@/components/MeasurementConverter";
@@ -40,7 +41,7 @@ const toolsSchema = {
 
 const Tools = () => {
   useSmoothScrollAnimations(
-    ".tools-hero-reveal, .tools-panel, .tools-tool-shell, .tools-cta-reveal, .home-footer-shell",
+    ".tools-hero-reveal, .tools-panel, .tools-tool-shell, .container-hero-reveal, .container-panel, .container-toolbar, .container-card, .container-info-card, .tools-cta-reveal, .home-footer-shell",
     30
   );
 
@@ -103,6 +104,12 @@ const Tools = () => {
                 >
                   Measurement Converter
                 </a>
+                <a
+                  href="#container-specification"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  Container Specification
+                </a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -159,6 +166,13 @@ const Tools = () => {
               className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
             >
               <MeasurementConverter />
+            </article>
+
+            <article
+              id="container-specification"
+              className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
+            >
+              <ContainerSpecificationsSection embedded showBottomCta={false} />
             </article>
           </div>
         </section>

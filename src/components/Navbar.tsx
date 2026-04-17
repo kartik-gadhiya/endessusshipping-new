@@ -15,7 +15,6 @@ const navItems: NavItem[] = [
   { label: "SERVICES", href: "/services", isRoute: true },
   { label: "ABOUT", href: "/about", isRoute: true },
   { label: "TOOLS", href: "/tools", isRoute: true },
-  { label: "CONTAINERS", href: "/container-specifications", isRoute: true },
   { label: "GALLERY", href: "/gallery", isRoute: true },
   { label: "CONTACT", href: "/contact", isRoute: true },
 ];

@@ -70,8 +70,8 @@ export const servicesData: Service[] = [
       "Placement of foundation/erection of heavy and over-dimensional consignment"
     ],
     sliderImages: [
-      "/assets/service-gallery/road_transport_1776256724000.png",
-      "/assets/service-gallery/rail_transport_1776256739075.png"
+      "/assets/service-gallery/india_surface_transport.png",
+      "/assets/service-gallery/india_rail_transport.png"
     ]
   },
   {
