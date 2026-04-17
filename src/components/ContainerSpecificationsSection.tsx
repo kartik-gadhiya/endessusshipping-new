@@ -105,6 +105,43 @@ const getCapacityLabel = (container: ContainerSpec) =>
 const getPayloadDisplay = (container: ContainerSpec) =>
   container.payload.trim() || (usesWeightLimitAsCapacity(container) ? "Confirm with team" : "Not listed");
 
+const stripAxisPrefix = (value: string) => value.replace(/^[A-Z]:\s*/, "").trim();
+
+const getPrimaryMeasure = (value: string) => {
+  const normalized = stripAxisPrefix(value);
+  const match = normalized.match(/^-?[\d.,]+\s?(?:m|cbm|kg)/i);
+
+  return match ? match[0] : normalized;
+};
+
+const getInteriorSummary = (container: ContainerSpec) =>
+  [
+    getPrimaryMeasure(container.interiorDimensions.length),
+    getPrimaryMeasure(container.interiorDimensions.width),
+    getPrimaryMeasure(container.interiorDimensions.height),
+  ].join(" x ");
+
+const getDoorSummary = (container: ContainerSpec) => {
+  const [width, height] = getDoorRows(container);
+
+  if (!width || !height) return "Door data not listed";
+
+  return `${getPrimaryMeasure(width)} x ${getPrimaryMeasure(height)}`;
+};
+
+const getTopAccessSummary = (container: ContainerSpec) =>
+  container.topsOpening ? "Top opening listed" : "No top opening listed";
+
+const getLoadHighlights = (container: ContainerSpec) => ({
+  capacity: getPrimaryMeasure(container.cubicCapacity),
+  tare: getPrimaryMeasure(container.tareWeight),
+  payload: container.payload.trim()
+    ? getPrimaryMeasure(container.payload)
+    : usesWeightLimitAsCapacity(container)
+      ? "See load limit"
+      : "Not listed",
+});
+
 const getContainerTags = (name: string) => {
   const tags: string[] = [];
 
@@ -497,11 +534,11 @@ const ContainerSpecificationsSection = ({
                       </div>
 
                       <div className="px-4 pb-4 pt-4 md:px-6 md:pb-6">
-                        <div className="mb-3 hidden grid-cols-[1.35fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a7693] lg:grid">
+                        <div className="mb-3 hidden grid-cols-[1.6fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a7693] xl:grid">
                           <span>Container</span>
-                          <span>Interior Dimensions</span>
-                          <span>Loading Access</span>
-                          <span>Load Data</span>
+                          <span>Interior Snapshot</span>
+                          <span>Access Snapshot</span>
+                          <span>Load Snapshot</span>
                         </div>
 
                         <Accordion
@@ -520,6 +557,10 @@ const ContainerSpecificationsSection = ({
                             const tags = getContainerTags(container.name);
                             const capacityLabel = getCapacityLabel(container);
                             const payloadDisplay = getPayloadDisplay(container);
+                            const interiorSummary = getInteriorSummary(container);
+                            const doorSummary = getDoorSummary(container);
+                            const topAccessSummary = getTopAccessSummary(container);
+                            const loadHighlights = getLoadHighlights(container);
                             const accordionValue = `container-${container.id}`;
 
                             return (
@@ -529,98 +570,103 @@ const ContainerSpecificationsSection = ({
                                 id={accordionValue}
                                 className="overflow-hidden rounded-[1.35rem] border border-white/80 bg-white/88 px-4 shadow-[0_14px_34px_rgba(10,35,66,0.06)]"
                               >
-                                <AccordionTrigger className="py-0 text-left hover:no-underline">
-                                  <div className="grid flex-1 gap-4 py-4 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:items-center">
-                                    <div>
-                                      <div className="flex flex-wrap items-center gap-2">
-                                        <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
-                                          Type {String(container.id).padStart(2, "0")}
-                                        </span>
-                                        <span
-                                          className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${meta.badgeClassName}`}
-                                        >
-                                          {group.category}
-                                        </span>
+                                <AccordionTrigger className="items-start gap-4 py-0 text-left hover:no-underline [&>svg]:mt-5 [&>svg]:rounded-full [&>svg]:border [&>svg]:border-[#d7e4f7] [&>svg]:bg-white [&>svg]:p-1.5 [&>svg]:text-[#264c75] [&>svg]:shadow-sm">
+                                  <div className="grid flex-1 gap-4 py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr] xl:items-center">
+                                    <div className="grid gap-4 sm:grid-cols-[148px_1fr] sm:items-center">
+                                      <div className="relative overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+                                        <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
+                                        <div className="relative flex h-[92px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
+                                          <img
+                                            src={container.image}
+                                            alt={container.name}
+                                            loading="lazy"
+                                            decoding="async"
+                                            className="max-h-[72px] w-auto object-contain sm:max-h-[84px]"
+                                          />
+                                        </div>
+                                        <p className="relative mt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
+                                          Container Preview
+                                        </p>
                                       </div>
 
-                                      <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
-
-                                      {tags.length > 0 && (
-                                        <div className="mt-3 flex flex-wrap gap-2">
-                                          {tags.map((tag) => (
-                                            <span
-                                              key={tag}
-                                              className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${meta.pillClassName}`}
-                                            >
-                                              {tag}
-                                            </span>
-                                          ))}
+                                      <div>
+                                        <div className="flex flex-wrap items-center gap-2">
+                                          <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
+                                            Type {String(container.id).padStart(2, "0")}
+                                          </span>
+                                          <span
+                                            className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${meta.badgeClassName}`}
+                                          >
+                                            {group.category}
+                                          </span>
                                         </div>
-                                      )}
 
-                                      <div className="mt-4 grid gap-2 sm:grid-cols-3 lg:hidden">
-                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2">
-                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                            {capacityLabel}
-                                          </p>
-                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
-                                            {container.cubicCapacity}
-                                          </p>
-                                        </div>
-                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2">
-                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                            Tare Weight
-                                          </p>
-                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
-                                            {container.tareWeight}
-                                          </p>
-                                        </div>
-                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2 sm:col-span-1">
-                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
-                                            Payload
-                                          </p>
-                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
-                                            {payloadDisplay}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
+                                        <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
 
-                                    <div className="hidden lg:block">
-                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Inside L / W / H
-                                      </p>
-                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
-                                        <p>{container.interiorDimensions.length}</p>
-                                        <p>{container.interiorDimensions.width}</p>
-                                        <p>{container.interiorDimensions.height}</p>
-                                      </div>
-                                    </div>
-
-                                    <div className="hidden lg:block">
-                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Door / Top Access
-                                      </p>
-                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
-                                        {doorRows.length > 0 ? (
-                                          doorRows.map((row) => <p key={row}>{row}</p>)
-                                        ) : (
-                                          <p className="text-[#5f7a98]">Door data not listed</p>
+                                        {tags.length > 0 && (
+                                          <div className="mt-3 flex flex-wrap gap-2">
+                                            {tags.map((tag) => (
+                                              <span
+                                                key={tag}
+                                                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${meta.pillClassName}`}
+                                              >
+                                                {tag}
+                                              </span>
+                                            ))}
+                                          </div>
                                         )}
-                                        <p className="text-[#5f7a98]">
-                                          {container.topsOpening ? `Top: ${container.topsOpening}` : "Top opening not listed"}
+                                      </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        Interior Snapshot
+                                      </p>
+                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                        <p className="text-lg font-black leading-tight text-[#143257]">{interiorSummary}</p>
+                                        <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                          Full metric and imperial interior dimensions are available in the expanded view.
                                         </p>
                                       </div>
                                     </div>
 
-                                    <div className="hidden lg:block">
+                                    <div className="space-y-2">
                                       <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
-                                        Volume / Weight
+                                        Access Snapshot
                                       </p>
-                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
-                                        <p>{capacityLabel}: {container.cubicCapacity}</p>
-                                        <p>Tare: {container.tareWeight}</p>
-                                        <p>Payload: {payloadDisplay}</p>
+                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                        <p className="text-lg font-black leading-tight text-[#143257]">{doorSummary}</p>
+                                        <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                          {topAccessSummary}
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        Load Snapshot
+                                      </p>
+                                      <div className="grid gap-2">
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
+                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                            {capacityLabel}
+                                          </p>
+                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.capacity}</p>
+                                        </div>
+                                        <div className="grid gap-2 sm:grid-cols-2">
+                                          <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                              Tare
+                                            </p>
+                                            <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.tare}</p>
+                                          </div>
+                                          <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                              Payload
+                                            </p>
+                                            <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.payload}</p>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -628,20 +674,29 @@ const ContainerSpecificationsSection = ({
 
                                 <AccordionContent className="pb-0 pt-0">
                                   <div className="border-t border-[#e1ebf8] pb-5 pt-5">
-                                    <div className="grid gap-5 xl:grid-cols-[240px_1fr] xl:items-start">
-                                      <div className="rounded-[1.2rem] border border-[#d8e5f7] bg-[linear-gradient(160deg,#f9fcff_0%,#f1f7ff_100%)] p-4">
-                                        <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-[#dce8f8] bg-white">
-                                          <img
-                                            src={container.image}
-                                            alt={container.name}
-                                            loading="lazy"
-                                            decoding="async"
-                                            className="max-h-48 w-auto object-contain md:max-h-52"
-                                          />
-                                        </div>
+                                    <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-[#d9e5f7] bg-white/72 p-4 lg:flex-row lg:items-center lg:justify-between">
+                                      <div>
+                                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#587493]">
+                                          Full Technical View
+                                        </p>
+                                        <p className="mt-2 text-sm font-semibold leading-relaxed text-[#476786]">
+                                          Expanded details keep the full spec sheet in one place without repeating the quick-compare summary above.
+                                        </p>
                                       </div>
 
-                                      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                                      <div className="flex flex-wrap gap-2">
+                                        <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                                          {capacityLabel}: {container.cubicCapacity}
+                                        </span>
+                                        {container.topsOpening && (
+                                          <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                                            Top access listed
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+
+                                    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                                         <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
                                           <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
                                             Interior Dimensions
@@ -679,7 +734,7 @@ const ContainerSpecificationsSection = ({
 
                                         <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
                                           <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
-                                            Handling Notes
+                                            Planning Notes
                                           </p>
                                           <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
                                             <p>{meta.focus}</p>
@@ -692,7 +747,6 @@ const ContainerSpecificationsSection = ({
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
                                 </AccordionContent>
                               </AccordionItem>
                             );
