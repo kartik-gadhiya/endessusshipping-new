@@ -151,7 +151,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 7,
     name: "40' High Cube Reefer Container",
-    image: "/assets/container_specifications/40ft_reefer_hc_type07_v2.png",
+    image: "/assets/container_specifications/40ft_reefer_hc_type07_v3.png",
     interiorDimensions: {
       length: "L: 13.102 m 42'11 10/16\"",
       width: "W: 2.284 m 7'6 8/16\"",
@@ -169,7 +169,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 8,
     name: "40' High Cube Reefer Container",
-    image: "/assets/container_specifications/40ft_reefer_hc_type08_v2.png",
+    image: "/assets/container_specifications/40ft_reefer_hc_type08_v3.png",
     interiorDimensions: {
       length: "L: 11.557 m 37'11\"",
       width: "W: 2.286 m 7'6\"",
@@ -187,7 +187,7 @@ export const containers: ContainerSpec[] = [
   {
     id: 9,
     name: "40' Reefer Container",
-    image: "/assets/container_specifications/40ft_reefer_type09_v2.png",
+    image: "/assets/container_specifications/40ft_reefer_type09_v3.png",
     interiorDimensions: {
       length: "L: 11.747 m 38'6 1/2\"",
       width: "W: 2.226 m 7'4\"",
