@@ -183,7 +183,7 @@ const HeroSlider = () => {
 
 
       <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
-        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#0c2442]/72 px-3 py-2.5 shadow-[0_18px_35px_rgba(3,10,22,0.45)] backdrop-blur-md">
+        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#0c2442]/72 px-3 py-2.5 shadow-[0_18px_35px_rgba(3,10,22,0.45)] backdrop-blur-md mb-4">
           <button
             onClick={() => scrollToSection("#about")}
             className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-3 py-1.5 text-xs font-bold tracking-[0.14em] text-white/85 transition-colors hover:bg-white/15 hover:text-white"

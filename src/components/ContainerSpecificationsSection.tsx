@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -9,13 +9,16 @@ import {
   Ruler,
   Search,
   ShieldCheck,
+  Snowflake,
   Sparkles,
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import {
   categoryOptions,
   containers,
   getContainerCategory,
+  type ContainerSpec,
   type ContainerCategory,
 } from "@/data/containerSpecifications";
 
@@ -25,6 +28,121 @@ type ContainerSpecificationsSectionProps = {
   headingAs?: "h1" | "h2";
 };
 
+const categoryDisplayOrder: Exclude<ContainerCategory, "All">[] = [
+  "Dry Container",
+  "Reefer Container",
+  "Special Container",
+];
+
+const categoryMeta: Record<
+  Exclude<ContainerCategory, "All">,
+  {
+    eyebrow: string;
+    description: string;
+    focus: string;
+    panelClassName: string;
+    iconClassName: string;
+    badgeClassName: string;
+    statClassName: string;
+    pillClassName: string;
+    icon: typeof Boxes;
+  }
+> = {
+  "Dry Container": {
+    eyebrow: "General cargo coverage",
+    description:
+      "A clean comparison view for standard freight moves, including dry and high cube options for everyday export planning.",
+    focus: "Best for cartons, pallets, and non-temperature-controlled cargo.",
+    panelClassName:
+      "border-[#d7e4f7] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.96)_100%)]",
+    iconClassName: "border-[#cfe0f5] bg-[#eef5ff] text-[#174978]",
+    badgeClassName: "border-[#bfd5f0] bg-[#eef5ff] text-[#174978]",
+    statClassName: "border-[#d6e4f7] bg-white/90",
+    pillClassName: "border-[#d7e4f7] bg-white text-[#3c5f86]",
+    icon: Boxes,
+  },
+  "Reefer Container": {
+    eyebrow: "Temperature-sensitive cargo",
+    description:
+      "Quickly compare reefer footprints, interior dimensions, and load limits when cold-chain planning needs precision.",
+    focus: "Best for chilled, frozen, or otherwise temperature-controlled shipments.",
+    panelClassName:
+      "border-[#cfe7ea] bg-[linear-gradient(180deg,rgba(248,254,255,0.98)_0%,rgba(238,249,250,0.96)_100%)]",
+    iconClassName: "border-[#c5e4e9] bg-[#ebf9fb] text-[#0f6b78]",
+    badgeClassName: "border-[#bce3e8] bg-[#ebf9fb] text-[#0f6b78]",
+    statClassName: "border-[#d0e8eb] bg-white/90",
+    pillClassName: "border-[#d0e8eb] bg-white text-[#2b6972]",
+    icon: Snowflake,
+  },
+  "Special Container": {
+    eyebrow: "Project and oversized cargo",
+    description:
+      "Open top, flat rack, and specialty formats grouped together so visitors can spot handling differences without extra digging.",
+    focus: "Best for top-loaded, oversized, or irregular cargo that needs special access.",
+    panelClassName:
+      "border-[#eadfca] bg-[linear-gradient(180deg,rgba(255,253,247,0.98)_0%,rgba(255,248,236,0.96)_100%)]",
+    iconClassName: "border-[#ead8b1] bg-[#fff7e6] text-[#8a5a08]",
+    badgeClassName: "border-[#f0dfb7] bg-[#fff7e6] text-[#8a5a08]",
+    statClassName: "border-[#efdfc3] bg-white/90",
+    pillClassName: "border-[#f0e1c9] bg-white text-[#7f6222]",
+    icon: Package,
+  },
+};
+
+const getDoorRows = (container: ContainerSpec) =>
+  typeof container.doorOpening === "string"
+    ? []
+    : [container.doorOpening.width, container.doorOpening.height].filter(
+        (value): value is string => Boolean(value && value.trim())
+      );
+
+const usesWeightLimitAsCapacity = (container: ContainerSpec) =>
+  !container.payload.trim() && /(kg|lbs)/i.test(container.cubicCapacity);
+
+const getCapacityLabel = (container: ContainerSpec) =>
+  usesWeightLimitAsCapacity(container) ? "Load Limit" : "Cubic Capacity";
+
+const getPayloadDisplay = (container: ContainerSpec) =>
+  container.payload.trim() || (usesWeightLimitAsCapacity(container) ? "Confirm with team" : "Not listed");
+
+const getContainerTags = (name: string) => {
+  const tags: string[] = [];
+
+  if (name.includes("Dry Freight")) tags.push("Standard Dry");
+  if (name.includes("High Cube")) tags.push("High Cube");
+  if (name.includes("Reefer")) tags.push("Reefer");
+  if (name.includes("Open Top")) tags.push("Open Top");
+  if (name.includes("Flat Rack")) tags.push(name.includes("Collapsible") ? "Collapsible Rack" : "Flat Rack");
+  if (name.includes("Tweedeck")) tags.push("Tweendeck");
+
+  return tags.slice(0, 3);
+};
+
+const getContainerSortKey = (name: string) => {
+  const sizeMatch = name.match(/\d+/);
+  const size = sizeMatch ? Number(sizeMatch[0]) : 999;
+
+  let variantRank = 9;
+
+  if (name.includes("Dry Freight")) variantRank = 1;
+  else if (name.includes("High Cube") && !name.includes("Reefer")) variantRank = 2;
+  else if (name.includes("Reefer") && !name.includes("High Cube")) variantRank = 3;
+  else if (name.includes("High Cube Reefer")) variantRank = 4;
+  else if (name.includes("Open Top")) variantRank = 5;
+  else if (name.includes("Flat Rack") && !name.includes("Collapsible")) variantRank = 6;
+  else if (name.includes("Collapsible")) variantRank = 7;
+  else if (name.includes("Tweedeck")) variantRank = 8;
+
+  return { size, variantRank };
+};
+
+const sortContainersForDisplay = (left: ContainerSpec, right: ContainerSpec) => {
+  const leftKey = getContainerSortKey(left.name);
+  const rightKey = getContainerSortKey(right.name);
+
+  return leftKey.size - rightKey.size || leftKey.variantRank - rightKey.variantRank || left.id - right.id;
+};
+
 const ContainerSpecificationsSection = ({
   embedded = false,
   showBottomCta = true,
@@ -32,6 +150,7 @@ const ContainerSpecificationsSection = ({
 }: ContainerSpecificationsSectionProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState<ContainerCategory>("All");
+  const [expandedContainerId, setExpandedContainerId] = useState<string>();
 
   const reeferCount = containers.filter((container) => container.name.includes("Reefer")).length;
   const highCubeCount = containers.filter((container) => container.name.includes("High Cube")).length;
@@ -43,15 +162,74 @@ const ContainerSpecificationsSection = ({
     return containers.filter((container) => {
       const category = getContainerCategory(container.name);
       const matchesCategory = activeCategory === "All" || category === activeCategory;
-      const matchesSearch =
-        normalizedSearch.length === 0 ||
-        container.name.toLowerCase().includes(normalizedSearch) ||
-        container.cubicCapacity.toLowerCase().includes(normalizedSearch) ||
-        container.tareWeight.toLowerCase().includes(normalizedSearch);
+      const searchableContent = [
+        container.name,
+        category,
+        container.cubicCapacity,
+        container.tareWeight,
+        container.payload,
+        container.interiorDimensions.length,
+        container.interiorDimensions.width,
+        container.interiorDimensions.height,
+        container.topsOpening,
+        typeof container.doorOpening === "string" ? "" : container.doorOpening.width ?? "",
+        typeof container.doorOpening === "string" ? "" : container.doorOpening.height ?? "",
+      ]
+        .join(" ")
+        .toLowerCase();
+      const matchesSearch = normalizedSearch.length === 0 || searchableContent.includes(normalizedSearch);
 
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchTerm]);
+
+  const groupedContainers = useMemo(
+    () =>
+      categoryDisplayOrder
+        .map((category) => ({
+          category,
+          containers: filteredContainers
+            .filter((container) => getContainerCategory(container.name) === category)
+            .sort(sortContainersForDisplay),
+        }))
+        .filter((group) => group.containers.length > 0),
+    [filteredContainers]
+  );
+
+  const loadDataCount = filteredContainers.filter(
+    (container) => Boolean(container.payload.trim()) || usesWeightLimitAsCapacity(container)
+  ).length;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const syncHashState = () => {
+      const nextHash = window.location.hash.replace(/^#/, "");
+
+      if (nextHash.startsWith("container-")) {
+        setExpandedContainerId(nextHash);
+
+        window.setTimeout(() => {
+          document.getElementById(nextHash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 160);
+      }
+    };
+
+    syncHashState();
+    window.addEventListener("hashchange", syncHashState);
+
+    return () => window.removeEventListener("hashchange", syncHashState);
+  }, []);
+
+  const handleAccordionChange = (value: string) => {
+    const nextValue = value || undefined;
+    setExpandedContainerId(nextValue);
+
+    if (typeof window === "undefined") return;
+
+    const baseUrl = `${window.location.pathname}${window.location.search}`;
+    window.history.replaceState(null, "", nextValue ? `${baseUrl}#${nextValue}` : `${baseUrl}#container-catalog`);
+  };
 
   const heroSectionClassName = embedded
     ? "relative overflow-hidden px-6 pb-14 pt-8 lg:px-8 lg:pb-16 lg:pt-10"
@@ -191,7 +369,7 @@ const ContainerSpecificationsSection = ({
                 <input
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
-                  placeholder="Search by container type, capacity, or tare weight"
+                  placeholder="Search by type, dimensions, door opening, or load data"
                   className="h-12 w-full rounded-xl border border-[#d7e4f7] bg-white pl-12 pr-4 text-sm font-medium text-[#27476b] outline-none transition-colors placeholder:text-[#7892ad] focus:border-primary/40"
                 />
               </div>
@@ -226,86 +404,306 @@ const ContainerSpecificationsSection = ({
               </p>
             </Card>
           ) : (
-            filteredContainers.map((container) => {
-              const category = getContainerCategory(container.name);
-              const doorRows =
-                typeof container.doorOpening === "string"
-                  ? []
-                  : [container.doorOpening.width, container.doorOpening.height].filter(
-                      (value): value is string => Boolean(value && value.trim())
-                    );
+            <>
+              <div className="container-card overflow-hidden rounded-[1.7rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-6 shadow-[0_18px_46px_rgba(10,35,66,0.08)] md:p-8">
+                <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+                  <div className="max-w-3xl">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b688a]">Compare At A Glance</p>
+                    <h3 className="mt-3 text-balance text-2xl font-black leading-tight text-[#143257] md:text-3xl">
+                      Visitors can now scan the key specs first and open only the containers they want in full.
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a] md:text-base">
+                      Each board lines up interior dimensions, loading access, and load data in the same place, so users
+                      do not have to jump between separate summary cards and detail sections.
+                    </p>
 
-              return (
-                <Card
-                  key={container.id}
-                  className="container-card overflow-hidden rounded-[1.9rem] border border-[#d8e5f7] bg-white/92 p-5 shadow-[0_22px_54px_rgba(10,35,66,0.1)] md:p-6"
-                >
-                  <div className="grid gap-6 lg:grid-cols-[260px_1fr] lg:items-start">
-                    <div className="rounded-[1.2rem] border border-[#d7e5f7] bg-[linear-gradient(160deg,#f9fcff_0%,#f1f7ff_100%)] p-4">
-                      <div className="flex h-full min-h-[220px] items-center justify-center rounded-xl border border-[#dce8f8] bg-white">
-                        <img
-                          src={container.image}
-                          alt={container.name}
-                          loading="lazy"
-                          decoding="async"
-                          className="max-h-48 w-auto object-contain md:max-h-52"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-primary">
-                          {category}
-                        </span>
-                        <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
-                          Type {String(container.id).padStart(2, "0")}
-                        </span>
-                      </div>
-
-                      <h3 className="mt-3 text-3xl font-black leading-tight text-[#143257]">{container.name}</h3>
-
-                      <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                        <div className="rounded-xl border border-[#d8e7f8] bg-[#f8fbff] p-4">
-                          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">Interior Dimensions</p>
-                          <div className="mt-2 space-y-1 text-sm font-semibold text-[#30567f]">
-                            <p>{container.interiorDimensions.length}</p>
-                            <p>{container.interiorDimensions.width}</p>
-                            <p>{container.interiorDimensions.height}</p>
-                          </div>
-                        </div>
-
-                        <div className="rounded-xl border border-[#d8e7f8] bg-[#f8fbff] p-4">
-                          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">Door Opening</p>
-                          <div className="mt-2 space-y-1 text-sm font-semibold text-[#30567f]">
-                            {doorRows.length > 0 ? (
-                              doorRows.map((row) => <p key={row}>{row}</p>)
-                            ) : (
-                              <p className="text-[#5f7a98]">Not listed for this type</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="rounded-xl border border-[#d8e7f8] bg-[#f8fbff] p-4 md:col-span-2 xl:col-span-1">
-                          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">Weight & Capacity</p>
-                          <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
-                            <p>Tare: {container.tareWeight}</p>
-                            <p>Capacity: {container.cubicCapacity}</p>
-                            {container.payload ? <p>Payload: {container.payload}</p> : <p className="text-[#5f7a98]">Payload not listed</p>}
-                          </div>
-                        </div>
-                      </div>
-
-                      {container.topsOpening && (
-                        <div className="mt-4 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm font-semibold text-[#5d4a16]">
-                          Top Opening: {container.topsOpening}
-                        </div>
-                      )}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                        Interior: length, width, height
+                      </span>
+                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                        Openings: door clearance and top access
+                      </span>
+                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                        Load: capacity, tare, and payload
+                      </span>
                     </div>
                   </div>
-                </Card>
-              );
-            })
+
+                  <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[420px]">
+                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Container Types</p>
+                      <p className="mt-2 text-3xl font-black text-[#143257]">{filteredContainers.length}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#52708f]">Visible after search and filter</p>
+                    </div>
+
+                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Categories</p>
+                      <p className="mt-2 text-3xl font-black text-[#143257]">{groupedContainers.length}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#52708f]">
+                        {activeCategory === "All" ? "Full catalog in view" : activeCategory}
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Load Data</p>
+                      <p className="mt-2 text-3xl font-black text-[#143257]">{loadDataCount}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#52708f]">Rows with usable weight guidance</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                {groupedContainers.map((group) => {
+                  const meta = categoryMeta[group.category];
+                  const Icon = meta.icon;
+
+                  return (
+                    <Card
+                      key={group.category}
+                      className={`container-card overflow-hidden rounded-[1.8rem] ${meta.panelClassName} shadow-[0_20px_48px_rgba(10,35,66,0.08)]`}
+                    >
+                      <div className="border-b border-white/70 px-5 py-5 md:px-6">
+                        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                          <div className="flex items-start gap-4">
+                            <span
+                              className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border ${meta.iconClassName}`}
+                            >
+                              <Icon size={22} />
+                            </span>
+
+                            <div>
+                              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5a7693]">{meta.eyebrow}</p>
+                              <h3 className="mt-2 text-2xl font-black text-[#143257]">{group.category}</h3>
+                              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#4e6b8a] md:text-base">
+                                {meta.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[320px]">
+                            <div className={`rounded-2xl border p-4 ${meta.statClassName}`}>
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Types In View</p>
+                              <p className="mt-2 text-2xl font-black text-[#143257]">{group.containers.length}</p>
+                              <p className="mt-1 text-xs font-semibold text-[#52708f]">Shown in this category board</p>
+                            </div>
+
+                            <div className={`rounded-2xl border p-4 ${meta.statClassName}`}>
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Best Fit</p>
+                              <p className="mt-2 text-sm font-bold leading-relaxed text-[#143257]">{meta.focus}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="px-4 pb-4 pt-4 md:px-6 md:pb-6">
+                        <div className="mb-3 hidden grid-cols-[1.35fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a7693] lg:grid">
+                          <span>Container</span>
+                          <span>Interior Dimensions</span>
+                          <span>Loading Access</span>
+                          <span>Load Data</span>
+                        </div>
+
+                        <Accordion
+                          type="single"
+                          collapsible
+                          className="space-y-3"
+                          value={
+                            group.containers.some((container) => `container-${container.id}` === expandedContainerId)
+                              ? expandedContainerId
+                              : undefined
+                          }
+                          onValueChange={handleAccordionChange}
+                        >
+                          {group.containers.map((container) => {
+                            const doorRows = getDoorRows(container);
+                            const tags = getContainerTags(container.name);
+                            const capacityLabel = getCapacityLabel(container);
+                            const payloadDisplay = getPayloadDisplay(container);
+                            const accordionValue = `container-${container.id}`;
+
+                            return (
+                              <AccordionItem
+                                key={container.id}
+                                value={accordionValue}
+                                id={accordionValue}
+                                className="overflow-hidden rounded-[1.35rem] border border-white/80 bg-white/88 px-4 shadow-[0_14px_34px_rgba(10,35,66,0.06)]"
+                              >
+                                <AccordionTrigger className="py-0 text-left hover:no-underline">
+                                  <div className="grid flex-1 gap-4 py-4 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:items-center">
+                                    <div>
+                                      <div className="flex flex-wrap items-center gap-2">
+                                        <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
+                                          Type {String(container.id).padStart(2, "0")}
+                                        </span>
+                                        <span
+                                          className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${meta.badgeClassName}`}
+                                        >
+                                          {group.category}
+                                        </span>
+                                      </div>
+
+                                      <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
+
+                                      {tags.length > 0 && (
+                                        <div className="mt-3 flex flex-wrap gap-2">
+                                          {tags.map((tag) => (
+                                            <span
+                                              key={tag}
+                                              className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${meta.pillClassName}`}
+                                            >
+                                              {tag}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      )}
+
+                                      <div className="mt-4 grid gap-2 sm:grid-cols-3 lg:hidden">
+                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2">
+                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                            {capacityLabel}
+                                          </p>
+                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
+                                            {container.cubicCapacity}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2">
+                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                            Tare Weight
+                                          </p>
+                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
+                                            {container.tareWeight}
+                                          </p>
+                                        </div>
+                                        <div className="rounded-xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2 sm:col-span-1">
+                                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                            Payload
+                                          </p>
+                                          <p className="mt-1 text-sm font-bold leading-snug text-[#143257]">
+                                            {payloadDisplay}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="hidden lg:block">
+                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        Inside L / W / H
+                                      </p>
+                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
+                                        <p>{container.interiorDimensions.length}</p>
+                                        <p>{container.interiorDimensions.width}</p>
+                                        <p>{container.interiorDimensions.height}</p>
+                                      </div>
+                                    </div>
+
+                                    <div className="hidden lg:block">
+                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        Door / Top Access
+                                      </p>
+                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
+                                        {doorRows.length > 0 ? (
+                                          doorRows.map((row) => <p key={row}>{row}</p>)
+                                        ) : (
+                                          <p className="text-[#5f7a98]">Door data not listed</p>
+                                        )}
+                                        <p className="text-[#5f7a98]">
+                                          {container.topsOpening ? `Top: ${container.topsOpening}` : "Top opening not listed"}
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    <div className="hidden lg:block">
+                                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        Volume / Weight
+                                      </p>
+                                      <div className="mt-2 space-y-1.5 text-sm font-semibold text-[#30567f]">
+                                        <p>{capacityLabel}: {container.cubicCapacity}</p>
+                                        <p>Tare: {container.tareWeight}</p>
+                                        <p>Payload: {payloadDisplay}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </AccordionTrigger>
+
+                                <AccordionContent className="pb-0 pt-0">
+                                  <div className="border-t border-[#e1ebf8] pb-5 pt-5">
+                                    <div className="grid gap-5 xl:grid-cols-[240px_1fr] xl:items-start">
+                                      <div className="rounded-[1.2rem] border border-[#d8e5f7] bg-[linear-gradient(160deg,#f9fcff_0%,#f1f7ff_100%)] p-4">
+                                        <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-[#dce8f8] bg-white">
+                                          <img
+                                            src={container.image}
+                                            alt={container.name}
+                                            loading="lazy"
+                                            decoding="async"
+                                            className="max-h-48 w-auto object-contain md:max-h-52"
+                                          />
+                                        </div>
+                                      </div>
+
+                                      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                            Interior Dimensions
+                                          </p>
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                            <p>{container.interiorDimensions.length}</p>
+                                            <p>{container.interiorDimensions.width}</p>
+                                            <p>{container.interiorDimensions.height}</p>
+                                          </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                            Door Opening
+                                          </p>
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                            {doorRows.length > 0 ? (
+                                              doorRows.map((row) => <p key={row}>{row}</p>)
+                                            ) : (
+                                              <p className="text-[#5f7a98]">No door opening data listed for this type.</p>
+                                            )}
+                                          </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                            Weight And Capacity
+                                          </p>
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                            <p>{capacityLabel}: {container.cubicCapacity}</p>
+                                            <p>Tare Weight: {container.tareWeight}</p>
+                                            <p>Payload: {payloadDisplay}</p>
+                                          </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                            Handling Notes
+                                          </p>
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                            <p>{meta.focus}</p>
+                                            <p>
+                                              {container.topsOpening
+                                                ? `Top Opening: ${container.topsOpening}`
+                                                : "Top opening details are not listed for this type."}
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </AccordionContent>
+                              </AccordionItem>
+                            );
+                          })}
+                        </Accordion>
+                      </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </section>

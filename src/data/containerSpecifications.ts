@@ -21,30 +21,22 @@ export interface ContainerSpec {
 
 export type ContainerCategory =
   | "All"
-  | "Dry Freight"
-  | "High Cube"
-  | "Reefer"
-  | "Open Top"
-  | "Flat Rack"
-  | "Specialty";
+  | "Dry Container"
+  | "Reefer Container"
+  | "Special Container";
 
 export const categoryOptions: ContainerCategory[] = [
   "All",
-  "Dry Freight",
-  "High Cube",
-  "Reefer",
-  "Open Top",
-  "Flat Rack",
-  "Specialty",
+  "Dry Container",
+  "Reefer Container",
+  "Special Container",
 ];
 
 export const getContainerCategory = (name: string): Exclude<ContainerCategory, "All"> => {
-  if (name.includes("Reefer")) return "Reefer";
-  if (name.includes("Open Top")) return "Open Top";
-  if (name.includes("Flat Rack")) return "Flat Rack";
-  if (name.includes("Dry Freight")) return "Dry Freight";
-  if (name.includes("High Cube")) return "High Cube";
-  return "Specialty";
+  if (name.includes("Reefer")) return "Reefer Container";
+  if (name.includes("Dry Freight")) return "Dry Container";
+  if (name.includes("High Cube") && !name.includes("Reefer")) return "Dry Container";
+  return "Special Container";
 };
 
 export const containers: ContainerSpec[] = [
@@ -269,5 +261,56 @@ export const containers: ContainerSpec[] = [
     tareWeight: "5,800 kg 10,787 lbs.",
     cubicCapacity: "28,200 kg 64,374 lbs.",
     payload: "",
+  },
+];
+
+export interface ContainerGroup {
+  category: string;
+  subcategory?: string;
+  sizes: Array<{
+    name: string;
+    variants?: string[];
+    containerIds: number[];
+  }>;
+}
+
+export const organizedContainers: ContainerGroup[] = [
+  {
+    category: "A) Dry Container",
+    sizes: [
+      { name: "20'", containerIds: [4] },
+      { name: "40'", containerIds: [3] },
+      { name: "40' HC", containerIds: [2] },
+      { name: "45' HC", containerIds: [1] },
+    ],
+  },
+  {
+    category: "B) Reefer Container",
+    sizes: [
+      { name: "20'", containerIds: [] },
+      { name: "40'", containerIds: [9] },
+      { name: "40' HC", containerIds: [7, 8] },
+    ],
+  },
+  {
+    category: "C) Special Container",
+    sizes: [
+      {
+        name: "(1) 20'",
+        variants: ["FR", "OT"],
+        containerIds: [10, 5],
+      },
+      {
+        name: "(2) 40'",
+        variants: ["FR", "OT"],
+        containerIds: [11, 6],
+      },
+      {
+        name: "(3) 40' HC",
+        variants: ["FR", "OT"],
+        containerIds: [],
+      },
+      { name: "45' HC (standard)", containerIds: [1] },
+    ],
   },
 ];
