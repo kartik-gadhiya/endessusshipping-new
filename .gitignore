@@ -29,3 +29,4 @@ dist-ssr
 *.sw?
 dist/assets/videos
 # public/assets/videos
+.watermark-cache/

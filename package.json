@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "watermark:gallery": "node scripts/watermark-gallery.mjs",
+    "predev": "npm run watermark:gallery",
     "dev": "concurrently \"tsx dev-server.ts\" \"vite\"",
+    "predev:ui": "npm run watermark:gallery",
     "dev:ui": "vite",
     "dev:api": "tsx dev-server.ts",
+    "prebuild": "npm run watermark:gallery",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
