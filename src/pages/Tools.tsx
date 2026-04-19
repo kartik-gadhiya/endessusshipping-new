@@ -2,34 +2,36 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Boxes,
-  Clock3,
   Ruler,
+  Scale,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 import ContainerSpecificationsSection from "@/components/ContainerSpecificationsSection";
+import DangerousGoodsClassSection from "@/components/DangerousGoodsClassSection";
 import FooterSection from "@/components/FooterSection";
 import CBMCalculator from "@/components/CBMCalculator";
 import MeasurementConverter from "@/components/MeasurementConverter";
+import VolumeWeightCalculator from "@/components/VolumeWeightCalculator";
 import { useSmoothScrollAnimations } from "@/hooks/useSmoothScrollAnimations";
 import { absoluteUrl, createBreadcrumbSchema } from "@/lib/seo";
 
 const highlights = [
+  { icon: Scale, label: "Chargeable Weight", value: "Actual vs volumetric" },
   { icon: Boxes, label: "CBM Precision", value: "Multi-package volume" },
-  { icon: Ruler, label: "Unit Conversion", value: "Metric + Imperial" },
-  { icon: Clock3, label: "Fast Workflow", value: "Real-time calculation" },
-  { icon: ShieldCheck, label: "Reliable Output", value: "Shipping-ready figures" },
+  { icon: Ruler, label: "Unit Flexibility", value: "Metric + Imperial" },
+  { icon: ShieldCheck, label: "Freight Logic", value: "Air, ocean, rail, road" },
 ];
 
 const toolsSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "CBM Calculator and Measurement Converter",
+  name: "Volume Weight, CBM and Measurement Tools",
   url: absoluteUrl("/tools"),
   description:
-    "Use En Dessus tools to calculate CBM and convert cargo measurements for faster shipping and freight planning.",
+    "Use En Dessus tools to calculate volume weight, chargeable weight, CBM, and cargo measurements for import-export freight planning.",
   applicationCategory: "BusinessApplication",
   operatingSystem: "All",
   offers: {
@@ -48,15 +50,17 @@ const Tools = () => {
   return (
     <div className="tools-canvas min-h-screen overflow-x-hidden text-foreground">
       <SEO
-        title="CBM Calculator and Measurement Converter for Shipping"
-        description="Use practical shipping tools to calculate CBM, convert measurements, and prepare accurate import-export freight plans."
+        title="Volume Weight Calculator, CBM Calculator and Measurement Tools"
+        description="Use practical shipping tools to calculate chargeable weight, CBM, and measurements for more accurate import-export freight planning."
         path="/tools"
         keywords={[
+          "volume weight calculator",
+          "chargeable weight calculator",
           "cbm calculator for shipping",
+          "air freight volumetric weight",
+          "ocean lcl weight or measure",
           "freight measurement converter",
-          "cargo volume calculator",
           "import export planning tools",
-          "shipping utility tools",
         ]}
         schema={[
           createBreadcrumbSchema([
@@ -87,34 +91,46 @@ const Tools = () => {
               </h1>
 
               <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#496686] md:text-xl">
-                Use practical calculators to estimate shipment volume and convert measurements instantly. Designed for
-                freight teams that need clear numbers without extra effort.
+                Use practical calculators to estimate chargeable weight, shipment volume, and cargo measurements
+                instantly. Designed for freight teams that need clear import-export numbers without extra effort.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="#cbm-calculator"
-                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
-                >
-                  CBM Calculator
-                </a>
-                <a
-                  href="#measurement-converter"
-                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
-                >
-                  Measurement Converter
-                </a>
                 <a
                   href="#container-specification"
                   className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
                 >
                   Container Specification
                 </a>
+                <a
+                  href="#volume-weight-calculator"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  Volume Weight Calculator
+                </a>
+                <a
+                  href="#dangerous-goods-specification"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  DG Class Specification
+                </a>
+                <a
+                  href="#cbm-calculator"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  CBM Calculation
+                </a>
+                <a
+                  href="#measurement-converter"
+                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                >
+                  Measurement Calculation
+                </a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="#cbm-calculator"
+                  href="#volume-weight-calculator"
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
                 >
                   Start Calculating
@@ -155,6 +171,27 @@ const Tools = () => {
         <section className="px-6 pb-24 lg:px-12 lg:pb-28">
           <div className="mx-auto max-w-7xl space-y-10">
             <article
+              id="container-specification"
+              className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
+            >
+              <ContainerSpecificationsSection embedded showBottomCta={false} showDangerousGoodsSection={false} />
+            </article>
+
+            <article
+              id="volume-weight-calculator"
+              className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
+            >
+              <VolumeWeightCalculator />
+            </article>
+
+            <article
+              id="dangerous-goods-specification"
+              className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
+            >
+              <DangerousGoodsClassSection embedded />
+            </article>
+
+            <article
               id="cbm-calculator"
               className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
             >
@@ -166,13 +203,6 @@ const Tools = () => {
               className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
             >
               <MeasurementConverter />
-            </article>
-
-            <article
-              id="container-specification"
-              className="tools-tool-shell scroll-mt-36 overflow-hidden rounded-[2rem] border border-[#d8e5f7] bg-white/90 shadow-[0_24px_55px_rgba(10,35,66,0.1)]"
-            >
-              <ContainerSpecificationsSection embedded showBottomCta={false} />
             </article>
           </div>
         </section>
