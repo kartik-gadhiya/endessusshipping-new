@@ -584,7 +584,7 @@ const ContainerSpecificationsSection = ({
                                       aria-label={`Enlarge image for ${container.name}`}
                                     >
                                       <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
-                                      <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105">
+                                      <span className="absolute right-5 top-5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105 z-10">
                                         <Search size={14} />
                                       </span>
                                       <div className="relative flex h-[92px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
