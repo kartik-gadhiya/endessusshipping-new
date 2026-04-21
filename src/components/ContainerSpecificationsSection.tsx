@@ -254,6 +254,8 @@ const ContainerSpecificationsSection = ({
         window.setTimeout(() => {
           document.getElementById(nextHash)?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 160);
+      } else {
+        setExpandedContainerId(undefined);
       }
     };
 
@@ -274,27 +276,27 @@ const ContainerSpecificationsSection = ({
   };
 
   const heroSectionClassName = embedded
-    ? "relative overflow-hidden px-6 pb-14 pt-8 lg:px-8 lg:pb-16 lg:pt-10"
-    : "relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40";
+    ? "relative overflow-hidden px-4 pb-12 pt-6 sm:px-6 sm:pb-14 sm:pt-8 lg:px-8 lg:pb-16 lg:pt-10"
+    : "relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-36 lg:px-12 lg:pb-24 lg:pt-40";
 
   const catalogSectionClassName = embedded
-    ? "px-6 pb-16 lg:px-8 lg:pb-20"
-    : "px-6 pb-24 lg:px-12 lg:pb-28";
+    ? "px-4 pb-14 sm:px-6 lg:px-8 lg:pb-20"
+    : "px-4 pb-20 sm:px-6 lg:px-12 lg:pb-28";
 
-  const infoSectionClassName = embedded ? "px-6 pb-12 lg:px-8" : "px-6 pb-24 lg:px-12";
+  const infoSectionClassName = embedded ? "px-4 pb-10 sm:px-6 lg:px-8" : "px-4 pb-20 sm:px-6 lg:px-12";
 
   const contentWidthClassName = embedded ? "mx-auto max-w-6xl" : "mx-auto max-w-7xl";
   const HeadingTag = headingAs;
   const headingClassName = embedded
-    ? "mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl"
-    : "mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl lg:text-7xl";
+    ? "mt-5 max-w-[9.25ch] text-[clamp(2.45rem,11.4vw,4.35rem)] font-black leading-[0.92] tracking-[-0.045em] text-[#102742] [overflow-wrap:anywhere] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal"
+    : "mt-5 max-w-[10.5ch] text-[clamp(2.9rem,14vw,4.75rem)] font-black leading-[0.94] tracking-[-0.04em] text-[#102742] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal lg:text-7xl";
 
   return (
     <>
       <section className={heroSectionClassName}>
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(34,211,238,0.17),transparent_27%),radial-gradient(circle_at_86%_8%,rgba(245,181,42,0.2),transparent_24%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.94)_100%)]" />
 
-        <div className={`${contentWidthClassName} grid gap-8 lg:grid-cols-[1.07fr_0.93fr] lg:items-end`}>
+        <div className={`${contentWidthClassName} grid gap-6 sm:gap-8 lg:grid-cols-[1.07fr_0.93fr] lg:items-end`}>
           <div className="container-hero-reveal">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-primary">
               <Sparkles size={14} className="text-accent" />
@@ -308,7 +310,7 @@ const ContainerSpecificationsSection = ({
               </span>
             </HeadingTag>
 
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#496686] md:text-xl">
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#496686] sm:text-lg md:mt-6 md:text-xl">
               Compare dimensions, opening details, tare weight, and capacity for major container formats. Built to help
               teams decide faster during booking and cargo planning.
             </p>
@@ -340,25 +342,25 @@ const ContainerSpecificationsSection = ({
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#container-catalog"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)] sm:w-auto"
               >
                 Start Exploring
                 <ArrowRight size={18} />
               </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary sm:w-auto"
               >
                 Ask Our Team
               </Link>
             </div>
           </div>
 
-          <div className="container-panel rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-6 shadow-[0_26px_62px_rgba(11,36,68,0.14)] lg:p-7">
+          <div className="container-panel rounded-[1.6rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-4 shadow-[0_26px_62px_rgba(11,36,68,0.14)] sm:p-6 lg:rounded-[1.9rem] lg:p-7">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Specification Highlights</p>
 
             <div className="mt-5 grid gap-3">
-              <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Boxes size={17} />
@@ -368,7 +370,7 @@ const ContainerSpecificationsSection = ({
                 <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{containers.length} listed</span>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Package size={17} />
@@ -378,7 +380,7 @@ const ContainerSpecificationsSection = ({
                 <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{payloadListedCount} types</span>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Clock3 size={17} />
@@ -388,7 +390,7 @@ const ContainerSpecificationsSection = ({
                 <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">High Cube {highCubeCount}</span>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <ShieldCheck size={17} />
@@ -404,7 +406,7 @@ const ContainerSpecificationsSection = ({
 
       <section id="container-catalog" className={catalogSectionClassName}>
         <div className={`${contentWidthClassName} space-y-7`}>
-          <div className="container-toolbar rounded-[1.7rem] border border-[#d7e4f7] bg-white/88 p-5 shadow-[0_18px_46px_rgba(10,35,66,0.09)] md:p-6">
+          <div className="container-toolbar rounded-[1.5rem] border border-[#d7e4f7] bg-white/88 p-4 shadow-[0_18px_46px_rgba(10,35,66,0.09)] sm:p-5 md:rounded-[1.7rem] md:p-6">
             <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="relative">
                 <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#5f7a98]" />
@@ -416,7 +418,7 @@ const ContainerSpecificationsSection = ({
                 />
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 overflow-x-auto pb-1 sm:overflow-visible sm:pb-0">
                 {categoryOptions.map((category) => {
                   const isActive = activeCategory === category;
 
@@ -447,11 +449,11 @@ const ContainerSpecificationsSection = ({
             </Card>
           ) : (
             <>
-              <div className="container-card overflow-hidden rounded-[1.7rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-6 shadow-[0_18px_46px_rgba(10,35,66,0.08)] md:p-8">
+              <div className="container-card overflow-hidden rounded-[1.5rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-4 shadow-[0_18px_46px_rgba(10,35,66,0.08)] sm:p-6 md:rounded-[1.7rem] md:p-8">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                   <div className="max-w-3xl">
                     <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b688a]">Compare At A Glance</p>
-                    <h3 className="mt-3 text-balance text-2xl font-black leading-tight text-[#143257] md:text-3xl">
+                    <h3 className="mt-3 text-wrap text-xl font-black leading-tight text-[#143257] sm:text-2xl md:text-3xl">
                       Visitors can now scan the key specs first and open only the containers they want in full.
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a] md:text-base">
@@ -505,7 +507,7 @@ const ContainerSpecificationsSection = ({
                       key={group.category}
                       className={`container-card overflow-hidden rounded-[1.8rem] ${meta.panelClassName} shadow-[0_20px_48px_rgba(10,35,66,0.08)]`}
                     >
-                      <div className="border-b border-white/70 px-5 py-5 md:px-6">
+                      <div className="border-b border-white/70 px-4 py-4 sm:px-5 sm:py-5 md:px-6">
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                           <div className="flex items-start gap-4">
                             <span
@@ -516,7 +518,7 @@ const ContainerSpecificationsSection = ({
 
                             <div>
                               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5a7693]">{meta.eyebrow}</p>
-                              <h3 className="mt-2 text-2xl font-black text-[#143257]">{group.category}</h3>
+                              <h3 className="mt-2 text-xl font-black text-[#143257] sm:text-2xl">{group.category}</h3>
                               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#4e6b8a] md:text-base">
                                 {meta.description}
                               </p>
@@ -538,7 +540,7 @@ const ContainerSpecificationsSection = ({
                         </div>
                       </div>
 
-                      <div className="px-4 pb-4 pt-4 md:px-6 md:pb-6">
+                      <div className="px-3 pb-3 pt-3 sm:px-4 sm:pb-4 sm:pt-4 md:px-6 md:pb-6">
                         <div className="mb-3 hidden grid-cols-[1.6fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a7693] xl:grid">
                           <span>Container</span>
                           <span>Interior Snapshot</span>
@@ -550,11 +552,7 @@ const ContainerSpecificationsSection = ({
                           type="single"
                           collapsible
                           className="space-y-3"
-                          value={
-                            group.containers.some((container) => `container-${container.id}` === expandedContainerId)
-                              ? expandedContainerId
-                              : undefined
-                          }
+                          value={expandedContainerId}
                           onValueChange={handleAccordionChange}
                         >
                           {group.containers.map((container) => {
@@ -573,21 +571,21 @@ const ContainerSpecificationsSection = ({
                                 key={container.id}
                                 value={accordionValue}
                                 id={accordionValue}
-                                className="overflow-hidden rounded-[1.35rem] border border-white/80 bg-white/88 px-4 shadow-[0_14px_34px_rgba(10,35,66,0.06)]"
+                                className="overflow-hidden rounded-[1.2rem] border border-white/80 bg-white/88 px-3 shadow-[0_14px_34px_rgba(10,35,66,0.06)] sm:rounded-[1.35rem] sm:px-4"
                               >
-                                <div className="grid gap-4 py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr_auto] xl:items-center">
-                                  <div className="grid gap-4 sm:grid-cols-[148px_1fr] sm:items-center">
+                                <div className="grid gap-3 py-3.5 sm:gap-4 sm:py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr_auto] xl:items-center">
+                                  <div className="grid gap-3 sm:grid-cols-[132px_1fr] sm:items-center md:gap-4 md:grid-cols-[148px_1fr]">
                                     <button
                                       type="button"
                                       onClick={() => setPreviewContainer(container)}
-                                      className="group relative overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25"
+                                      className="group relative mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 sm:mx-0 sm:max-w-none"
                                       aria-label={`Enlarge image for ${container.name}`}
                                     >
                                       <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
-                                      <span className="absolute right-5 top-5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105 z-10">
+                                      <span className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105">
                                         <Search size={14} />
                                       </span>
-                                      <div className="relative flex h-[92px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
+                                      <div className="relative flex h-[96px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
                                         <img
                                           src={container.image}
                                           alt={container.name}
@@ -596,7 +594,7 @@ const ContainerSpecificationsSection = ({
                                           className="h-full w-full object-contain p-2"
                                         />
                                       </div>
-                                      <p className="relative mt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
+                                      <p className="relative mt-2.5 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
                                         Container Preview
                                       </p>
                                     </button>
@@ -613,7 +611,9 @@ const ContainerSpecificationsSection = ({
                                         </span>
                                       </div>
 
-                                      <p className="mt-3 text-lg font-black leading-tight text-[#143257]">{container.name}</p>
+                                      <p className="mt-3 text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                        {container.name}
+                                      </p>
 
                                       {tags.length > 0 && (
                                         <div className="mt-3 flex flex-wrap gap-2">
@@ -635,7 +635,9 @@ const ContainerSpecificationsSection = ({
                                       Interior Snapshot
                                     </p>
                                     <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                      <p className="text-lg font-black leading-tight text-[#143257]">{interiorSummary}</p>
+                                      <p className="text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                        {interiorSummary}
+                                      </p>
                                       <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
                                         Full metric and imperial interior dimensions are available in the expanded view.
                                       </p>
@@ -647,7 +649,9 @@ const ContainerSpecificationsSection = ({
                                       Access Snapshot
                                     </p>
                                     <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                      <p className="text-lg font-black leading-tight text-[#143257]">{doorSummary}</p>
+                                      <p className="text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                        {doorSummary}
+                                      </p>
                                       <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
                                         {topAccessSummary}
                                       </p>
@@ -823,7 +827,7 @@ const ContainerSpecificationsSection = ({
       {showDangerousGoodsSection && <DangerousGoodsClassSection embedded={embedded} />}
 
       {showBottomCta && (
-        <section className="container-cta-reveal px-6 pb-24 lg:px-12">
+        <section className="container-cta-reveal px-4 pb-20 sm:px-6 lg:px-12 lg:pb-24">
           <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Need Help Selecting a Container</p>
             <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">

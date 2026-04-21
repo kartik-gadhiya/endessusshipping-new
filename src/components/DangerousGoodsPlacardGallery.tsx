@@ -22,27 +22,28 @@ const DangerousGoodsPlacardSlide = ({
   badgeClassName: string;
   label: DangerousGoodsLabel;
 }) => (
-  <div className="px-1 pb-2 pt-1">
-    <div className="overflow-hidden rounded-[1.35rem] border border-[#d8e5f7] bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.96),rgba(239,245,255,0.93)_55%,rgba(226,237,252,0.92)_100%)] p-3 shadow-[0_12px_28px_rgba(10,35,66,0.08)]">
-      <div className="flex aspect-square items-center justify-center rounded-[1.05rem] border border-white/85 bg-white/85 p-4">
+  <div className="px-0.5 pb-1 pt-0.5 sm:px-1 sm:pb-2 sm:pt-1">
+    <div className="flex justify-center overflow-hidden rounded-[1.2rem] border border-[#d8e5f7] bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.96),rgba(239,245,255,0.93)_55%,rgba(226,237,252,0.92)_100%)] p-1.5 shadow-[0_12px_28px_rgba(10,35,66,0.08)] sm:rounded-[1.35rem] sm:p-3">
+      <div className="mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center overflow-hidden rounded-[0.95rem] border border-white/85 bg-white/88 p-2 sm:max-w-none sm:aspect-auto sm:h-[320px] sm:rounded-[1.05rem] sm:p-4 md:h-[360px]">
         <img
           src={label.image}
           alt={label.alt}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-contain"
+          className="h-full w-full object-contain object-center"
         />
       </div>
     </div>
 
-    <div className="mt-4 flex items-start justify-between gap-3">
-      <div>
+    <div className="mt-3 flex flex-col items-center text-center gap-2 sm:mt-4 sm:flex-row sm:items-start sm:text-left sm:justify-between sm:gap-3">
+      <div className="min-w-0 flex-1">
         <p className="text-sm font-black text-[#143257]">{label.title}</p>
         <p className="mt-1 text-xs font-semibold leading-relaxed text-[#597696]">{label.caption}</p>
       </div>
       <span
         className={cn(
-          "shrink-0",
+          "w-fit shrink-0",
+          badgeClassName,
           screenshotPillClassName,
         )}
       >
@@ -88,8 +89,8 @@ const DangerousGoodsPlacardGallery = ({
   }, [api, multiple]);
 
   return (
-    <div className="mt-5 rounded-[1.3rem] border border-white/80 bg-white/72 p-4">
-      <div className="flex items-start justify-between gap-3">
+    <div className="mt-4 rounded-[1.15rem] border border-white/80 bg-white/72 p-3 sm:mt-5 sm:rounded-[1.3rem] sm:p-4">
+      <div className="flex flex-col items-center text-center gap-2 sm:flex-row sm:items-start sm:text-left sm:justify-between sm:gap-3">
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Image Gallery</p>
           <p className="mt-1 text-xs font-semibold text-[#6682a0]">
@@ -99,12 +100,12 @@ const DangerousGoodsPlacardGallery = ({
           </p>
         </div>
 
-        <div className={cn("shrink-0 whitespace-nowrap", counterPillClassName)}>
+        <div className={cn("w-fit shrink-0 whitespace-nowrap", counterPillClassName)}>
           {multiple ? `${current} / ${total}` : "1 Image"}
         </div>
       </div>
 
-      <Carousel className="mt-4" setApi={setApi} opts={{ align: "start", loop: multiple }}>
+      <Carousel className="mt-3 sm:mt-4" setApi={setApi} opts={{ align: "center", loop: multiple }}>
         <CarouselContent>
           {labels.map((label) => (
             <CarouselItem key={label.id}>

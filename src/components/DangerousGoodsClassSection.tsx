@@ -10,15 +10,15 @@ const DangerousGoodsClassSection = ({ embedded = false }: DangerousGoodsClassSec
   const contentWidthClassName = embedded ? "mx-auto max-w-6xl" : "mx-auto max-w-7xl";
 
   return (
-    <section className={embedded ? "px-6 py-8 lg:px-8 lg:py-10" : "px-6 pb-24 lg:px-12 lg:pb-28"}>
+    <section className={embedded ? "px-4 py-6 sm:px-6 lg:px-8 lg:py-10" : "px-4 pb-20 sm:px-6 lg:px-12 lg:pb-28"}>
       <div className={`${contentWidthClassName} space-y-6`}>
-        <Card className="container-card overflow-hidden rounded-[1.7rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-6 shadow-[0_18px_46px_rgba(10,35,66,0.08)] md:p-8">
-          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <Card className="container-card overflow-hidden rounded-[1.5rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-4 shadow-[0_18px_46px_rgba(10,35,66,0.08)] sm:p-6 md:rounded-[1.7rem] md:p-8">
+          <div className="grid gap-5 md:gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div className="max-w-3xl">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b688a]">
                 Dangerous Goods Classification
               </p>
-              <h3 className="mt-3 text-balance text-2xl font-black leading-tight text-[#143257] md:text-3xl">
+              <h3 className="mt-3 text-wrap text-xl font-black leading-tight text-[#143257] sm:text-2xl md:text-3xl">
                 What are the nine classes of Dangerous Goods?
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a] md:text-base">
@@ -61,7 +61,7 @@ const DangerousGoodsClassSection = ({ embedded = false }: DangerousGoodsClassSec
           {dangerousGoodsClasses.map((dangerousGoodsClass) => (
             <Card
               key={dangerousGoodsClass.id}
-              className={`container-info-card flex h-full flex-col rounded-[1.45rem] border p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)] ${dangerousGoodsClass.accentClassName}`}
+              className={`container-info-card flex h-full flex-col rounded-[1.3rem] border p-4 shadow-[0_14px_34px_rgba(10,35,66,0.08)] sm:rounded-[1.45rem] sm:p-5 ${dangerousGoodsClass.accentClassName}`}
             >
               <div className="flex items-start justify-between gap-4">
                 <span
@@ -72,7 +72,9 @@ const DangerousGoodsClassSection = ({ embedded = false }: DangerousGoodsClassSec
                 <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#6a83a0]">DG</span>
               </div>
 
-              <h4 className="mt-4 text-xl font-black leading-tight text-[#143257]">{dangerousGoodsClass.title}</h4>
+              <h4 className="mt-3 text-lg font-black leading-tight text-[#143257] sm:mt-4 sm:text-xl">
+                {dangerousGoodsClass.title}
+              </h4>
 
               <DangerousGoodsPlacardGallery
                 badgeClassName={dangerousGoodsClass.badgeClassName}
