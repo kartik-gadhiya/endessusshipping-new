@@ -61,7 +61,7 @@ const DangerousGoodsClassSection = ({ embedded = false }: DangerousGoodsClassSec
           {dangerousGoodsClasses.map((dangerousGoodsClass) => (
             <Card
               key={dangerousGoodsClass.id}
-              className={`container-info-card flex h-full flex-col rounded-[1.3rem] border p-4 shadow-[0_14px_34px_rgba(10,35,66,0.08)] sm:rounded-[1.45rem] sm:p-5 ${dangerousGoodsClass.accentClassName}`}
+              className={`container-info-card flex h-full flex-col overflow-hidden rounded-[1.3rem] border p-4 shadow-[0_14px_34px_rgba(10,35,66,0.08)] sm:rounded-[1.45rem] sm:p-5 ${dangerousGoodsClass.accentClassName}`}
             >
               <div className="flex items-start justify-between gap-4">
                 <span
