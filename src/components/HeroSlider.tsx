@@ -14,7 +14,7 @@ const slides = [
     title: "Global Shipping Made Simple",
     titlePhrases: ["Global", "Shipping Made", "Simple"],
     subtitle: "Seamless logistics solutions connecting your business to the world.",
-    tag: "Sea Freight Solutions 1",
+    tag: "Sea Freight Solutions",
     blurb:
       "Reliable ocean logistics, proactive communication, and end-to-end execution for importers and exporters.",
   },
