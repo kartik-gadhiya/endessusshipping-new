@@ -59,7 +59,21 @@ export const useSmoothScrollAnimations = (selectors: string = defaultSelectors, 
 
     ScrollTrigger.refresh();
 
+    let resizeRafId: number | null = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeRafId !== null) cancelAnimationFrame(resizeRafId);
+      resizeRafId = requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
+    });
+
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
+
     return () => {
+      if (resizeRafId !== null) cancelAnimationFrame(resizeRafId);
+      resizeObserver.disconnect();
       context.revert();
       if (ticker) gsap.ticker.remove(ticker);
       lenis?.destroy();
