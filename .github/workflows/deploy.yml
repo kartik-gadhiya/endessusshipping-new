@@ -43,4 +43,3 @@ jobs:
 
             echo "Executing deploy.sh on branch main..."
             ./scripts/deploy.sh main
-
