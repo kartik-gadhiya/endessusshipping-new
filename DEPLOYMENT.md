@@ -119,3 +119,19 @@ Every deployment notification email includes:
 - **Error Diagnostics**: If a build or git step fails, the exact failing command and line number are highlighted.
 - **Log Snippet**: The last 40 lines of the deployment log are automatically attached for fast debugging.
 
+---
+
+## 6. Gallery Watermark Management
+
+To prevent unnecessary processing and file modifications during deployment, watermark generation is **not** run automatically on builds.
+
+- All existing gallery images are tracked via `.watermark-cache/watermark-manifest.json`.
+- When new gallery images are added and need to be watermarked, run the script manually:
+  ```bash
+  npm run watermark:gallery
+  ```
+- To force re-watermarking on all gallery images:
+  ```bash
+  npm run watermark:gallery -- --force
+  ```
+
