@@ -25,7 +25,7 @@ const containerSpecificationsSchema = {
 
 const ContainerSpecifications = () => {
   useSmoothScrollAnimations(
-    ".container-hero-reveal, .container-panel, .container-toolbar, .container-card, .container-info-card, .container-cta-reveal, .home-footer-shell",
+    ".container-hero-reveal, .container-panel, .container-toolbar, .container-cta-reveal, .home-footer-shell",
     30
   );
 

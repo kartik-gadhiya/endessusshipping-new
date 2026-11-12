@@ -43,7 +43,7 @@ const toolsSchema = {
 
 const Tools = () => {
   useSmoothScrollAnimations(
-    ".tools-hero-reveal, .tools-panel, .tools-tool-shell, .container-hero-reveal, .container-panel, .container-toolbar, .container-card, .container-info-card, .tools-cta-reveal, .home-footer-shell",
+    ".tools-hero-reveal, .tools-panel, .tools-tool-shell, .container-hero-reveal, .container-panel, .container-toolbar, .tools-cta-reveal, .home-footer-shell",
     30
   );
 
