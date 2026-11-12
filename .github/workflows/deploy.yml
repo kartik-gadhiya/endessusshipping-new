@@ -34,7 +34,7 @@ jobs:
           script_stop: true
           envs: TARGET_BRANCH
           script: |
-            TARGET_DIR="${{ secrets.SERVER_TARGET_DIR || '/opt/homebrew/var/www/endessusshipping-new' }}"
+            TARGET_DIR="${{ secrets.SERVER_TARGET_DIR || '/opt/homebrew/var/www/endessusshipping' }}"
             echo "Navigating to project directory: ${TARGET_DIR}"
             cd "${TARGET_DIR}" || { echo "Directory ${TARGET_DIR} not found on server"; exit 1; }
 
