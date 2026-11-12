@@ -121,6 +121,7 @@ fi
 
 # 5. Build production bundle
 echo "[4/5] Building production application..."
+export SKIP_WATERMARK=true
 npm run build
 
 # Verify build output

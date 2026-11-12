@@ -19,7 +19,10 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDir, "..");
 const galleryDir = path.join(projectRoot, "public", "assets", "gallery");
 const backupRoot = path.join(projectRoot, ".watermark-cache", "gallery-originals");
-const refreshSources = process.argv.includes("--refresh");
+const manifestPath = path.join(projectRoot, ".watermark-cache", "watermark-manifest.json");
+
+const forceAll = process.argv.includes("--force") || process.argv.includes("--refresh");
+const skipWatermark = process.env.SKIP_WATERMARK === "true" || process.argv.includes("--skip");
 
 const exists = async (targetPath) => {
   try {
@@ -27,6 +30,26 @@ const exists = async (targetPath) => {
     return true;
   } catch {
     return false;
+  }
+};
+
+const loadManifest = async () => {
+  try {
+    if (await exists(manifestPath)) {
+      const data = await fs.readFile(manifestPath, "utf-8");
+      return JSON.parse(data);
+    }
+  } catch {
+    // If manifest read fails, return empty
+  }
+  return {};
+};
+
+const saveManifest = async (manifest) => {
+  try {
+    await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2), "utf-8");
+  } catch (err) {
+    console.warn("Could not save watermark manifest:", err.message);
   }
 };
 
@@ -121,6 +144,11 @@ const applyWatermark = async (sourcePath, outputPath, fontPairs) => {
 };
 
 const main = async () => {
+  if (skipWatermark) {
+    console.log("Watermark processing skipped (SKIP_WATERMARK=true).");
+    return;
+  }
+
   if (!(await exists(galleryDir))) {
     throw new Error(`Gallery directory not found: ${galleryDir}`);
   }
@@ -133,6 +161,31 @@ const main = async () => {
     console.log("No gallery images found to watermark.");
     return;
   }
+
+  const manifest = await loadManifest();
+
+  // Determine which images actually need watermarking
+  const imagesToProcess = [];
+
+  for (const relativePath of imageFiles) {
+    const backupFilePath = path.join(backupRoot, relativePath);
+    const backupExists = await exists(backupFilePath);
+    const isRecorded = Boolean(manifest[relativePath]);
+
+    // If forceAll is requested, or backup doesn't exist, or file is not recorded as watermarked
+    if (forceAll || !backupExists || !isRecorded) {
+      imagesToProcess.push(relativePath);
+    }
+  }
+
+  if (imagesToProcess.length === 0) {
+    console.log(
+      `All ${imageFiles.length} gallery images are already watermarked. No processing needed (use 'npm run watermark:gallery -- --force' to re-watermark all).`
+    );
+    return;
+  }
+
+  console.log(`Found ${imagesToProcess.length} gallery image(s) needing watermark processing...`);
 
   const fontPairs = [
     {
@@ -159,28 +212,33 @@ const main = async () => {
 
   let processedCount = 0;
 
-  for (const relativePath of imageFiles) {
+  for (const relativePath of imagesToProcess) {
     const publicFilePath = path.join(galleryDir, relativePath);
     const backupFilePath = path.join(backupRoot, relativePath);
 
     await fs.mkdir(path.dirname(backupFilePath), { recursive: true });
 
-    if (refreshSources || !(await exists(backupFilePath))) {
+    // If backup does not exist or force refresh requested, backup original first
+    if (forceAll || !(await exists(backupFilePath))) {
       await fs.copyFile(publicFilePath, backupFilePath);
     }
 
     await applyWatermark(backupFilePath, publicFilePath, fontPairs);
     processedCount += 1;
+
+    // Record in manifest
+    manifest[relativePath] = {
+      watermarkedAt: new Date().toISOString(),
+      watermarkVersion: "1.0",
+    };
   }
+
+  await saveManifest(manifest);
 
   console.log(
     `Applied EN DESSUS watermark to ${processedCount} gallery image${processedCount === 1 ? "" : "s"} in public/assets/gallery.`,
   );
   console.log(`Original source backups are stored in ${path.relative(projectRoot, backupRoot)}.`);
-
-  if (refreshSources) {
-    console.log("Refresh mode was used: backup sources were rebuilt from the current public gallery files.");
-  }
 };
 
 main().catch((error) => {
