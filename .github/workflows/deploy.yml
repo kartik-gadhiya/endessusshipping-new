@@ -15,31 +15,46 @@ jobs:
     name: Execute Production Deployment
     runs-on: ubuntu-latest
 
+    # Connect GitHub Environment
+    environment: Production
+
     steps:
       - name: Verify Required Secrets
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
         run: |
-          if [ -z "${{ secrets.SERVER_HOST }}" ] || [ -z "${{ secrets.SERVER_SSH_KEY }}" ]; then
-            echo "::error::Missing deployment secrets! Please configure SERVER_HOST, SERVER_USER, and SERVER_SSH_KEY in your GitHub Repository Settings (Settings -> Secrets and variables -> Actions)."
-            echo "Refer to DEPLOYMENT.md for setup instructions."
+          if [ -z "$SERVER_HOST" ] || \
+             [ -z "$SERVER_USER" ] || \
+             [ -z "$SERVER_SSH_KEY" ]; then
+            echo "::error::Missing Production Environment secrets."
             exit 1
           fi
+
+          echo "All required secrets are available."
 
       - name: Trigger Remote Deployment via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER || 'root' }}
+          username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
+          port: ${{ secrets.SERVER_PORT || '22' }}
           script_stop: true
-          envs: TARGET_BRANCH
           script: |
-            TARGET_DIR="${{ secrets.SERVER_TARGET_DIR || '/opt/homebrew/var/www/endessusshipping' }}"
-            echo "Navigating to project directory: ${TARGET_DIR}"
-            cd "${TARGET_DIR}" || { echo "Directory ${TARGET_DIR} not found on server"; exit 1; }
+            set -e
+
+            TARGET_DIR="/var/www/endessusshipping"
+
+            echo "Deploying to ${TARGET_DIR}"
+
+            cd "${TARGET_DIR}"
 
             chmod +x scripts/deploy.sh
-            chmod +x scripts/send-deployment-email.mjs
 
-            echo "Executing deploy.sh on branch main..."
+            echo "Starting deployment on main..."
+
             ./scripts/deploy.sh main
+
+            echo "Deployment completed successfully."
