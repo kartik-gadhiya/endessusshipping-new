@@ -101,6 +101,8 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
           alt={`${service.title} logistics service`}
           loading="lazy"
           decoding="async"
+          width={600}
+          height={338}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
         {/* Overlay */}

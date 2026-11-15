@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 type GalleryImage = {
   src: string;
+  thumbnail: string;
   title: string;
   tag: string;
   note: string;
@@ -12,97 +13,113 @@ type GalleryImage = {
 
 const galleryImages: GalleryImage[] = [
   {
-    src: "/assets/gallery/IMG-20241017-WA0064-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0064-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0064-1-280x180.webp",
     title: "Heavy Cargo Handling",
     tag: "Project Cargo",
     note: "Specialized lifting and secure positioning for high-value shipments.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0065-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0065-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0065-1-280x180.webp",
     title: "Portside Coordination",
     tag: "Port Operations",
     note: "Real-time execution from gate-in to vessel allocation.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0066-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0066-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0066-1-280x180.webp",
     title: "Container Movement",
     tag: "Container Handling",
     note: "Efficient staging and loading for smoother turnaround.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0067-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0067-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0067-1-280x180.webp",
     title: "Operational Readiness",
     tag: "Yard Planning",
     note: "Pre-shipment checks that reduce route-side delays.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0068-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0068-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0068-1-280x180.webp",
     title: "Equipment Deployment",
     tag: "Field Operations",
     note: "Precise positioning for oversize and heavy equipment.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0069-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0069-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0069-1-280x180.webp",
     title: "Vessel Interface",
     tag: "Marine Logistics",
     note: "Integrated planning across dock and vessel teams.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0070-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0070-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0070-1-280x180.webp",
     title: "Air Cargo Support",
     tag: "Air Freight",
     note: "Fast processing for time-sensitive consignments.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0071-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0071-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0071-1-280x180.webp",
     title: "Warehouse Processing",
     tag: "Storage",
     note: "Secure handling with route-based dispatch sequencing.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0072-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0072-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0072-1-280x180.webp",
     title: "Special Cargo Securing",
     tag: "Cargo Safety",
     note: "Protection-focused lashing and movement control.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0073-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0073-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0073-1-280x180.webp",
     title: "Inspection Workflow",
     tag: "Quality Control",
     note: "Verified condition checks at key transfer points.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0074-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0074-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0074-1-280x180.webp",
     title: "Terminal Throughput",
     tag: "Port Operations",
     note: "Streamlined handling for consistent daily throughput.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0075-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0075-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0075-1-280x180.webp",
     title: "Freight Reliability",
     tag: "Logistics",
     note: "Execution built around schedule confidence.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0076-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0076-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0076-1-280x180.webp",
     title: "Supply Chain Continuity",
     tag: "Coordination",
     note: "Connected operations from origin to final discharge.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0078-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0078-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0078-1-280x180.webp",
     title: "Project Shipment Readiness",
     tag: "Project Cargo",
     note: "Large-format cargo staged for controlled transit.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0079-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0079-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0079-1-280x180.webp",
     title: "Hub Operations",
     tag: "Network",
     note: "Regional hub activities supporting global routes.",
   },
   {
-    src: "/assets/gallery/IMG-20241017-WA0080-1.jpg",
+    src: "/assets/gallery/IMG-20241017-WA0080-1.webp",
+    thumbnail: "/assets/gallery/IMG-20241017-WA0080-1-280x180.webp",
     title: "Shipping Execution",
     tag: "Global Freight",
     note: "Operational precision for dependable shipment movement.",
@@ -314,10 +331,12 @@ const GallerySection = () => {
                       >
                         <div className="h-14 w-20 overflow-hidden rounded-lg">
                           <img
-                            src={item.src}
+                            src={item.thumbnail || item.src}
                             alt={item.title}
                             loading="lazy"
                             decoding="async"
+                            width={80}
+                            height={56}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>

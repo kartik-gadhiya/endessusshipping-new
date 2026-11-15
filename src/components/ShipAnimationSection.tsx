@@ -1,7 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const ShipAnimationSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section ref={containerRef} className="relative w-full h-screen overflow-hidden -mb-px border-t border-border/10">
@@ -9,12 +28,14 @@ const ShipAnimationSection = () => {
       {/* Full Screen Video Background */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
+        autoPlay={inView}
         muted
         playsInline
         loop
+        preload={inView ? "auto" : "none"}
+        poster="/assets/videos/shipping1-poster.webp"
       >
-        <source src="/assets/videos/shipping1.mp4" type="video/mp4" />
+        {inView && <source src="/assets/videos/shipping1.mp4" type="video/mp4" />}
         Your browser does not support the video tag.
       </video>
 

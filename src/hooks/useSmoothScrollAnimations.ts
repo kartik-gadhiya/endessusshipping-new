@@ -16,65 +16,70 @@ export const useSmoothScrollAnimations = (selectors: string = defaultSelectors, 
 
     let lenis: Lenis | null = null;
     let ticker: ((time: number) => void) | null = null;
+    let context: gsap.Context | null = null;
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+    let resizeObserver: ResizeObserver | null = null;
 
-    lenis = new Lenis({
-      duration: 1.05,
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.1,
-      anchors: true,
-    });
-
-    lenis.on("scroll", () => ScrollTrigger.update());
-
-    ticker = (time: number) => {
-      lenis?.raf(time * 1000);
-    };
-
-    gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
-
-    const context = gsap.context(() => {
-      const revealTargets = gsap.utils.toArray<HTMLElement>(selectors);
-
-      revealTargets.forEach((target, index) => {
-        gsap.fromTo(
-          target,
-          { autoAlpha: 0, y: revealY },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.82,
-            ease: "power2.out",
-            delay: Math.min(index * 0.03, 0.12),
-            scrollTrigger: {
-              trigger: target,
-              start: "top 84%",
-              once: true,
-            },
-          }
-        );
+    const startTimer = setTimeout(() => {
+      lenis = new Lenis({
+        duration: 1.05,
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.1,
+        anchors: true,
       });
-    });
 
-    ScrollTrigger.refresh();
+      lenis.on("scroll", () => ScrollTrigger.update());
 
-    let resizeRafId: number | null = null;
-    const resizeObserver = new ResizeObserver(() => {
-      if (resizeRafId !== null) cancelAnimationFrame(resizeRafId);
-      resizeRafId = requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
+      ticker = (time: number) => {
+        lenis?.raf(time * 1000);
+      };
+
+      gsap.ticker.add(ticker);
+      gsap.ticker.lagSmoothing(0);
+
+      context = gsap.context(() => {
+        const revealTargets = gsap.utils.toArray<HTMLElement>(selectors);
+
+        revealTargets.forEach((target, index) => {
+          gsap.fromTo(
+            target,
+            { autoAlpha: 0, y: revealY },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.82,
+              ease: "power2.out",
+              delay: Math.min(index * 0.03, 0.12),
+              scrollTrigger: {
+                trigger: target,
+                start: "top 84%",
+                once: true,
+              },
+            }
+          );
+        });
       });
-    });
 
-    if (document.body) {
-      resizeObserver.observe(document.body);
-    }
+      ScrollTrigger.refresh();
+
+      resizeObserver = new ResizeObserver(() => {
+        if (resizeTimer !== null) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 200);
+      });
+
+      if (document.body) {
+        resizeObserver.observe(document.body);
+      }
+    }, 60);
 
     return () => {
-      if (resizeRafId !== null) cancelAnimationFrame(resizeRafId);
-      resizeObserver.disconnect();
-      context.revert();
+      clearTimeout(startTimer);
+      if (resizeTimer !== null) clearTimeout(resizeTimer);
+      if (resizeObserver) resizeObserver.disconnect();
+      if (context) context.revert();
       if (ticker) gsap.ticker.remove(ticker);
       lenis?.destroy();
     };

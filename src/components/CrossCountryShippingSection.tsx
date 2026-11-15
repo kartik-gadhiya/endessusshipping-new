@@ -53,7 +53,7 @@ const journeySteps = [
   },
 ];
 
-const imagePath = "/assets/images/corss_country_shipping.png";
+const imagePath = "/assets/images/corss_country_shipping.webp";
 
 const shellStyle = {
   background:

@@ -69,22 +69,36 @@ export const fallbackReviews: GoogleReview[] = [
 ];
 
 export const useGoogleReviews = () => {
-  const [reviews, setReviews] = useState<GoogleReview[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [reviews, setReviews] = useState<GoogleReview[]>(fallbackReviews);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
     const fetchReviews = async () => {
       try {
-        setIsLoading(true);
-        // By default, attempt to hit the proxy or the env variable endpoint.
-        const endpoint = import.meta.env.VITE_WP_API_URL || "http://endessusshipping.local/api-reviews.php";
-        
+        // By default, attempt to hit the configured reviews endpoint
+        const endpoint = import.meta.env.VITE_WP_API_URL || "/api-reviews.php";
+
+        // Prevent live browsers from attempting to fetch local developer URLs
+        if (
+          typeof window !== "undefined" &&
+          window.location.hostname !== "localhost" &&
+          window.location.hostname !== "127.0.0.1" &&
+          endpoint.includes("://localhost")
+        ) {
+          setReviews(fallbackReviews);
+          return;
+        }
+
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
             "Accept": "application/json"
-          }
+          },
+          signal: controller.signal
         });
 
         if (!response.ok) {
@@ -94,24 +108,25 @@ export const useGoogleReviews = () => {
         const json = await response.json();
         
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          console.log("Reviews data from WP API:", json.data);
           setReviews(json.data);
         } else {
-          // Fallback if data format is unexpected
-          console.warn("Invalid reviews data from WP API. Using fallbacks.");
           setReviews(fallbackReviews);
         }
       } catch (err: any) {
-        console.error("Failed to fetch Google Reviews from WP:", err);
-        setError(err.message);
-        // Fallback to static reviews if the API endpoint is completely inaccessible
+        setError(err.name === "AbortError" ? "Request timed out" : err.message);
         setReviews(fallbackReviews);
       } finally {
+        clearTimeout(timeoutId);
         setIsLoading(false);
       }
     };
 
     fetchReviews();
+
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
   return { reviews, isLoading, error };
