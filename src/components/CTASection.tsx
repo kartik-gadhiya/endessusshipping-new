@@ -11,7 +11,7 @@ const CTASection = () => {
       ref={ref}
       className="relative py-36 lg:py-48 overflow-hidden"
       style={{
-        backgroundImage: "url(https://endessusshipping.com/wp-content/uploads/2024/09/ship-loaded.jpg)",
+        backgroundImage: "url(/assets/about-image/cta-ship-background.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "scroll",

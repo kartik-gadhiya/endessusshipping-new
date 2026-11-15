@@ -59,6 +59,8 @@ const HeroSlider = () => {
         muted
         playsInline
         loop
+        preload="metadata"
+        poster="/assets/videos/shipping-poster.webp"
       >
         <source src="/assets/videos/shipping.mp4" type="video/mp4" />
         Your browser does not support the video tag.

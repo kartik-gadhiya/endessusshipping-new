@@ -55,12 +55,14 @@ const Navbar = () => {
       >
         <Link to="/" className="group flex items-center gap-3">
           <img
-            src="/assets/logo/En-Dessus-Logo5.png"
+            src="/assets/logo/En-Dessus-Logo5.webp"
             alt="En Dessus Global Forwarding"
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            className="h-14 object-contain transition-transform duration-300 group-hover:scale-105"
+            width={169}
+            height={56}
+            className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
 

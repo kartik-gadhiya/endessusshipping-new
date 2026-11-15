@@ -190,7 +190,7 @@ const About = () => {
           <div className="about-shell overflow-hidden rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-5 shadow-[0_28px_62px_rgba(11,36,68,0.14)] lg:p-6">
             <div className="relative overflow-hidden rounded-[1.4rem] border border-[#d7e5f7]">
               <img
-                src="/assets/about-image/wolfgang-weiser-467045605-20712621.jpg"
+                src="/assets/about-image/wolfgang-weiser-467045605-20712621.webp"
                 alt="En Dessus Global Forwarding cargo and shipping operations"
                 decoding="async"
                 className="h-[280px] w-full object-cover lg:h-[320px]"

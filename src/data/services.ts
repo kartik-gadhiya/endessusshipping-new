@@ -26,7 +26,7 @@ export const servicesData: Service[] = [
     description:
       "With a full variety of sea freight services, our global network of seasoned personnel, robust global shipping links, and unmatched flexibility allow us to efficiently and promptly handle both your import and export containerized cargo.",
     icon: Ship,
-    image: "/assets/service-gallery/sea_freight_1_1776256825028.png",
+    image: "/assets/service-gallery/sea_freight_1_1776256825028.webp",
     tags: [
       "FCL – Full Container Load", 
       "LCL – Less than Container Load", 
@@ -36,11 +36,11 @@ export const servicesData: Service[] = [
       "DG Cargo – Dangerous Goods Shipment"
     ],
     sliderImages: [
-      "/assets/service-gallery/sea_freight_1_1776256825028.png",
-      "/assets/service-gallery/sea_freight_2_1776256842661.png",
-      "/assets/service-gallery/sea_freight_3_1776256859318.png",
-      "/assets/service-gallery/sea_freight_4_1776256965990.png",
-      "/assets/service-gallery/sea_freight_5_1776256981643.png"
+      "/assets/service-gallery/sea_freight_1_1776256825028.webp",
+      "/assets/service-gallery/sea_freight_2_1776256842661.webp",
+      "/assets/service-gallery/sea_freight_3_1776256859318.webp",
+      "/assets/service-gallery/sea_freight_4_1776256965990.webp",
+      "/assets/service-gallery/sea_freight_5_1776256981643.webp"
     ]
   },
   {
@@ -49,7 +49,7 @@ export const servicesData: Service[] = [
     description:
       "For all air freight shipments to and from anywhere in the world, we provide an affordable, safe, reliable, and effective option. From ground transportation, insurance coverage arrangements, air consolidation, suitable and secure warehousing, to customs documentation, we oversee the entire procedure.",
     icon: Plane,
-    image: "/assets/service-gallery/air_freight_high_quality_1776256703376.png",
+    image: "/assets/service-gallery/air_freight_high_quality_1776256703376.webp",
     tags: ["Global Network", "Fast Delivery", "Consolidation"]
   },
   {
@@ -58,7 +58,7 @@ export const servicesData: Service[] = [
     description:
       "Our team of experts carefully evaluates your cargo requirements and works closely with our extensive network of partners to determine the most efficient transportation solution. We maintain a versatile fleet of trailers, including 20/40/50/60/80 feet trailers, as well as high bed, low bed, and semi-low bed options, to handle a wide range of cargo needs. For heavy lift operations across India, we collaborate with specialized companies equipped with hydraulic axle and puller equipment.",
     icon: Truck,
-    image: "/assets/service-gallery/road_transport_1776256724000.png",
+    image: "/assets/service-gallery/road_transport_1776256724000.webp",
     tags: [
       "General cargo transportation", 
       "Heavy and over-dimensional cargo transportation", 
@@ -70,8 +70,8 @@ export const servicesData: Service[] = [
       // "Placement of foundation/erection of heavy and over-dimensional consignment"
     ],
     sliderImages: [
-      "/assets/service-gallery/india_surface_transport.jpeg",
-      "/assets/service-gallery/india_rail_transport.png"
+      "/assets/service-gallery/india_surface_transport.webp",
+      "/assets/service-gallery/india_rail_transport.webp"
     ]
   },
   {
@@ -80,7 +80,7 @@ export const servicesData: Service[] = [
     description:
       "We provide clients with a hassle-free customs clearance service by means of a team that is well-versed in protocol and has a great working relationship with customs officials.",
     icon: FileCheck,
-    image: "/assets/service-gallery/customs_clearance_india_1776256684397.png",
+    image: "/assets/service-gallery/customs_clearance_india_1776256684397.webp",
     tags: ["Tariff Classification", "Regulatory Compliance", "Documentation"]
   },
   {
@@ -89,7 +89,7 @@ export const servicesData: Service[] = [
     description:
       "We have overseen multiple valuable project cargoes, providing our clients with top-notch project cargo services at competitive prices. Our staff handles each consignment uniquely, carefully arranging and designing every necessary element. We have completed projects worldwide including factories, distilleries, rolling mill equipment, and more.",
     icon: Package,
-    image: "/assets/service-gallery/project_cargo_1776258668993.png",
+    image: "/assets/service-gallery/project_cargo_1776258668993.webp",
     tags: ["Heavy Lift", "Break Bulk", "Route Planning"]
   },
   {
@@ -98,7 +98,7 @@ export const servicesData: Service[] = [
     description:
       "Chartering a ship is an arrangement to rent a ship or a portion of it from its owner. It is primarily utilized in break bulk and bulk shipments. We actively arrange bulk cruises for coal, minerals, agricultural products, cement, aggregates and more. We oversee bulk and break bulk cargo at all principal ports.",
     icon: Anchor,
-    image: "/assets/service-gallery/chartering_break_bulk_1776256808189.png",
+    image: "/assets/service-gallery/chartering_break_bulk_1776256808189.webp",
     tags: ["Vessel Chartering", "Heavy Equipment", "Dry Bulk"]
   },
   {
@@ -107,16 +107,16 @@ export const servicesData: Service[] = [
     description:
       "We offer a variety of valuable supplementary services, such as Cargo Maintenance, Pallets / Wooden Packaging / Wrapping, Fumigation, Lashing & Chocking, surveying containers during stuffing, and marine transport insurance services.",
     icon: Package,
-    image: "/assets/service-gallery/value_added1.jpeg",
+    image: "/assets/service-gallery/value_added1.webp",
     tags: ["Cargo Maintenance", "Pallets / Wooden Packaging / Wrapping", "Fumigation", "Lashing & Chocking"],
     sliderImages: [
-      "/assets/service-gallery/value_added1.jpeg",
-      "/assets/service-gallery/value_added2.jpeg",
-      "/assets/service-gallery/value_added3.jpeg",
-      "/assets/service-gallery/value_added4.jpeg",
-      "/assets/service-gallery/value_added5.jpeg",
-      "/assets/service-gallery/value_added6.jpeg",
-      "/assets/service-gallery/value_added7.jpeg"
+      "/assets/service-gallery/value_added1.webp",
+      "/assets/service-gallery/value_added2.webp",
+      "/assets/service-gallery/value_added3.webp",
+      "/assets/service-gallery/value_added4.webp",
+      "/assets/service-gallery/value_added5.webp",
+      "/assets/service-gallery/value_added6.webp",
+      "/assets/service-gallery/value_added7.webp"
     ]
   },
   {
@@ -125,7 +125,7 @@ export const servicesData: Service[] = [
     description:
       "Secure and scalable warehousing solutions designed for your inventory. With state-of-the-art security, climate control options, and strategic location placement, we provide comprehensive storage coverage.",
     icon: Warehouse,
-    image: "/assets/service-gallery/india_warehouse.png",
+    image: "/assets/service-gallery/india_warehouse.webp",
     tags: ["Secure Storage", "Inventory Management", "Distribution"]
   }
 ];
