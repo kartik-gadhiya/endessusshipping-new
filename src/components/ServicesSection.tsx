@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import { servicesData } from "@/data/services";
 
 const serviceUIOptions: Record<string, { subtitle: string; iconColor: string }> = {
-  "sea-freight": { subtitle: "Import/Export", iconColor: "blueGradient" },
-  "air-freight": { subtitle: "Import/Export", iconColor: "indigoGradient" },
-  "land-freight": { subtitle: "Domestic & International", iconColor: "cyanGradient" },
-  "customs-clearance": { subtitle: "Documentation", iconColor: "amberGradient" },
-  "project-cargo": { subtitle: "Heavy Equipment", iconColor: "indigoGradient" },
-  "chartering": { subtitle: "Chartering", iconColor: "cyanGradient" },
-  "value-added": { subtitle: "Premium Services", iconColor: "amberGradient" },
-  "warehousing": { subtitle: "Storage", iconColor: "blueGradient" },
+  "sea-freight": { subtitle: "Import/Export", iconColor: "redGradient" },
+  "air-freight": { subtitle: "Import/Export", iconColor: "silverGradient" },
+  "land-freight": { subtitle: "Domestic & International", iconColor: "greyGradient" },
+  "customs-clearance": { subtitle: "Documentation", iconColor: "darkGradient" },
+  "project-cargo": { subtitle: "Heavy Equipment", iconColor: "redGradient" },
+  "chartering": { subtitle: "Chartering", iconColor: "silverGradient" },
+  "value-added": { subtitle: "Premium Services", iconColor: "redGradient" },
+  "warehousing": { subtitle: "Storage", iconColor: "greyGradient" },
 };
 
 const services = servicesData.map(service => ({
@@ -23,27 +23,27 @@ const services = servicesData.map(service => ({
   title: service.title.toUpperCase(),
   subtitle: serviceUIOptions[service.id]?.subtitle || "Services",
   desc: service.description,
-  iconColor: serviceUIOptions[service.id]?.iconColor || "blueGradient"
+  iconColor: serviceUIOptions[service.id]?.iconColor || "redGradient"
 }));
 
 const SVGIconGradients = () => (
   <svg width="0" height="0" className="absolute">
     <defs>
-      <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb" />
-        <stop offset="100%" stopColor="#60a5fa" />
+      <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#E30016" />
+        <stop offset="100%" stopColor="#FF2638" />
       </linearGradient>
-      <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0891b2" />
-        <stop offset="100%" stopColor="#22d3ee" />
+      <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#9C9D9F" />
+        <stop offset="100%" stopColor="#D1D5DB" />
       </linearGradient>
-      <linearGradient id="indigoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#4f46e5" />
-        <stop offset="100%" stopColor="#818cf8" />
+      <linearGradient id="greyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6E6F71" />
+        <stop offset="100%" stopColor="#8E9093" />
       </linearGradient>
-      <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#d97706" />
-        <stop offset="100%" stopColor="#fbbf24" />
+      <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6E6F71" />
+        <stop offset="100%" stopColor="#4B4D4F" />
       </linearGradient>
     </defs>
   </svg>
@@ -92,7 +92,7 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer border border-blue-100/50 hover:border-secondary/50 transition-all duration-300 bg-white shadow-md hover:shadow-2xl hover:shadow-secondary/30"
+      className="group relative rounded-2xl overflow-hidden cursor-pointer border border-[#E2E4E6] hover:border-[#E30016] transition-all duration-300 bg-white shadow-md hover:shadow-2xl hover:shadow-red-900/10"
     >
       {/* Image Section */}
       <div className="aspect-video overflow-hidden relative">
@@ -106,12 +106,12 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent group-hover:from-primary/90 group-hover:via-primary/60 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#4B4D4F]/85 via-[#6E6F71]/40 to-transparent group-hover:from-[#4B4D4F]/95 group-hover:via-[#6E6F71]/60 transition-colors duration-500" />
         
         {/* Icon Badge */}
         <motion.div
           whileHover={{ scale: 1.1, rotate: 10, y: -2 }}
-          className="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-md rounded-xl flex items-center justify-center shadow-xl border border-white/20 group-hover:border-secondary/30 transition-all duration-300"
+          className="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-md rounded-xl flex items-center justify-center shadow-xl border border-white/20 group-hover:border-[#E30016] transition-all duration-300"
         >
           <service.icon size={26} stroke={`url(#${service.iconColor})`} strokeWidth={2.5} />
         </motion.div>
@@ -120,17 +120,17 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
       {/* Content Section */}
       <div className="p-6 relative">
         <div className="mb-3">
-          <p className="text-xs font-bold text-secondary tracking-widest uppercase mb-1">{service.subtitle}</p>
-          <h3 className="text-lg font-bold text-primary leading-tight">{service.title}</h3>
+          <p className="text-xs font-bold text-[#6E6F71] tracking-widest uppercase mb-1">{service.subtitle}</p>
+          <h3 className="text-lg font-bold text-[#4B4D4F] leading-tight group-hover:text-[#E30016] transition-colors">{service.title}</h3>
         </div>
         
-        <p className="text-muted-foreground text-sm leading-relaxed mb-5 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+        <p className="text-[#6E6F71] text-sm leading-relaxed mb-5 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
           {service.desc}
         </p>
 
         <Link to={`/services#${service.id}`}>
           <motion.div
-            className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all opacity-0 group-hover:opacity-100 duration-300"
+            className="inline-flex items-center gap-2 text-[#E30016] font-bold text-sm hover:gap-3 transition-all opacity-0 group-hover:opacity-100 duration-300"
           >
             Learn More
             <motion.div whileHover={{ x: 4 }}>
@@ -140,7 +140,7 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
         </Link>
 
         {/* Hover accent line */}
-        <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-secondary to-accent rounded-full w-0 group-hover:w-full transition-all duration-300" />
+        <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#E30016] to-[#9C9D9F] rounded-full w-0 group-hover:w-full transition-all duration-300" />
       </div>
     </motion.div>
   );
@@ -153,20 +153,20 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#f5f9ff_0%,#ffffff_40%,#f1f7ff_100%)]"
+      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#F8F9FA_0%,#FFFFFF_40%,#F4F5F7_100%)]"
       ref={ref}
     >
       <SVGIconGradients />
       {/* Decorative elements */}
       <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.12, 0.08] }}
         transition={{ duration: 10, repeat: Infinity }}
-        className="absolute top-20 left-0 w-96 h-96 bg-secondary/30 rounded-full blur-3xl -translate-x-1/2"
+        className="absolute top-20 left-0 w-96 h-96 bg-[#E30016]/10 rounded-full blur-3xl -translate-x-1/2"
       />
       <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.12, 0.08] }}
         transition={{ duration: 10, repeat: Infinity, delay: 2 }}
-        className="absolute bottom-20 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl translate-x-1/2"
+        className="absolute bottom-20 right-0 w-96 h-96 bg-[#9C9D9F]/15 rounded-full blur-3xl translate-x-1/2"
       />
 
       <div className="max-w-7xl mx-auto relative z-10 home-section-shell">
@@ -178,11 +178,11 @@ const ServicesSection = () => {
           className="text-center mb-20"
         >
           <span className="section-label">WHAT WE OFFER</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 mb-6 leading-tight">
-            Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Logistics Solutions</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#4B4D4F] mt-4 mb-6 leading-tight">
+            Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E30016] to-[#6E6F71]">Logistics Solutions</span>
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-accent via-yellow-400 to-accent rounded-full mx-auto mb-6" />
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+          <div className="w-24 h-1.5 bg-gradient-to-r from-[#E30016] via-[#9C9D9F] to-[#E30016] rounded-full mx-auto mb-6" />
+          <p className="text-[#6E6F71] text-lg max-w-2xl mx-auto leading-relaxed">
             From sea and air freight to customs clearance and premium logistics services, we handle every aspect of your cargo with professionalism and care.
           </p>
         </motion.div>
@@ -199,18 +199,18 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-20 p-10 rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 border border-blue-100/50 text-center"
+          className="mt-20 p-10 rounded-2xl bg-[#F8F9FA] border border-[#E2E4E6] text-center"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Explore All Our Services</h3>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <h3 className="text-2xl md:text-3xl font-black text-[#4B4D4F] mb-4">Explore All Our Services</h3>
+          <p className="text-[#6E6F71] mb-8 max-w-2xl mx-auto">
             Discover our complete range of shipping and logistics solutions. Click the button below to view all services in detail, or contact our team for custom solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/services">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 rounded-xl font-bold text-primary shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all"
+                className="inline-flex items-center gap-2 bg-[#E30016] px-8 py-4 rounded-xl font-bold text-white shadow-lg shadow-red-900/25 hover:bg-[#C40013] transition-all"
               >
                 View All Services
                 <ArrowRight size={20} />
@@ -218,9 +218,9 @@ const ServicesSection = () => {
             </Link>
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary via-blue-700 to-primary px-8 py-4 rounded-xl font-bold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
+              className="inline-flex items-center gap-2 bg-white border border-[#E2E4E6] px-8 py-4 rounded-xl font-bold text-[#4B4D4F] shadow-sm hover:bg-[#F4F5F7] hover:border-[#9C9D9F] transition-all"
             >
               Contact Our Team
               <ArrowRight size={20} />

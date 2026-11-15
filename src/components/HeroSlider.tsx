@@ -52,9 +52,9 @@ const HeroSlider = () => {
   const titlePhrases = slide.titlePhrases;
 
   return (
-    <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#071a33] lg:min-h-[860px]">
+    <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#6E6F71] lg:min-h-[860px]">
       <video
-        className="absolute inset-0 h-full w-full scale-[1.02] object-cover brightness-[1.15] contrast-[1.08] saturate-[1.1]"
+        className="absolute inset-0 h-full w-full scale-[1.02] object-cover brightness-[1.08] contrast-[1.05] saturate-[1.05]"
         autoPlay
         muted
         playsInline
@@ -66,8 +66,8 @@ const HeroSlider = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(7,26,51,0.78)_0%,rgba(12,36,66,0.62)_42%,rgba(12,36,66,0.34)_100%)]" />
-      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.16),transparent_38%),radial-gradient(circle_at_14%_84%,rgba(217,119,6,0.12),transparent_32%)]" />
+      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(75,77,79,0.92)_0%,rgba(110,111,113,0.82)_45%,rgba(110,111,113,0.55)_100%)]" />
+      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(227,0,22,0.12),transparent_38%),radial-gradient(circle_at_14%_84%,rgba(156,157,159,0.12),transparent_32%)]" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-6 pb-32 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
         <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
@@ -84,10 +84,10 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: -18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/45 bg-white/10 px-4 py-2 backdrop-blur-md"
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md"
               >
-                <Anchor size={15} className="text-accent" />
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{slide.tag}</span>
+                <Anchor size={15} className="text-[#E30016]" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">{slide.tag}</span>
               </motion.div>
 
               <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl lg:max-w-3xl">
@@ -99,7 +99,7 @@ const HeroSlider = () => {
                     transition={{ delay: 0.2 + i * 0.06, duration: 0.42 }}
                     className={`mr-3 inline-block ${
                       i === titlePhrases.length - 1
-                        ? "bg-gradient-to-r from-accent via-yellow-300 to-accent bg-clip-text text-transparent"
+                        ? "bg-gradient-to-r from-white via-[#9C9D9F] to-white bg-clip-text text-transparent"
                         : ""
                     }`}
                   >
@@ -112,7 +112,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55, duration: 0.45 }}
-                className="mt-6 max-w-2xl rounded-2xl border border-white/15 bg-[#071c38]/45 px-5 py-3 text-lg font-medium leading-relaxed text-white drop-shadow-[0_2px_14px_rgba(2,8,20,0.55)] backdrop-blur-sm md:text-xl"
+                className="mt-6 max-w-2xl rounded-2xl border border-white/15 bg-[#4B4D4F]/70 px-5 py-3 text-lg font-medium leading-relaxed text-white drop-shadow-[0_2px_14px_rgba(75,77,79,0.3)] backdrop-blur-sm md:text-xl"
               >
                 {slide.subtitle}
               </motion.p>
@@ -121,7 +121,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.68, duration: 0.45 }}
-                className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base lg:max-w-xl"
+                className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 md:text-base lg:max-w-xl"
               >
                 {slide.blurb}
               </motion.p>
@@ -136,7 +136,7 @@ const HeroSlider = () => {
                   href="#services"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex min-h-[52px] w-fit items-center justify-center whitespace-nowrap rounded-xl border border-[#f0ca69] bg-[linear-gradient(135deg,#f2b52a_0%,#f6cc54_55%,#f1af23_100%)] px-7 py-3 text-lg font-extrabold text-[#0b2b4e] shadow-[0_14px_30px_rgba(243,173,31,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(243,173,31,0.45)]"
+                  className="inline-flex min-h-[52px] w-fit items-center justify-center whitespace-nowrap rounded-xl bg-[#E30016] px-7 py-3 text-lg font-extrabold text-white shadow-[0_14px_30px_rgba(227,0,22,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#C40013] hover:shadow-[0_20px_40px_rgba(227,0,22,0.45)]"
                 >
                   Explore Services <ArrowRight size={17} className="ml-2" />
                 </motion.a>
@@ -144,7 +144,7 @@ const HeroSlider = () => {
                   href="#contact"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white hover:text-[#6E6F71]"
                 >
                   Request a Quote
                 </motion.a>
@@ -156,7 +156,7 @@ const HeroSlider = () => {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.25 }}
-            className="hidden rounded-3xl border border-white/15 bg-black/20 p-6 backdrop-blur-md lg:block"
+            className="hidden rounded-3xl border border-white/15 bg-[#4B4D4F]/20 p-6 backdrop-blur-md lg:block"
           >
             <p className="section-label text-white/75">Operational Highlights</p>
             <div className="mt-5 grid gap-3">
@@ -185,12 +185,12 @@ const HeroSlider = () => {
 
 
       <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
-        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#0c2442]/72 px-3 py-2.5 shadow-[0_18px_35px_rgba(3,10,22,0.45)] backdrop-blur-md mb-4">
+        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#4B4D4F]/85 px-3 py-2.5 shadow-[0_18px_35px_rgba(75,77,79,0.35)] backdrop-blur-md mb-4">
           <button
             onClick={() => scrollToSection("#about")}
-            className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-3 py-1.5 text-xs font-bold tracking-[0.14em] text-white/85 transition-colors hover:bg-white/15 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-3 py-1.5 text-xs font-bold tracking-[0.14em] text-white/90 transition-colors hover:bg-white/15 hover:text-white"
           >
-            <Mouse size={14} className="text-accent" />
+            <Mouse size={14} className="text-[#E30016]" />
             SCROLL
           </button>
 
@@ -210,7 +210,7 @@ const HeroSlider = () => {
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 15, ease: "linear" }}
-                    className="absolute inset-y-0 left-0 rounded-full bg-accent"
+                    className="absolute inset-y-0 left-0 rounded-full bg-[#E30016]"
                   />
                 )}
               </motion.button>
@@ -219,7 +219,7 @@ const HeroSlider = () => {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#082140]" />
+      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#4B4D4F]/40" />
     </section>
   );
 };

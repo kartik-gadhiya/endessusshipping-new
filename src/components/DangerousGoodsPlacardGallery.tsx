@@ -123,8 +123,8 @@ export default function DangerousGoodsPlacardGallery({ badgeClassName, classTitl
               {/* Caption */}
               <div className="mt-3 flex items-start justify-between gap-2 sm:mt-4">
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-black text-[#143257]">{label.title}</p>
-                  <p className="mt-1 text-xs font-semibold leading-relaxed text-[#597696]">{label.caption}</p>
+                  <p className="text-sm font-black text-[#4B4D4F]">{label.title}</p>
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-[#6E6F71]">{label.caption}</p>
                 </div>
                 <span className={cn("shrink-0", badgeClassName, pillCls)}>
                   {label.division}

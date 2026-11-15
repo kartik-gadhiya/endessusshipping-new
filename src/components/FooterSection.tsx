@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { BUSINESS_CONTACT } from "@/lib/seo";
 
 const FooterSection = () => (
-  <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#0b2545_0%,#081b33_45%,#061426_100%)] text-white">
+  <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#6E6F71_0%,#5A5B5D_45%,#4B4D4F_100%)] text-white">
     {/* Decorative elements */}
     <motion.div
-      animate={{ opacity: [0.1, 0.2, 0.1] }}
+      animate={{ opacity: [0.08, 0.15, 0.08] }}
       transition={{ duration: 10, repeat: Infinity }}
-      className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+      className="absolute top-0 right-0 w-96 h-96 bg-[#E30016]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
     />
 
     <div className="home-footer-shell max-w-7xl mx-auto px-6 lg:px-12 section-padding pb-10 relative z-10">
@@ -21,12 +21,17 @@ const FooterSection = () => (
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center">
-              <Anchor size={24} className="text-primary" />
-            </div>
-            <span className="font-bold text-xl">En Dessus</span>
-          </div>
+          <Link to="/" className="inline-block mb-6">
+            <img
+              src="/assets/logo/logo-exact.webp"
+              alt="En Dessus Global Forwarding"
+              width={220}
+              height={73}
+              loading="lazy"
+              decoding="async"
+              className="h-12 w-auto object-contain bg-white rounded-xl px-3 py-1.5 shadow-md"
+            />
+          </Link>
           <p className="text-white/70 text-sm leading-relaxed mb-8">
             En Dessus Global Forwarding provides reliable, efficient, and cost-effective logistics solutions worldwide.
           </p>
@@ -34,21 +39,21 @@ const FooterSection = () => (
             <motion.a
               href="https://www.facebook.com/endessus/"
               whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:border-[#E30016] hover:text-[#E30016] hover:bg-[#E30016]/10 transition-all"
             >
               <Facebook size={18} />
             </motion.a>
             <motion.a
               href="https://www.linkedin.com/company/en-dessus-global-forwarding-pvt-ltd/?originalSubdomain=in"
               whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:border-[#E30016] hover:text-[#E30016] hover:bg-[#E30016]/10 transition-all"
             >
               <Linkedin size={18} />
             </motion.a>
             <motion.a
               href="https://www.instagram.com/en_dessus"
               whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:border-[#E30016] hover:text-[#E30016] hover:bg-[#E30016]/10 transition-all"
             >
               <Instagram size={18} />
             </motion.a>
@@ -64,14 +69,14 @@ const FooterSection = () => (
         >
           <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
             Quick Links
-            <div className="h-1 w-8 bg-gradient-to-r from-accent to-yellow-400 rounded-full" />
+            <div className="h-1 w-8 bg-gradient-to-r from-[#E30016] to-[#FF2638] rounded-full" />
           </h4>
           <ul className="space-y-3 text-sm text-white/70">
             <li>
               <Link to="/">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Home
                 </motion.span>
@@ -81,7 +86,7 @@ const FooterSection = () => (
               <Link to="/about">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   About Us
                 </motion.span>
@@ -91,7 +96,7 @@ const FooterSection = () => (
               <Link to="/services">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Services
                 </motion.span>
@@ -101,7 +106,7 @@ const FooterSection = () => (
               <Link to="/gallery">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Gallery
                 </motion.span>
@@ -111,7 +116,7 @@ const FooterSection = () => (
               <Link to="/contact">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Contact
                 </motion.span>
@@ -129,14 +134,14 @@ const FooterSection = () => (
         >
           <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
             Services
-            <div className="h-1 w-8 bg-gradient-to-r from-accent to-yellow-400 rounded-full" />
+            <div className="h-1 w-8 bg-gradient-to-r from-[#E30016] to-[#FF2638] rounded-full" />
           </h4>
           <ul className="space-y-3 text-sm text-white/70">
             <li>
               <Link to="/services#sea-freight">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Sea Freight
                 </motion.span>
@@ -146,7 +151,7 @@ const FooterSection = () => (
               <Link to="/services#air-freight">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Air Freight
                 </motion.span>
@@ -156,7 +161,7 @@ const FooterSection = () => (
               <Link to="/services#customs-clearance">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Customs Clearance
                 </motion.span>
@@ -166,7 +171,7 @@ const FooterSection = () => (
               <Link to="/services#transport-services">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Transport Services
                 </motion.span>
@@ -176,7 +181,7 @@ const FooterSection = () => (
               <Link to="/services#project-cargo">
                 <motion.span
                   whileHover={{ x: 5 }}
-                  className="hover:text-accent inline-block transition-colors"
+                  className="hover:text-[#E30016] inline-block transition-colors"
                 >
                   Project Cargo
                 </motion.span>
@@ -194,43 +199,43 @@ const FooterSection = () => (
         >
           <h4 className="font-bold text-lg mb-6 flex items-center gap-2">
             Contact Us
-            <div className="h-1 w-8 bg-gradient-to-r from-accent to-yellow-400 rounded-full" />
+            <div className="h-1 w-8 bg-gradient-to-r from-[#E30016] to-[#FF2638] rounded-full" />
           </h4>
           <ul className="space-y-4 text-sm text-white/70">
             <li className="flex items-start gap-3 group">
-              <MapPin size={18} className="text-accent mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <span>Ahmedabad<br /><span className="text-xs">A-1035/1036, Sun west bank, Ashram Rd, opp. City Gold cinema, Ahmedabad, Gujarat 380009</span></span>
+              <MapPin size={18} className="text-[#E30016] mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <span>Ahmedabad<br /><span className="text-xs text-white/50">A-1035/1036, Sun west bank, Ashram Rd, opp. City Gold cinema, Ahmedabad, Gujarat 380009</span></span>
             </li>
-            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
-              <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a className="hover:text-accent transition-colors">
+            <li className="flex items-center gap-3 group hover:text-white transition-colors">
+              <Phone size={18} className="text-[#E30016] flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <a className="hover:text-[#E30016] transition-colors">
                 {BUSINESS_CONTACT.phone}
               </a>
             </li>
-            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
-              <Phone size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-              <a className="hover:text-accent transition-colors">
+            <li className="flex items-center gap-3 group hover:text-white transition-colors">
+              <Phone size={18} className="text-[#E30016] flex-shrink-0 group-hover:scale-110 transition-transform" />
+              <a className="hover:text-[#E30016] transition-colors">
                 {BUSINESS_CONTACT.landline}
               </a>
             </li>
-            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
-              <Mail size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+            <li className="flex items-center gap-3 group hover:text-white transition-colors">
+              <Mail size={18} className="text-[#E30016] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <a
                 href={`mailto:${BUSINESS_CONTACT.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-accent transition-colors"
+                className="hover:text-[#E30016] transition-colors"
               >
                 {BUSINESS_CONTACT.email}
               </a>
             </li>
-            <li className="flex items-center gap-3 group hover:text-accent transition-colors">
-              <Mail size={18} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+            <li className="flex items-center gap-3 group hover:text-white transition-colors">
+              <Mail size={18} className="text-[#E30016] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <a
                 href={`mailto:${BUSINESS_CONTACT.alternateEmail}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-accent transition-colors"
+                className="hover:text-[#E30016] transition-colors"
               >
                 {BUSINESS_CONTACT.alternateEmail}
               </a>

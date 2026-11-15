@@ -143,14 +143,14 @@ const VolumeWeightCalculator = () => {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <div className="mb-3 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[hsl(205_92%_23%)] to-[hsl(36_87%_55%)]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E30016] text-white shadow-md shadow-red-900/20">
               <Scale size={20} className="text-white" />
             </div>
-            <h2 className="font-heading text-3xl font-bold text-[hsl(205_92%_23%)]">
+            <h2 className="font-heading text-3xl font-black text-[#4B4D4F]">
               Volume Weight Calculator
             </h2>
           </div>
-          <p className="ml-[3.25rem] max-w-4xl text-gray-600">
+          <p className="ml-[3.25rem] max-w-4xl text-[#6E6F71]">
             Estimate volumetric weight, actual gross weight, and shipment chargeable weight using common
             import-export freight rules for air, ocean LCL, rail, road, and express courier shipments.
           </p>
@@ -158,14 +158,14 @@ const VolumeWeightCalculator = () => {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border border-[#E2E4E6] bg-white shadow-sm">
               <div className="p-6 lg:p-7">
-                <div className="mb-6 rounded-2xl bg-gradient-to-r from-[hsl(205_92%_23%)] via-sky-700 to-[hsl(186_100%_50%)] p-4 text-white md:p-5">
+                <div className="mb-6 rounded-2xl bg-[#4B4D4F] p-4 text-white md:p-5 border border-white/10">
                   <div className="grid gap-3 md:grid-cols-3">
                     <div>
                       <label className="mb-1.5 block text-sm font-semibold text-white">Freight Mode</label>
                       <Select value={freightMode} onValueChange={(value) => setFreightMode(value as FreightModeId)}>
-                        <SelectTrigger className="border-white/20 bg-white text-[hsl(205_92%_23%)]">
+                        <SelectTrigger className="border-[#E2E4E6] bg-white text-[#4B4D4F]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -184,7 +184,7 @@ const VolumeWeightCalculator = () => {
                         value={dimensionUnit}
                         onValueChange={(value) => setDimensionUnit(value as DimensionUnit)}
                       >
-                        <SelectTrigger className="border-white/20 bg-white text-[hsl(205_92%_23%)]">
+                        <SelectTrigger className="border-[#E2E4E6] bg-white text-[#4B4D4F]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -200,7 +200,7 @@ const VolumeWeightCalculator = () => {
                     <div>
                       <label className="mb-1.5 block text-sm font-semibold text-white">Actual Weight</label>
                       <Select value={weightUnit} onValueChange={(value) => setWeightUnit(value as WeightUnit)}>
-                        <SelectTrigger className="border-white/20 bg-white text-[hsl(205_92%_23%)]">
+                        <SelectTrigger className="border-[#E2E4E6] bg-white text-[#4B4D4F]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -223,14 +223,14 @@ const VolumeWeightCalculator = () => {
                         step="1"
                         value={roadDivisor}
                         onChange={(event) => setRoadDivisor(event.target.value)}
-                        className="border-white/20 bg-white text-[hsl(205_92%_23%)]"
+                        className="border-[#E2E4E6] bg-white text-[#4B4D4F]"
                       />
                     </div>
                   )}
 
                   <div className="mt-3 grid gap-3 md:grid-cols-2">
                     <div className="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#E30016]">
                         Chargeable Weight Rule
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-white/90">
@@ -240,7 +240,7 @@ const VolumeWeightCalculator = () => {
                     </div>
 
                     <div className="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#E30016]">
                         Applied Density
                       </p>
                       <p className="mt-2 text-sm font-semibold text-white">{selectedMode.densityRatioLabel}</p>
@@ -267,18 +267,18 @@ const VolumeWeightCalculator = () => {
                     return (
                       <div
                         key={item.id}
-                        className="rounded-xl border-2 border-gray-100 bg-gray-50 p-5 transition-colors hover:border-[hsl(186_100%_50%)]"
+                        className="rounded-xl border border-[#E2E4E6] bg-[#F8F9FA] p-5 transition-colors hover:border-[#E30016]"
                       >
                         <div className="mb-3 flex items-center justify-between gap-4">
                           <div>
-                            <h3 className="text-lg font-semibold text-[hsl(205_92%_23%)]">Package {index + 1}</h3>
-                            <p className="text-sm text-gray-500">Enter outer dimensions including packaging.</p>
+                            <h3 className="text-lg font-bold text-[#4B4D4F]">Package {index + 1}</h3>
+                            <p className="text-sm text-[#6E6F71]">Enter outer dimensions including packaging.</p>
                           </div>
 
                           {packages.length > 1 && (
                             <button
                               onClick={() => removePackage(item.id)}
-                              className="rounded-lg p-2 text-red-500 transition-colors hover:bg-red-100"
+                              className="rounded-lg p-2 text-[#E30016] transition-colors hover:bg-red-50"
                               aria-label={`Remove package ${index + 1}`}
                             >
                               <Trash2 size={20} />
@@ -295,7 +295,7 @@ const VolumeWeightCalculator = () => {
                             { key: "actualWeight", label: `Actual / Package (${weightUnit})` },
                           ].map(({ key, label }) => (
                             <div key={key}>
-                              <label className="mb-2 block text-sm font-semibold text-gray-700">{label}</label>
+                              <label className="mb-2 block text-sm font-bold text-[#4B4D4F]">{label}</label>
                               <Input
                                 type="number"
                                 min="0"
@@ -305,34 +305,34 @@ const VolumeWeightCalculator = () => {
                                 onChange={(event) =>
                                   updatePackage(item.id, key as keyof PackageRow, event.target.value)
                                 }
-                                className="border-2 border-gray-200 focus:border-[hsl(186_100%_50%)] focus:ring-0"
+                                className="border border-[#E2E4E6] bg-white text-[#4B4D4F] focus:border-[#E30016] focus-visible:ring-1 focus-visible:ring-[#E30016]"
                               />
                             </div>
                           ))}
                         </div>
 
                         <div className="mt-4 grid gap-3 md:grid-cols-3">
-                          <div className="rounded-xl border border-[#d9e7f8] bg-white px-4 py-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6a82a0]">
+                          <div className="rounded-xl border border-[#E2E4E6] bg-white px-4 py-3">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6E6F71]">
                               CBM
                             </p>
-                            <p className="mt-1.5 text-xl font-bold text-[hsl(205_92%_23%)]">
+                            <p className="mt-1.5 text-xl font-black text-[#4B4D4F]">
                               {numberFormatter(packageMetrics?.volumeCbm ?? 0, 4)}
                             </p>
                           </div>
-                          <div className="rounded-xl border border-[#d9e7f8] bg-white px-4 py-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6a82a0]">
+                          <div className="rounded-xl border border-[#E2E4E6] bg-white px-4 py-3">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6E6F71]">
                               Actual Weight
                             </p>
-                            <p className="mt-1.5 text-xl font-bold text-[hsl(205_92%_23%)]">
+                            <p className="mt-1.5 text-xl font-black text-[#4B4D4F]">
                               {numberFormatter(packageMetrics?.actualWeightKg ?? 0, 2)} kg
                             </p>
                           </div>
-                          <div className="rounded-xl border border-[#d9e7f8] bg-white px-4 py-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6a82a0]">
+                          <div className="rounded-xl border border-[#E2E4E6] bg-white px-4 py-3">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6E6F71]">
                               Volumetric Weight
                             </p>
-                            <p className="mt-1.5 text-xl font-bold text-[hsl(36_87%_55%)]">
+                            <p className="mt-1.5 text-xl font-black text-[#E30016]">
                               {numberFormatter(packageMetrics?.volumetricWeightKg ?? 0, 2)} kg
                             </p>
                           </div>
@@ -349,22 +349,22 @@ const VolumeWeightCalculator = () => {
               </div>
             </Card>
 
-            <Card className="border-0 bg-white shadow-lg">
+            <Card className="border border-[#E2E4E6] bg-white shadow-sm">
               <div className="p-5 lg:p-6">
                 <div className="mb-4 flex items-center gap-2">
-                  <Lightbulb size={16} className="text-[hsl(36_87%_55%)]" />
-                  <h3 className="font-bold text-[hsl(205_92%_23%)]">Freight Mode Reference</h3>
+                  <Lightbulb size={16} className="text-[#E30016]" />
+                  <h3 className="font-black text-[#4B4D4F]">Freight Mode Reference</h3>
                 </div>
                 <div className="grid gap-3 md:grid-cols-2">
                   {freightModePresets.map((mode) => (
-                    <div key={mode.id} className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+                    <div key={mode.id} className="rounded-xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3">
                       <div className="flex items-center justify-between gap-3">
-                        <p className="font-semibold text-[hsl(205_92%_23%)]">{mode.label}</p>
-                        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5b7898]">
+                        <p className="font-bold text-[#4B4D4F]">{mode.label}</p>
+                        <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                           {mode.divisorCm.toLocaleString()} cm3/kg
                         </span>
                       </div>
-                      <p className="mt-2 text-sm leading-relaxed text-gray-600">{mode.note}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#6E6F71]">{mode.note}</p>
                     </div>
                   ))}
                 </div>
@@ -373,22 +373,22 @@ const VolumeWeightCalculator = () => {
           </div>
 
           <div>
-            <Card className="sticky top-8 border-0 bg-gradient-to-br from-[hsl(205_92%_23%)] to-[hsl(186_100%_50%)] text-white shadow-lg">
+            <Card className="sticky top-8 border border-white/10 bg-[linear-gradient(160deg,#6E6F71_0%,#5A5B5D_55%,#4B4D4F_100%)] text-white shadow-xl">
               <div className="p-6">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-heading text-2xl font-bold">Shipment Summary</h2>
-                    <p className="mt-1 text-sm text-white/75">{selectedMode.shortLabel} freight estimate</p>
+                    <h2 className="font-heading text-2xl font-black">Shipment Summary</h2>
+                    <p className="mt-1 text-sm text-[#9C9D9F]">{selectedMode.shortLabel} freight estimate</p>
                   </div>
-                  <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/85">
+                  <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white">
                     {chargeableBasis}
                   </span>
                 </div>
 
                 <div className="mb-4 rounded-xl border border-white/20 bg-white/10 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">Chargeable Weight</p>
-                  <p className="mt-2 text-4xl font-bold">{numberFormatter(chargeableWeightKg, 2)}</p>
-                  <p className="mt-1 text-sm text-white/75">kg billed at shipment level</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#9C9D9F]">Chargeable Weight</p>
+                  <p className="mt-2 text-4xl font-black text-[#E30016]">{numberFormatter(chargeableWeightKg, 2)}</p>
+                  <p className="mt-1 text-sm text-[#9C9D9F]">kg billed at shipment level</p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

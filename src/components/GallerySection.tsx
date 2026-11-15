@@ -221,13 +221,13 @@ const GallerySection = () => {
             className="text-center mb-12"
           >
             <span className="section-label">Operational Gallery</span>
-            <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-[#12335a]">
+            <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-[#4B4D4F]">
               A Visual Story of
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#E30016] to-[#6E6F71] bg-clip-text text-transparent">
                 {" "}Reliable Freight Execution
               </span>
             </h2>
-            <p className="mt-5 max-w-3xl mx-auto text-base md:text-lg text-[#4d6a8a] leading-relaxed">
+            <p className="mt-5 max-w-3xl mx-auto text-base md:text-lg text-[#6E6F71] leading-relaxed">
               From heavy-lift cargo to terminal operations, every frame reflects how we plan, coordinate, and deliver
               logistics with precision.
             </p>
@@ -240,7 +240,7 @@ const GallerySection = () => {
               transition={{ duration: 0.65 }}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="relative min-h-[470px] overflow-hidden rounded-[1.8rem] border border-[#d4e3f7] bg-[#0d2f54] shadow-[0_26px_65px_rgba(8,35,66,0.35)]"
+              className="relative min-h-[470px] overflow-hidden rounded-[1.8rem] border border-[#E2E4E6] bg-[#6E6F71] shadow-2xl"
             >
               <AnimatePresence mode="wait">
                 <motion.img
@@ -257,7 +257,7 @@ const GallerySection = () => {
                 />
               </AnimatePresence>
 
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,28,52,0.22)_0%,rgba(9,28,52,0.82)_78%,rgba(9,28,52,0.94)_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(110,111,113,0.25)_0%,rgba(75,77,79,0.82)_78%,rgba(40,41,43,0.95)_100%)]" />
 
               <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
                 <span className="rounded-full border border-white/30 bg-white/15 px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md">
@@ -265,7 +265,7 @@ const GallerySection = () => {
                 </span>
                 <button
                   onClick={() => setSelectedIdx(currentIndex)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/30 text-white transition-colors hover:bg-black/50"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/60 text-white transition-colors hover:bg-[#4B4D4F]/80"
                   aria-label="Expand image"
                 >
                   <Expand size={16} />
@@ -280,14 +280,14 @@ const GallerySection = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => navigate("prev")}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/30 text-white transition-colors hover:bg-accent hover:text-primary"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/60 text-white transition-colors hover:bg-[#E30016] hover:text-white"
                       aria-label="Previous image"
                     >
                       <ChevronLeft size={18} />
                     </button>
                     <button
                       onClick={() => navigate("next")}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/30 text-white transition-colors hover:bg-accent hover:text-primary"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/60 text-white transition-colors hover:bg-[#E30016] hover:text-white"
                       aria-label="Next image"
                     >
                       <ChevronRight size={18} />
@@ -305,7 +305,7 @@ const GallerySection = () => {
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 4.2, ease: "linear" }}
-                    className="h-full origin-left rounded-full bg-gradient-to-r from-accent via-yellow-400 to-accent"
+                    className="h-full origin-left rounded-full bg-[#E30016]"
                   />
                 </div>
               </div>
@@ -317,8 +317,8 @@ const GallerySection = () => {
               transition={{ duration: 0.65, delay: 0.06 }}
               className="grid gap-4"
             >
-              <div className="rounded-[1.4rem] border border-[#d8e7f8] bg-white/92 p-4 shadow-[0_18px_38px_rgba(10,35,66,0.12)]">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#48698e]">Next Frames</p>
+              <div className="rounded-[1.4rem] border border-[#E2E4E6] bg-white p-4 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6E6F71]">Next Frames</p>
                 <div className="mt-3 space-y-2.5">
                   {sidePreviewIndices.map((idx) => {
                     const item = galleryImages[idx];
@@ -327,7 +327,7 @@ const GallerySection = () => {
                       <button
                         key={item.src}
                         onClick={() => goTo(idx)}
-                        className="group flex w-full items-center gap-3 rounded-xl border border-[#dce9f9] bg-[#f8fbff] p-2.5 text-left transition-colors hover:border-primary/35"
+                        className="group flex w-full items-center gap-3 rounded-xl border border-[#E2E4E6] bg-[#F8F9FA] p-2.5 text-left transition-colors hover:border-[#E30016]"
                       >
                         <div className="h-14 w-20 overflow-hidden rounded-lg">
                           <img
@@ -341,8 +341,8 @@ const GallerySection = () => {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="truncate text-xs font-bold uppercase tracking-[0.12em] text-[#5f7c9f]">{item.tag}</p>
-                          <p className="truncate text-sm font-semibold text-[#183861]">{item.title}</p>
+                          <p className="truncate text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{item.tag}</p>
+                          <p className="truncate text-sm font-semibold text-[#4B4D4F] group-hover:text-[#E30016] transition-colors">{item.title}</p>
                         </div>
                       </button>
                     );
@@ -350,15 +350,15 @@ const GallerySection = () => {
                 </div>
               </div>
 
-              <div className="rounded-[1.4rem] border border-[#d8e7f8] bg-[linear-gradient(165deg,#0a2d53_0%,#0c365f_58%,#0a2444_100%)] p-5 text-white shadow-[0_22px_48px_rgba(3,17,36,0.4)]">
+              <div className="rounded-[1.4rem] border border-white/10 bg-[linear-gradient(165deg,#6E6F71_0%,#5A5B5D_58%,#4B4D4F_100%)] p-5 text-white shadow-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/70">Complete Portfolio</p>
-                <h3 className="mt-2 text-2xl font-black leading-tight">Explore all project and freight operation photos</h3>
+                <h3 className="mt-2 text-2xl font-black leading-tight text-white">Explore all project and freight operation photos</h3>
                 <p className="mt-3 text-sm text-white/75 leading-relaxed">
                   Visit the full gallery to review more captures from container handling, yard operations, and heavy-lift execution.
                 </p>
                 <Link
                   to="/gallery"
-                  className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-4 py-2.5 text-sm font-extrabold text-primary"
+                  className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#E30016] hover:bg-[#C40013] px-4 py-2.5 text-sm font-extrabold text-white transition-all shadow-md shadow-red-900/25"
                 >
                   View Full Gallery
                   <ArrowRight size={16} />
@@ -371,7 +371,7 @@ const GallerySection = () => {
             initial={{ opacity: 0, y: 26 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="mt-7 rounded-[1.2rem] border border-[#d8e7f8] bg-white/88 p-3 shadow-[0_16px_34px_rgba(10,35,66,0.1)]"
+            className="mt-7 rounded-[1.2rem] border border-[#E2E4E6] bg-white p-3 shadow-sm"
           >
             <div className="flex gap-2 overflow-x-auto pb-1">
               {galleryImages.map((item, index) => (
@@ -380,8 +380,8 @@ const GallerySection = () => {
                   onClick={() => goTo(index)}
                   className={`relative h-20 w-[118px] shrink-0 overflow-hidden rounded-lg border transition-all ${
                     currentIndex === index
-                      ? "border-accent ring-2 ring-accent/40"
-                      : "border-[#d5e4f7] opacity-70 hover:opacity-100"
+                      ? "border-[#E30016] ring-2 ring-[#E30016]/40"
+                      : "border-[#E2E4E6] opacity-70 hover:opacity-100"
                   }`}
                 >
                   <img
@@ -391,7 +391,7 @@ const GallerySection = () => {
                     decoding="async"
                     className="h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(9,29,54,0.72)_100%)]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(75,77,79,0.85)_100%)]" />
                   <span className="absolute bottom-1.5 left-2 text-[10px] font-bold uppercase tracking-[0.1em] text-white/85">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -409,7 +409,7 @@ const GallerySection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedIdx(null)}
-            className="fixed inset-0 z-50 bg-[#020a16eb] p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-[#4B4D4F]/95 p-4 backdrop-blur-sm"
           >
             <motion.div
               initial={{ scale: 0.97, opacity: 0 }}
@@ -419,7 +419,7 @@ const GallerySection = () => {
               onClick={(event) => event.stopPropagation()}
               className="mx-auto flex h-full w-full max-w-6xl flex-col justify-center"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/60 shadow-2xl">
+              <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#4B4D4F]/60 shadow-2xl">
                 <img
                   src={galleryImages[selectedIdx].src}
                   alt={galleryImages[selectedIdx].title}
@@ -428,7 +428,7 @@ const GallerySection = () => {
 
                 <button
                   onClick={() => setSelectedIdx(null)}
-                  className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-[#4B4D4F]/70 text-white transition-colors hover:bg-[#4B4D4F]/60"
                   aria-label="Close preview"
                 >
                   <X size={18} />
@@ -436,7 +436,7 @@ const GallerySection = () => {
 
                 <button
                   onClick={() => navigateLightbox("prev")}
-                  className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/70 text-white transition-colors hover:bg-[#4B4D4F]/60"
                   aria-label="Previous image"
                 >
                   <ChevronLeft size={20} />
@@ -444,7 +444,7 @@ const GallerySection = () => {
 
                 <button
                   onClick={() => navigateLightbox("next")}
-                  className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/70 text-white transition-colors hover:bg-[#4B4D4F]/60"
                   aria-label="Next image"
                 >
                   <ChevronRight size={20} />

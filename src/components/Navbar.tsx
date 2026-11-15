@@ -47,22 +47,22 @@ const Navbar = () => {
       className="fixed left-0 right-0 top-3 z-50 px-4 sm:px-6"
     >
       <div
-        className={`mx-auto flex h-20 max-w-7xl items-center justify-between rounded-2xl border px-4 shadow-xl transition-all duration-500 sm:px-6 ${
+        className={`mx-auto flex h-20 max-w-7xl items-center justify-between rounded-2xl border px-4 shadow-md transition-all duration-500 sm:px-6 ${
           scrolled
-            ? "border-slate-300/75 bg-white/80 backdrop-blur-lg shadow-[0_18px_50px_rgba(15,23,42,0.15)]"
-            : "border-white/20 bg-[#0c2442]/55 backdrop-blur-md shadow-[0_14px_36px_rgba(7,22,45,0.28)]"
+            ? "border-[#9C9D9F]/40 bg-white/98 backdrop-blur-lg shadow-[0_12px_36px_rgba(110,111,113,0.12)]"
+            : "border-white/20 bg-[#4B4D4F]/55 backdrop-blur-md shadow-[0_10px_28px_rgba(75,77,79,0.2)]"
         }`}
       >
         <Link to="/" className="group flex items-center gap-3">
           <img
-            src="/assets/logo/En-Dessus-Logo5.webp"
+            src="/assets/logo/logo-exact.webp"
             alt="En Dessus Global Forwarding"
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            width={169}
-            height={56}
-            className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            width={195}
+            height={65}
+            className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
 
@@ -75,12 +75,10 @@ const Navbar = () => {
                 <motion.div key={item.label} whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     to={item.href}
-                    className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold tracking-[0.12em] transition-all duration-300 ${
+                    className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] transition-all duration-300 ${
                       isActive
-                        ? "bg-gradient-to-r from-accent to-yellow-400 text-primary shadow-md"
-                        : scrolled
-                          ? "text-slate-900 hover:bg-slate-100"
-                          : "text-white/90 hover:bg-white/10 hover:text-white"
+                        ? "bg-[#E30016] text-white shadow-md shadow-red-900/25"
+                        : "text-[#E30016] hover:bg-[#E30016] hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -96,11 +94,7 @@ const Navbar = () => {
                 onClick={() => handleNavClick(item)}
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.97 }}
-                className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold tracking-[0.12em] transition-all duration-300 ${
-                  scrolled
-                    ? "text-slate-900 hover:bg-slate-100"
-                    : "text-white/90 hover:bg-white/10 hover:text-white"
-                }`}
+                className="inline-flex items-center rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] text-[#E30016] hover:bg-[#E30016] hover:text-white transition-all duration-300"
               >
                 {item.label}
               </motion.a>
@@ -114,7 +108,7 @@ const Navbar = () => {
               asChild
               variant="accent"
               size="lg"
-              className="gap-2"
+              className="gap-2 bg-[#E30016] hover:bg-[#C40013] text-white font-bold shadow-md shadow-red-900/20 border border-transparent"
             >
               <motion.div
                 whileHover={{ scale: 1.04 }}
@@ -130,9 +124,7 @@ const Navbar = () => {
         <motion.button
           onClick={() => setMobileOpen((prev) => !prev)}
           whileTap={{ scale: 0.92 }}
-          className={`rounded-xl p-2 transition-colors lg:hidden ${
-            scrolled ? "text-slate-900 hover:bg-slate-100" : "text-white hover:bg-white/12"
-          }`}
+          className="rounded-xl p-2 text-[#E30016] hover:bg-[#E30016]/10 transition-colors lg:hidden"
           aria-label="Toggle navigation"
         >
           {mobileOpen ? <X size={26} /> : <Menu size={26} />}
@@ -146,7 +138,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="mx-auto mt-2 max-w-7xl overflow-hidden rounded-2xl border border-white/20 bg-[#0c2442]/95 px-4 py-4 shadow-[0_25px_65px_rgba(7,22,45,0.45)] backdrop-blur-xl lg:hidden"
+            className="mx-auto mt-2 max-w-7xl overflow-hidden rounded-2xl border border-white/20 bg-[#4B4D4F]/95 px-4 py-4 shadow-2xl backdrop-blur-xl lg:hidden text-white"
           >
             <div className="grid gap-2">
               {navItems.map((item) => {
@@ -158,8 +150,10 @@ const Navbar = () => {
                       key={item.label}
                       to={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`rounded-xl px-3 py-2.5 text-sm font-semibold tracking-[0.08em] transition-colors ${
-                        isActive ? "bg-accent text-primary" : "text-white/90 hover:bg-white/10"
+                      className={`rounded-xl px-3 py-2.5 text-sm font-bold tracking-[0.08em] transition-colors ${
+                        isActive
+                          ? "bg-[#E30016] text-white shadow-sm"
+                          : "text-[#E30016] hover:bg-[#E30016] hover:text-white"
                       }`}
                     >
                       {item.label}
@@ -172,7 +166,7 @@ const Navbar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={() => handleNavClick(item)}
-                    className="rounded-xl px-3 py-2.5 text-sm font-semibold tracking-[0.08em] text-white/90 transition-colors hover:bg-white/10"
+                    className="rounded-xl px-3 py-2.5 text-sm font-bold tracking-[0.08em] text-[#E30016] hover:bg-[#E30016] hover:text-white transition-colors"
                   >
                     {item.label}
                   </a>
@@ -180,15 +174,17 @@ const Navbar = () => {
               })}
             </div>
 
-            <Link to="/contact" onClick={() => setMobileOpen(false)}>
-              <Button
-                variant="accent"
-                size="lg"
-                className="w-full"
-              >
-                Get a Quote
-              </Button>
-            </Link>
+            <div className="mt-4 pt-3 border-t border-[#E2E4E6]">
+              <Link to="/contact" onClick={() => setMobileOpen(false)}>
+                <Button
+                  variant="accent"
+                  size="lg"
+                  className="w-full bg-[#E30016] hover:bg-[#C40013] text-white font-bold"
+                >
+                  Get a Quote
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

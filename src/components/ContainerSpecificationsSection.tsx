@@ -56,12 +56,11 @@ const categoryMeta: Record<
     description:
       "A clean comparison view for standard freight moves, including dry and high cube options for everyday export planning.",
     focus: "Best for cartons, pallets, and non-temperature-controlled cargo.",
-    panelClassName:
-      "border-[#d7e4f7] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.96)_100%)]",
-    iconClassName: "border-[#cfe0f5] bg-[#eef5ff] text-[#174978]",
-    badgeClassName: "border-[#bfd5f0] bg-[#eef5ff] text-[#174978]",
-    statClassName: "border-[#d6e4f7] bg-white/90",
-    pillClassName: "border-[#d7e4f7] bg-white text-[#3c5f86]",
+    panelClassName: "border-[#E2E4E6] bg-white",
+    iconClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#E30016]",
+    badgeClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#4B4D4F]",
+    statClassName: "border-[#E2E4E6] bg-[#F8F9FA]",
+    pillClassName: "border-[#E2E4E6] bg-white text-[#6E6F71]",
     icon: Boxes,
   },
   "Reefer Container": {
@@ -69,12 +68,11 @@ const categoryMeta: Record<
     description:
       "Quickly compare reefer footprints, interior dimensions, and load limits when cold-chain planning needs precision.",
     focus: "Best for chilled, frozen, or otherwise temperature-controlled shipments.",
-    panelClassName:
-      "border-[#cfe7ea] bg-[linear-gradient(180deg,rgba(248,254,255,0.98)_0%,rgba(238,249,250,0.96)_100%)]",
-    iconClassName: "border-[#c5e4e9] bg-[#ebf9fb] text-[#0f6b78]",
-    badgeClassName: "border-[#bce3e8] bg-[#ebf9fb] text-[#0f6b78]",
-    statClassName: "border-[#d0e8eb] bg-white/90",
-    pillClassName: "border-[#d0e8eb] bg-white text-[#2b6972]",
+    panelClassName: "border-[#E2E4E6] bg-white",
+    iconClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#E30016]",
+    badgeClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#4B4D4F]",
+    statClassName: "border-[#E2E4E6] bg-[#F8F9FA]",
+    pillClassName: "border-[#E2E4E6] bg-white text-[#6E6F71]",
     icon: Snowflake,
   },
   "Special Container": {
@@ -82,12 +80,11 @@ const categoryMeta: Record<
     description:
       "Open top, flat rack, and specialty formats grouped together so visitors can spot handling differences without extra digging.",
     focus: "Best for top-loaded, oversized, or irregular cargo that needs special access.",
-    panelClassName:
-      "border-[#eadfca] bg-[linear-gradient(180deg,rgba(255,253,247,0.98)_0%,rgba(255,248,236,0.96)_100%)]",
-    iconClassName: "border-[#ead8b1] bg-[#fff7e6] text-[#8a5a08]",
-    badgeClassName: "border-[#f0dfb7] bg-[#fff7e6] text-[#8a5a08]",
-    statClassName: "border-[#efdfc3] bg-white/90",
-    pillClassName: "border-[#f0e1c9] bg-white text-[#7f6222]",
+    panelClassName: "border-[#E2E4E6] bg-white",
+    iconClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#E30016]",
+    badgeClassName: "border-[#E2E4E6] bg-[#F4F5F7] text-[#4B4D4F]",
+    statClassName: "border-[#E2E4E6] bg-[#F8F9FA]",
+    pillClassName: "border-[#E2E4E6] bg-white text-[#7f6222]",
     icon: Package,
   },
 };
@@ -288,8 +285,8 @@ const ContainerSpecificationsSection = ({
   const contentWidthClassName = embedded ? "mx-auto max-w-6xl" : "mx-auto max-w-7xl";
   const HeadingTag = headingAs;
   const headingClassName = embedded
-    ? "mt-5 max-w-[9.25ch] text-[clamp(2.45rem,11.4vw,4.35rem)] font-black leading-[0.92] tracking-[-0.045em] text-[#102742] [overflow-wrap:anywhere] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal"
-    : "mt-5 max-w-[10.5ch] text-[clamp(2.9rem,14vw,4.75rem)] font-black leading-[0.94] tracking-[-0.04em] text-[#102742] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal lg:text-7xl";
+    ? "mt-5 max-w-[9.25ch] text-[clamp(2.45rem,11.4vw,4.35rem)] font-black leading-[0.92] tracking-[-0.045em] text-[#4B4D4F] [overflow-wrap:anywhere] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal"
+    : "mt-5 max-w-[10.5ch] text-[clamp(2.9rem,14vw,4.75rem)] font-black leading-[0.94] tracking-[-0.04em] text-[#4B4D4F] sm:mt-6 sm:max-w-none sm:text-6xl sm:tracking-normal lg:text-7xl";
 
   return (
     <>
@@ -318,21 +315,21 @@ const ContainerSpecificationsSection = ({
             <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href="#container-catalog"
-                className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                className="rounded-full border border-[#E2E4E6] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#4B4D4F] transition-colors hover:border-[#E30016] hover:text-[#E30016]"
               >
                 Browse Specifications
               </a>
               {embedded ? (
                 <a
                   href="#measurement-converter"
-                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                  className="rounded-full border border-[#E2E4E6] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#4B4D4F] transition-colors hover:border-[#E30016] hover:text-[#E30016]"
                 >
                   Measurement Converter
                 </a>
               ) : (
                 <Link
                   to="/tools"
-                  className="rounded-full border border-[#d3e1f5] bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#27476b] transition-colors hover:border-primary/35 hover:text-primary"
+                  className="rounded-full border border-[#E2E4E6] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#4B4D4F] transition-colors hover:border-[#E30016] hover:text-[#E30016]"
                 >
                   Open Tools
                 </Link>
@@ -342,62 +339,62 @@ const ContainerSpecificationsSection = ({
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#container-catalog"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)] sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#E30016] hover:bg-[#C40013] px-6 py-3 font-extrabold text-white shadow-md shadow-red-900/20 sm:w-auto"
               >
                 Start Exploring
                 <ArrowRight size={18} />
               </a>
               <Link
                 to="/contact"
-                className="inline-flex w-full items-center justify-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-[#E2E4E6] bg-white px-5 py-3 text-sm font-bold text-[#4B4D4F] transition-colors hover:border-[#9C9D9F] hover:bg-[#F4F5F7] sm:w-auto"
               >
                 Ask Our Team
               </Link>
             </div>
           </div>
 
-          <div className="container-panel rounded-[1.6rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-4 shadow-[0_26px_62px_rgba(11,36,68,0.14)] sm:p-6 lg:rounded-[1.9rem] lg:p-7">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Specification Highlights</p>
+          <div className="container-panel rounded-[1.6rem] border border-[#E2E4E6] bg-white p-4 shadow-sm sm:p-6 lg:rounded-[1.9rem] lg:p-7">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#E30016]">Specification Highlights</p>
 
             <div className="mt-5 grid gap-3">
-              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                     <Boxes size={17} />
                   </span>
-                  <span className="text-sm font-semibold text-[#1a3c63]">Container Types</span>
+                  <span className="text-sm font-bold text-[#4B4D4F]">Container Types</span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{containers.length} listed</span>
+                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{containers.length} listed</span>
               </div>
 
-              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                     <Package size={17} />
                   </span>
-                  <span className="text-sm font-semibold text-[#1a3c63]">Payload Data</span>
+                  <span className="text-sm font-bold text-[#4B4D4F]">Payload Data</span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{payloadListedCount} types</span>
+                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{payloadListedCount} types</span>
               </div>
 
-              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                     <Clock3 size={17} />
                   </span>
-                  <span className="text-sm font-semibold text-[#1a3c63]">Quick Comparison</span>
+                  <span className="text-sm font-bold text-[#4B4D4F]">Quick Comparison</span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">High Cube {highCubeCount}</span>
+                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">High Cube {highCubeCount}</span>
               </div>
 
-              <div className="flex flex-col gap-2 rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                     <ShieldCheck size={17} />
                   </span>
-                  <span className="text-sm font-semibold text-[#1a3c63]">Temperature Controlled</span>
+                  <span className="text-sm font-bold text-[#4B4D4F]">Temperature Controlled</span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">Reefer {reeferCount}</span>
+                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">Reefer {reeferCount}</span>
               </div>
             </div>
           </div>
@@ -406,15 +403,15 @@ const ContainerSpecificationsSection = ({
 
       <section id="container-catalog" className={catalogSectionClassName}>
         <div className={`${contentWidthClassName} space-y-7`}>
-          <div className="container-toolbar rounded-[1.5rem] border border-[#d7e4f7] bg-white/88 p-4 shadow-[0_18px_46px_rgba(10,35,66,0.09)] sm:p-5 md:rounded-[1.7rem] md:p-6">
+          <div className="container-toolbar rounded-[1.5rem] border border-[#E2E4E6] bg-white p-4 shadow-sm sm:p-5 md:rounded-[1.7rem] md:p-6">
             <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="relative">
-                <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#5f7a98]" />
+                <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#9C9D9F]" />
                 <input
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
                   placeholder="Search by type, dimensions, door opening, or load data"
-                  className="h-12 w-full rounded-xl border border-[#d7e4f7] bg-white pl-12 pr-4 text-sm font-medium text-[#27476b] outline-none transition-colors placeholder:text-[#7892ad] focus:border-primary/40"
+                  className="h-12 w-full rounded-xl border border-[#E2E4E6] bg-white pl-12 pr-4 text-sm font-medium text-[#4B4D4F] outline-none transition-colors placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                 />
               </div>
 
@@ -428,8 +425,8 @@ const ContainerSpecificationsSection = ({
                       onClick={() => setActiveCategory(category)}
                       className={`rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-[0.11em] transition-colors ${
                         isActive
-                          ? "border-primary/35 bg-primary text-white"
-                          : "border-[#d5e3f6] bg-white text-[#35557c] hover:border-primary/30 hover:text-primary"
+                          ? "border-[#E30016] bg-[#E30016] text-white shadow-sm"
+                          : "border-[#E2E4E6] bg-white text-[#4B4D4F] hover:border-[#E30016] hover:text-[#E30016]"
                       }`}
                     >
                       {category}
@@ -441,58 +438,58 @@ const ContainerSpecificationsSection = ({
           </div>
 
           {filteredContainers.length === 0 ? (
-            <Card className="container-card rounded-[1.6rem] border border-[#d7e4f7] bg-white/92 p-8 text-center shadow-[0_18px_44px_rgba(10,35,66,0.1)]">
-              <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#4b688a]">No Matching Results</p>
-              <p className="mt-2 text-lg font-semibold text-[#1a3c63]">
+            <Card className="container-card rounded-[1.6rem] border border-[#E2E4E6] bg-white p-8 text-center shadow-sm">
+              <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#6E6F71]">No Matching Results</p>
+              <p className="mt-2 text-lg font-semibold text-[#4B4D4F]">
                 Try a different keyword or switch the category filter.
               </p>
             </Card>
           ) : (
             <>
-              <div className="container-card overflow-hidden rounded-[1.5rem] border border-[#d7e4f7] bg-[linear-gradient(145deg,rgba(255,255,255,0.98)_0%,rgba(244,249,255,0.98)_56%,rgba(235,244,255,0.96)_100%)] p-4 shadow-[0_18px_46px_rgba(10,35,66,0.08)] sm:p-6 md:rounded-[1.7rem] md:p-8">
+              <div className="container-card overflow-hidden rounded-[1.5rem] border border-[#E2E4E6] bg-white p-4 shadow-sm sm:p-6 md:rounded-[1.7rem] md:p-8">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
                   <div className="max-w-3xl">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b688a]">Compare At A Glance</p>
-                    <h3 className="mt-3 text-wrap text-xl font-black leading-tight text-[#143257] sm:text-2xl md:text-3xl">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#E30016]">Compare At A Glance</p>
+                    <h3 className="mt-3 text-wrap text-xl font-black leading-tight text-[#4B4D4F] sm:text-2xl md:text-3xl">
                       Visitors can now scan the key specs first and open only the containers they want in full.
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[#4e6b8a] md:text-base">
+                    <p className="mt-3 text-sm leading-relaxed text-[#6E6F71] md:text-base">
                       Each board lines up interior dimensions, loading access, and load data in the same place, so users
                       do not have to jump between separate summary cards and detail sections.
                     </p>
 
                     <div className="mt-5 flex flex-wrap gap-2">
-                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                      <span className="rounded-full border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-1 text-xs font-semibold text-[#4B4D4F]">
                         Interior: length, width, height
                       </span>
-                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                      <span className="rounded-full border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-1 text-xs font-semibold text-[#4B4D4F]">
                         Openings: door clearance and top access
                       </span>
-                      <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                      <span className="rounded-full border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-1 text-xs font-semibold text-[#4B4D4F]">
                         Load: capacity, tare, and payload
                       </span>
                     </div>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[420px]">
-                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Container Types</p>
-                      <p className="mt-2 text-3xl font-black text-[#143257]">{filteredContainers.length}</p>
-                      <p className="mt-1 text-xs font-semibold text-[#52708f]">Visible after search and filter</p>
+                    <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">Container Types</p>
+                      <p className="mt-2 text-3xl font-black text-[#4B4D4F]">{filteredContainers.length}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#6E6F71]">Visible after search and filter</p>
                     </div>
 
-                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Categories</p>
-                      <p className="mt-2 text-3xl font-black text-[#143257]">{groupedContainers.length}</p>
-                      <p className="mt-1 text-xs font-semibold text-[#52708f]">
+                    <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">Categories</p>
+                      <p className="mt-2 text-3xl font-black text-[#4B4D4F]">{groupedContainers.length}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#6E6F71]">
                         {activeCategory === "All" ? "Full catalog in view" : activeCategory}
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-[#d6e4f7] bg-white/92 p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Load Data</p>
-                      <p className="mt-2 text-3xl font-black text-[#143257]">{loadDataCount}</p>
-                      <p className="mt-1 text-xs font-semibold text-[#52708f]">Rows with usable weight guidance</p>
+                    <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">Load Data</p>
+                      <p className="mt-2 text-3xl font-black text-[#4B4D4F]">{loadDataCount}</p>
+                      <p className="mt-1 text-xs font-semibold text-[#6E6F71]">Rows with usable weight guidance</p>
                     </div>
                   </div>
                 </div>
@@ -505,9 +502,9 @@ const ContainerSpecificationsSection = ({
                   return (
                     <Card
                       key={group.category}
-                      className={`container-card overflow-hidden rounded-[1.8rem] ${meta.panelClassName} shadow-[0_20px_48px_rgba(10,35,66,0.08)]`}
+                      className={`container-card overflow-hidden rounded-[1.8rem] ${meta.panelClassName} shadow-sm`}
                     >
-                      <div className="border-b border-white/70 px-4 py-4 sm:px-5 sm:py-5 md:px-6">
+                      <div className="border-b border-[#E2E4E6] px-4 py-4 sm:px-5 sm:py-5 md:px-6">
                         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                           <div className="flex items-start gap-4">
                             <span
@@ -517,9 +514,9 @@ const ContainerSpecificationsSection = ({
                             </span>
 
                             <div>
-                              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#5a7693]">{meta.eyebrow}</p>
-                              <h3 className="mt-2 text-xl font-black text-[#143257] sm:text-2xl">{group.category}</h3>
-                              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#4e6b8a] md:text-base">
+                              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#E30016]">{meta.eyebrow}</p>
+                              <h3 className="mt-2 text-xl font-black text-[#4B4D4F] sm:text-2xl">{group.category}</h3>
+                              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#6E6F71] md:text-base">
                                 {meta.description}
                               </p>
                             </div>
@@ -527,21 +524,21 @@ const ContainerSpecificationsSection = ({
 
                           <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[320px]">
                             <div className={`rounded-2xl border p-4 ${meta.statClassName}`}>
-                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Types In View</p>
-                              <p className="mt-2 text-2xl font-black text-[#143257]">{group.containers.length}</p>
-                              <p className="mt-1 text-xs font-semibold text-[#52708f]">Shown in this category board</p>
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">Types In View</p>
+                              <p className="mt-2 text-2xl font-black text-[#4B4D4F]">{group.containers.length}</p>
+                              <p className="mt-1 text-xs font-semibold text-[#6E6F71]">Shown in this category board</p>
                             </div>
 
                             <div className={`rounded-2xl border p-4 ${meta.statClassName}`}>
-                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f7a98]">Best Fit</p>
-                              <p className="mt-2 text-sm font-bold leading-relaxed text-[#143257]">{meta.focus}</p>
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">Best Fit</p>
+                              <p className="mt-2 text-sm font-bold leading-relaxed text-[#4B4D4F]">{meta.focus}</p>
                             </div>
                           </div>
                         </div>
                       </div>
 
                       <div className="px-3 pb-3 pt-3 sm:px-4 sm:pb-4 sm:pt-4 md:px-6 md:pb-6">
-                        <div className="mb-3 hidden grid-cols-[1.6fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a7693] xl:grid">
+                        <div className="mb-3 hidden grid-cols-[1.6fr_1fr_1fr_1fr] gap-3 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#6E6F71] xl:grid">
                           <span>Container</span>
                           <span>Interior Snapshot</span>
                           <span>Access Snapshot</span>
@@ -571,21 +568,20 @@ const ContainerSpecificationsSection = ({
                                 key={container.id}
                                 value={accordionValue}
                                 id={accordionValue}
-                                className="overflow-hidden rounded-[1.2rem] border border-white/80 bg-white/88 px-3 shadow-[0_14px_34px_rgba(10,35,66,0.06)] sm:rounded-[1.35rem] sm:px-4"
+                                className="overflow-hidden rounded-[1.2rem] border border-[#E2E4E6] bg-white px-3 shadow-sm sm:rounded-[1.35rem] sm:px-4"
                               >
                                 <div className="grid gap-3 py-3.5 sm:gap-4 sm:py-4 xl:grid-cols-[1.5fr_1fr_1fr_1.05fr_auto] xl:items-center">
                                   <div className="grid gap-3 sm:grid-cols-[132px_1fr] sm:items-center md:gap-4 md:grid-cols-[148px_1fr]">
                                     <button
                                       type="button"
                                       onClick={() => setPreviewContainer(container)}
-                                      className="group relative mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.15rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.96),rgba(234,244,255,0.92)_55%,rgba(223,236,252,0.9)_100%)] p-3 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 sm:mx-0 sm:max-w-none"
+                                      className="group relative mx-auto w-full max-w-[220px] overflow-hidden rounded-[1.15rem] border border-[#E2E4E6] bg-[#F8F9FA] p-3 text-left shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E30016]/25 sm:mx-0 sm:max-w-none"
                                       aria-label={`Enlarge image for ${container.name}`}
                                     >
-                                      <div className="pointer-events-none absolute inset-x-4 top-3 h-8 rounded-full bg-white/45 blur-xl" />
-                                      <span className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-[#27476b] shadow-sm transition-transform group-hover:scale-105">
+                                      <span className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-[#E2E4E6] bg-white text-[#4B4D4F] shadow-sm transition-transform group-hover:scale-105">
                                         <Search size={14} />
                                       </span>
-                                      <div className="relative flex h-[96px] items-center justify-center rounded-[0.95rem] border border-white/80 bg-white/75 sm:h-[104px]">
+                                      <div className="relative flex h-[96px] items-center justify-center rounded-[0.95rem] border border-[#E2E4E6] bg-white sm:h-[104px]">
                                         <img
                                           src={container.image}
                                           alt={container.name}
@@ -594,14 +590,14 @@ const ContainerSpecificationsSection = ({
                                           className="h-full w-full object-contain p-2"
                                         />
                                       </div>
-                                      <p className="relative mt-2.5 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6c85a1]">
+                                      <p className="relative mt-2.5 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[#6E6F71]">
                                         Container Preview
                                       </p>
                                     </button>
 
                                     <div>
                                       <div className="flex flex-wrap items-center gap-2">
-                                        <span className="inline-flex items-center rounded-full border border-[#d7e5f8] bg-[#f6f9ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#426186]">
+                                        <span className="inline-flex items-center rounded-full border border-[#E2E4E6] bg-[#F4F5F7] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#4B4D4F]">
                                           Type {String(container.id).padStart(2, "0")}
                                         </span>
                                         <span
@@ -611,7 +607,7 @@ const ContainerSpecificationsSection = ({
                                         </span>
                                       </div>
 
-                                      <p className="mt-3 text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                      <p className="mt-3 text-base font-black leading-tight text-[#4B4D4F] sm:text-lg">
                                         {container.name}
                                       </p>
 
@@ -631,91 +627,91 @@ const ContainerSpecificationsSection = ({
                                   </div>
 
                                   <div className="space-y-2">
-                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                       Interior Snapshot
                                     </p>
-                                    <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                      <p className="text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                    <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                      <p className="text-base font-black leading-tight text-[#4B4D4F] sm:text-lg">
                                         {interiorSummary}
                                       </p>
-                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#6E6F71]">
                                         Full metric and imperial interior dimensions are available in the expanded view.
                                       </p>
                                     </div>
                                   </div>
 
                                   <div className="space-y-2">
-                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                       Access Snapshot
                                     </p>
-                                    <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                      <p className="text-base font-black leading-tight text-[#143257] sm:text-lg">
+                                    <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                      <p className="text-base font-black leading-tight text-[#4B4D4F] sm:text-lg">
                                         {doorSummary}
                                       </p>
-                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#5d7898]">
+                                      <p className="mt-2 text-xs font-semibold leading-relaxed text-[#6E6F71]">
                                         {topAccessSummary}
                                       </p>
                                     </div>
                                   </div>
 
                                   <div className="space-y-2">
-                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                       Load Snapshot
                                     </p>
                                     <div className="grid gap-2">
-                                      <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
-                                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                      <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-2.5">
+                                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#6E6F71]">
                                           {capacityLabel}
                                         </p>
-                                        <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.capacity}</p>
+                                        <p className="mt-1 text-sm font-black text-[#4B4D4F]">{loadHighlights.capacity}</p>
                                       </div>
                                       <div className="grid gap-2 sm:grid-cols-2">
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
-                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-2.5">
+                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#6E6F71]">
                                             Tare
                                           </p>
-                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.tare}</p>
+                                          <p className="mt-1 text-sm font-black text-[#4B4D4F]">{loadHighlights.tare}</p>
                                         </div>
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] px-3 py-2.5">
-                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5f7a98]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-3 py-2.5">
+                                          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#6E6F71]">
                                             Payload
                                           </p>
-                                          <p className="mt-1 text-sm font-black text-[#143257]">{loadHighlights.payload}</p>
+                                          <p className="mt-1 text-sm font-black text-[#4B4D4F]">{loadHighlights.payload}</p>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
 
                                   <div className="flex items-center xl:justify-end">
-                                    <AccordionTrigger className="w-full rounded-[1.15rem] border border-[#d9e5f7] bg-white/95 px-4 py-3 text-left shadow-sm transition-colors hover:border-primary/30 hover:bg-white hover:no-underline data-[state=open]:border-primary/25 data-[state=open]:bg-primary/5 xl:w-[160px] [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-[#264c75]">
+                                    <AccordionTrigger className="w-full rounded-[1.15rem] border border-[#E2E4E6] bg-white px-4 py-3 text-left shadow-sm transition-colors hover:border-[#E30016] hover:bg-white hover:no-underline data-[state=open]:border-[#E30016] data-[state=open]:bg-red-50/20 xl:w-[160px] [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-[#4B4D4F]">
                                       <div className="flex flex-col">
-                                        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#5f7a98]">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                           More Details
                                         </span>
-                                        <span className="mt-1 text-sm font-black text-[#143257]">Open Below</span>
+                                        <span className="mt-1 text-sm font-black text-[#4B4D4F]">Open Below</span>
                                       </div>
                                     </AccordionTrigger>
                                   </div>
                                 </div>
 
                                 <AccordionContent className="pb-0 pt-0">
-                                  <div className="border-t border-[#e1ebf8] pb-5 pt-5">
-                                    <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-[#d9e5f7] bg-white/72 p-4 lg:flex-row lg:items-center lg:justify-between">
+                                  <div className="border-t border-[#E2E4E6] pb-5 pt-5">
+                                    <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4 lg:flex-row lg:items-center lg:justify-between">
                                       <div>
-                                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#587493]">
+                                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E30016]">
                                           Full Technical View
                                         </p>
-                                        <p className="mt-2 text-sm font-semibold leading-relaxed text-[#476786]">
+                                        <p className="mt-2 text-sm font-semibold leading-relaxed text-[#6E6F71]">
                                           Expanded details keep the full spec sheet in one place without repeating the quick-compare summary above.
                                         </p>
                                       </div>
 
                                       <div className="flex flex-wrap gap-2">
-                                        <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                                        <span className="rounded-full border border-[#E2E4E6] bg-white px-3 py-1 text-xs font-semibold text-[#4B4D4F]">
                                           {capacityLabel}: {container.cubicCapacity}
                                         </span>
                                         {container.topsOpening && (
-                                          <span className="rounded-full border border-[#d8e5f7] bg-white px-3 py-1 text-xs font-semibold text-[#35557c]">
+                                          <span className="rounded-full border border-[#E2E4E6] bg-white px-3 py-1 text-xs font-semibold text-[#4B4D4F]">
                                             Top access listed
                                           </span>
                                         )}
@@ -723,46 +719,46 @@ const ContainerSpecificationsSection = ({
                                     </div>
 
                                     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                             Interior Dimensions
                                           </p>
-                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#4B4D4F]">
                                             <p>{container.interiorDimensions.length}</p>
                                             <p>{container.interiorDimensions.width}</p>
                                             <p>{container.interiorDimensions.height}</p>
                                           </div>
                                         </div>
 
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                             Door Opening
                                           </p>
-                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#4B4D4F]">
                                             {doorRows.length > 0 ? (
                                               doorRows.map((row) => <p key={row}>{row}</p>)
                                             ) : (
-                                              <p className="text-[#5f7a98]">No door opening data listed for this type.</p>
+                                              <p className="text-[#6E6F71]">No door opening data listed for this type.</p>
                                             )}
                                           </div>
                                         </div>
 
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                             Weight And Capacity
                                           </p>
-                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#4B4D4F]">
                                             <p>{capacityLabel}: {container.cubicCapacity}</p>
                                             <p>Tare Weight: {container.tareWeight}</p>
                                             <p>Payload: {payloadDisplay}</p>
                                           </div>
                                         </div>
 
-                                        <div className="rounded-2xl border border-[#d9e5f7] bg-[#f8fbff] p-4">
-                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#4b688a]">
+                                        <div className="rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#6E6F71]">
                                             Planning Notes
                                           </p>
-                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#30567f]">
+                                          <div className="mt-3 space-y-2 text-sm font-semibold text-[#4B4D4F]">
                                             <p>{meta.focus}</p>
                                             <p>
                                               {container.topsOpening
@@ -791,32 +787,32 @@ const ContainerSpecificationsSection = ({
       <section className={infoSectionClassName}>
         <div className={contentWidthClassName}>
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="container-info-card rounded-[1.3rem] border border-[#d7e4f7] bg-white/90 p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)]">
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Card className="container-info-card rounded-[1.3rem] border border-[#E2E4E6] bg-white p-5 shadow-sm">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                 <Ruler size={18} />
               </div>
-              <h4 className="mt-4 text-xl font-black text-[#143257]">Dimensions</h4>
-              <p className="mt-2 text-sm leading-relaxed text-[#4e6b8a]">
+              <h4 className="mt-4 text-xl font-black text-[#4B4D4F]">Dimensions</h4>
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6F71]">
                 Values are shown in metric and imperial formats so teams can cross-check planning data quickly.
               </p>
             </Card>
 
-            <Card className="container-info-card rounded-[1.3rem] border border-[#d7e4f7] bg-white/90 p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)]">
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Card className="container-info-card rounded-[1.3rem] border border-[#E2E4E6] bg-white p-5 shadow-sm">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                 <Package size={18} />
               </div>
-              <h4 className="mt-4 text-xl font-black text-[#143257]">Capacity</h4>
-              <p className="mt-2 text-sm leading-relaxed text-[#4e6b8a]">
+              <h4 className="mt-4 text-xl font-black text-[#4B4D4F]">Capacity</h4>
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6F71]">
                 Cubic capacity and payload indicators help estimate fit and optimize loading strategy before booking.
               </p>
             </Card>
 
-            <Card className="container-info-card rounded-[1.3rem] border border-[#d7e4f7] bg-white/90 p-5 shadow-[0_14px_34px_rgba(10,35,66,0.08)]">
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Card className="container-info-card rounded-[1.3rem] border border-[#E2E4E6] bg-white p-5 shadow-sm">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                 <CheckCircle2 size={18} />
               </div>
-              <h4 className="mt-4 text-xl font-black text-[#143257]">Planning Accuracy</h4>
-              <p className="mt-2 text-sm leading-relaxed text-[#4e6b8a]">
+              <h4 className="mt-4 text-xl font-black text-[#4B4D4F]">Planning Accuracy</h4>
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6F71]">
                 Use these references with your cargo details to reduce handling surprises and improve execution flow.
               </p>
             </Card>
@@ -828,8 +824,8 @@ const ContainerSpecificationsSection = ({
 
       {showBottomCta && (
         <section className="container-cta-reveal px-4 pb-20 sm:px-6 lg:px-12 lg:pb-24">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Need Help Selecting a Container</p>
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,#6E6F71_0%,#5A5B5D_55%,#4B4D4F_100%)] p-8 text-white shadow-2xl md:p-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E30016]">Need Help Selecting a Container</p>
             <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
               Match your cargo profile with the right container type
             </h2>
@@ -841,7 +837,7 @@ const ContainerSpecificationsSection = ({
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#E30016] hover:bg-[#C40013] px-8 py-4 font-extrabold text-white shadow-lg shadow-red-900/30"
               >
                 Request Consultation
                 <ArrowRight size={18} />
@@ -858,20 +854,20 @@ const ContainerSpecificationsSection = ({
       )}
 
       <Dialog open={Boolean(previewContainer)} onOpenChange={(open) => !open && setPreviewContainer(null)}>
-        <DialogContent className="w-[min(92vw,960px)] max-w-[960px] rounded-[1.5rem] border border-[#d7e4f7] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_100%)] p-4 sm:p-6">
+        <DialogContent className="w-[min(92vw,960px)] max-w-[960px] rounded-[1.5rem] border border-[#E2E4E6] bg-white p-4 sm:p-6 shadow-2xl">
           {previewContainer && (
             <>
               <div className="pr-10">
-                <DialogTitle className="text-balance text-2xl font-black text-[#143257]">
+                <DialogTitle className="text-balance text-2xl font-black text-[#4B4D4F]">
                   {previewContainer.name}
                 </DialogTitle>
-                <DialogDescription className="mt-2 text-sm font-semibold text-[#5d7898]">
+                <DialogDescription className="mt-2 text-sm font-semibold text-[#6E6F71]">
                   Enlarged preview from the container specifications catalog.
                 </DialogDescription>
               </div>
 
-              <div className="overflow-hidden rounded-[1.35rem] border border-[#dce8f8] bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.98),rgba(234,244,255,0.94)_58%,rgba(223,236,252,0.9)_100%)] p-4">
-                <div className="flex min-h-[240px] max-h-[72vh] items-center justify-center rounded-[1.15rem] border border-white/85 bg-white/85 p-4 sm:min-h-[320px]">
+              <div className="overflow-hidden rounded-[1.35rem] border border-[#E2E4E6] bg-[#F8F9FA] p-4">
+                <div className="flex min-h-[240px] max-h-[72vh] items-center justify-center rounded-[1.15rem] border border-[#E2E4E6] bg-white p-4 sm:min-h-[320px]">
                   <img
                     src={previewContainer.image}
                     alt={previewContainer.name}

@@ -116,8 +116,8 @@ const ContactSection = () => {
           className="text-center mb-16"
         >
           <span className="section-label">Get In Touch</span>
-          <h2 className="section-title mt-3">Contact Us</h2>
-          <p className="text-muted-foreground text-lg mt-3 max-w-2xl mx-auto">
+          <h2 className="section-title mt-3 text-[#4B4D4F]">Contact Us</h2>
+          <p className="text-[#6E6F71] text-lg mt-3 max-w-2xl mx-auto">
             Have a question or need a quote? We'd love to hear from you. Reach out and our team will respond promptly.
           </p>
         </motion.div>
@@ -136,13 +136,13 @@ const ContactSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
-                className="glass-card p-5 flex items-start gap-4 group hover:shadow-lg transition-shadow"
+                className="glass-card p-5 flex items-start gap-4 group hover:shadow-lg transition-shadow border border-[#E2E4E6] bg-white"
               >
-                <div className="w-12 h-12 rounded-xl gradient-red flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <item.icon size={20} className="text-accent-foreground" />
+                <div className="w-12 h-12 rounded-xl bg-[#E30016] text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-md shadow-red-900/20">
+                  <item.icon size={20} />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                  <h4 className="font-bold text-[#4B4D4F] mb-1">{item.title}</h4>
                   {item.details.map((detail) => (
                     detail.href ? (
                       <a
@@ -150,12 +150,12 @@ const ContactSection = () => {
                         href={detail.href}
                         target={detail.opensInNewTab ? "_blank" : undefined}
                         rel={detail.opensInNewTab ? "noopener noreferrer" : undefined}
-                        className="block text-sm text-muted-foreground transition-colors hover:text-accent"
+                        className="block text-sm text-[#6E6F71] transition-colors hover:text-[#E30016]"
                       >
                         {detail.label}
                       </a>
                     ) : (
-                      <p key={detail.label} className="text-sm text-muted-foreground">
+                      <p key={detail.label} className="text-sm text-[#6E6F71]">
                         {detail.label}
                       </p>
                     )
@@ -172,7 +172,7 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5">
+            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5 border border-[#E2E4E6] bg-white shadow-xl">
               <div className="grid sm:grid-cols-2 gap-5">
                 <Input
                   name="name"
@@ -180,7 +180,7 @@ const ContactSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="bg-background/50 border-border/50 focus:border-accent"
+                  className="bg-white border-[#E2E4E6] text-[#4B4D4F] placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                 />
                 <Input
                   name="email"
@@ -189,7 +189,7 @@ const ContactSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="bg-background/50 border-border/50 focus:border-accent"
+                  className="bg-white border-[#E2E4E6] text-[#4B4D4F] placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                 />
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
@@ -198,7 +198,7 @@ const ContactSection = () => {
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="bg-background/50 border-border/50 focus:border-accent"
+                  className="bg-white border-[#E2E4E6] text-[#4B4D4F] placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                 />
                 <Input
                   name="subject"
@@ -206,7 +206,7 @@ const ContactSection = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="bg-background/50 border-border/50 focus:border-accent"
+                  className="bg-white border-[#E2E4E6] text-[#4B4D4F] placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                 />
               </div>
               <Textarea
@@ -216,14 +216,14 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="bg-background/50 border-border/50 focus:border-accent resize-none"
+                className="bg-white border-[#E2E4E6] text-[#4B4D4F] placeholder:text-[#9C9D9F] focus:border-[#E30016] resize-none"
               />
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 variant="accent"
                 size="lg"
-                className="w-full"
+                className="w-full bg-[#E30016] hover:bg-[#C40013] text-white font-bold"
               >
                 {isSubmitting ? (
                   <>

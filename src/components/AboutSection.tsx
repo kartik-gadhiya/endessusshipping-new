@@ -3,17 +3,17 @@ import { motion, useInView } from "framer-motion";
 import { Ship, Plane, Container, Globe, CheckCircle2, Award, TrendingUp, Lock, History, Package, Anchor, ArrowRight, Medal, BarChart3, ShieldCheck, BadgeCheck } from "lucide-react";
 
 const stats = [
-  { id: "stat-years", icon: History, value: 10, suffix: "+", label: "Years of Experience", color: "from-blue-600/20 to-blue-400/20", iconColor: "blueGradient" },
-  { id: "stat-shipments", icon: Package, value: 500, suffix: "+", label: "Shipments per Annum", color: "from-cyan-600/20 to-cyan-400/20", iconColor: "cyanGradient" },
-  { id: "stat-air", icon: Plane, value: 200, suffix: "+", label: "Tons Air Cargo/Year", color: "from-blue-500/20 to-indigo-400/20", iconColor: "indigoGradient" },
-  { id: "stat-ocean", icon: Anchor, value: 1000, suffix: "+", label: "TEUs Cargo/Year", color: "from-amber-500/20 to-yellow-400/20", iconColor: "amberGradient" },
+  { id: "stat-years", icon: History, value: 10, suffix: "+", label: "Years of Experience", color: "from-[#E30016]/15 to-[#FF2638]/10", iconColor: "redGradient" },
+  { id: "stat-shipments", icon: Package, value: 500, suffix: "+", label: "Shipments per Annum", color: "from-[#6E6F71]/15 to-[#9C9D9F]/10", iconColor: "greyGradient" },
+  { id: "stat-air", icon: Plane, value: 200, suffix: "+", label: "Tons Air Cargo/Year", color: "from-[#E30016]/15 to-[#FF2638]/10", iconColor: "redGradient" },
+  { id: "stat-ocean", icon: Anchor, value: 1000, suffix: "+", label: "TEUs Cargo/Year", color: "from-[#6E6F71]/20 to-[#4B4D4F]/10", iconColor: "darkGradient" },
 ];
 
 const features = [
-  { icon: Award, title: "Industry Experts", desc: "Decades of combined expertise in global logistics", iconColor: "blueGradient" },
-  { icon: TrendingUp, title: "Reliable Growth", desc: "Consistent year-over-year growth and expansion", iconColor: "cyanGradient" },
-  { icon: ShieldCheck, title: "Secure Handling", desc: "Advanced tracking and security for all cargo", iconColor: "indigoGradient" },
-  { icon: BadgeCheck, title: "Quality Assurance", desc: "100% commitment to service excellence", iconColor: "amberGradient" },
+  { icon: Award, title: "Industry Experts", desc: "Decades of combined expertise in global logistics", iconColor: "redGradient" },
+  { icon: TrendingUp, title: "Reliable Growth", desc: "Consistent year-over-year growth and expansion", iconColor: "greyGradient" },
+  { icon: ShieldCheck, title: "Secure Handling", desc: "Advanced tracking and security for all cargo", iconColor: "redGradient" },
+  { icon: BadgeCheck, title: "Quality Assurance", desc: "100% commitment to service excellence", iconColor: "silverGradient" },
 ];
 
 const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
@@ -44,25 +44,25 @@ const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
 const SVGIconGradients = () => (
   <svg width="0" height="0" className="absolute">
     <defs>
-      <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb" />
-        <stop offset="100%" stopColor="#60a5fa" />
+      <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#E30016" />
+        <stop offset="100%" stopColor="#FF2638" />
       </linearGradient>
-      <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0891b2" />
-        <stop offset="100%" stopColor="#22d3ee" />
+      <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#9C9D9F" />
+        <stop offset="100%" stopColor="#D1D5DB" />
       </linearGradient>
-      <linearGradient id="indigoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#4f46e5" />
-        <stop offset="100%" stopColor="#818cf8" />
+      <linearGradient id="greyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6E6F71" />
+        <stop offset="100%" stopColor="#8E9093" />
       </linearGradient>
-      <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#d97706" />
-        <stop offset="100%" stopColor="#fbbf24" />
+      <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6E6F71" />
+        <stop offset="100%" stopColor="#4B4D4F" />
       </linearGradient>
       <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#1e3a8a" />
-        <stop offset="100%" stopColor="#3b82f6" />
+        <stop offset="0%" stopColor="#E30016" />
+        <stop offset="100%" stopColor="#C40013" />
       </linearGradient>
     </defs>
   </svg>
@@ -75,20 +75,20 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#eef5ff_0%,#f9fbff_60%,#f1f7ff_100%)]"
+      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#F8F9FA_0%,#FFFFFF_60%,#F4F5F7_100%)]"
       ref={ref}
     >
       <SVGIconGradients />
       {/* Decorative gradient orbs */}
       <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.15, 0.08] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 right-0 w-96 h-96 bg-secondary/30 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" 
+        className="absolute top-0 right-0 w-96 h-96 bg-[#E30016]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" 
       />
       <motion.div 
-        animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.15, 0.1] }}
+        animate={{ scale: [1, 1.5, 1], opacity: [0.08, 0.12, 0.08] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" 
+        className="absolute bottom-0 left-0 w-80 h-80 bg-[#9C9D9F]/15 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" 
       />
 
       <div className="max-w-7xl mx-auto relative z-10 home-section-shell">
@@ -100,10 +100,10 @@ const AboutSection = () => {
           className="text-center mb-16"
         >
           <span className="section-label">WHO WE ARE</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4 mb-6 leading-tight">
-            En Dessus <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Global Forwarding</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#4B4D4F] mt-4 mb-6 leading-tight">
+            En Dessus <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E30016] to-[#6E6F71]">Global Forwarding</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-accent via-yellow-400 to-accent rounded-full mx-auto mb-6" />
+          <div className="w-20 h-1 bg-gradient-to-r from-[#E30016] via-[#9C9D9F] to-[#E30016] rounded-full mx-auto mb-6" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
@@ -114,13 +114,13 @@ const AboutSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative"
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-              Delivering Excellence <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">in Global Logistics</span>
+            <h3 className="text-3xl md:text-4xl font-black text-[#4B4D4F] mb-6 leading-tight">
+              Delivering Excellence <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E30016] to-[#6E6F71]">in Global Logistics</span>
             </h3>
             
-            <div className="space-y-5 text-muted-foreground text-lg leading-relaxed mb-10">
+            <div className="space-y-5 text-[#6E6F71] text-lg leading-relaxed mb-10">
               <p>
-                Founded in 2015, En Dessus Global Forwarding combines decades of expertise with cutting-edge technology. We're dedicated to providing <span className="font-semibold text-foreground">seamless, reliable shipping solutions</span> that connect your business to the world.
+                Founded in 2015, En Dessus Global Forwarding combines decades of expertise with cutting-edge technology. We're dedicated to providing <span className="font-bold text-[#4B4D4F]">seamless, reliable shipping solutions</span> that connect your business to the world.
               </p>
               <p>
                 Our team of industry veterans understands the complexities of international logistics. We don't just move cargo—we build partnerships, ensure compliance, and deliver predictable results every single time.
@@ -137,19 +137,19 @@ const AboutSection = () => {
                   transition={{ delay: 0.2 + i * 0.1 }}
                   className="flex items-center gap-4 group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-white shadow-sm border border-blue-50 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <CheckCircle2 size={18} stroke="url(#primaryGradient)" strokeWidth={2.5} />
+                  <div className="w-8 h-8 rounded-lg bg-white shadow-sm border border-[#E2E4E6] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle2 size={18} className="text-[#E30016]" />
                   </div>
-                  <span className="text-foreground font-medium text-lg">{feature}</span>
+                  <span className="text-[#4B4D4F] font-semibold text-lg">{feature}</span>
                 </motion.div>
               ))}
             </div>
 
             <motion.a
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 165, 116, 0.3)" }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
               href="#services"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary via-blue-700 to-primary px-8 py-4 rounded-xl font-bold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-[#E30016] px-8 py-4 rounded-xl font-bold text-white shadow-lg shadow-red-900/25 hover:bg-[#C40013] transition-all duration-300"
             >
               Explore Our Services
               <ArrowRight size={20} />
@@ -167,15 +167,15 @@ const AboutSection = () => {
                 className={`relative group overflow-hidden ${i % 2 !== 0 ? 'lg:translate-y-12' : ''}`}
               >
                 {/* Card Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-50 rounded-2xl border border-blue-100/50" />
+                <div className="absolute inset-0 bg-white rounded-2xl border border-[#E2E4E6] shadow-sm group-hover:border-[#E30016] transition-colors" />
                 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#E30016]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
                 
                 {/* Content */}
                 <div className="relative z-10 p-8 text-center flex flex-col items-center justify-center min-h-[220px]">
                   <motion.div 
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} backdrop-blur-sm border border-white/50 flex items-center justify-center mb-6 shadow-xl shadow-blue-900/5`}
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} backdrop-blur-sm border border-[#E2E4E6] flex items-center justify-center mb-6 shadow-md`}
                     whileHover={{ 
                       rotate: [0, -10, 10, 0], 
                       scale: 1.1,
@@ -192,11 +192,11 @@ const AboutSection = () => {
                     <stat.icon size={32} stroke={`url(#${stat.iconColor})`} strokeWidth={2.5} />
                   </motion.div>
                   
-                  <div className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-blue-700 mb-3">
+                  <div className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#4B4D4F] to-[#E30016] mb-3">
                     <CountUp target={stat.value} suffix={stat.suffix} />
                   </div>
                   
-                  <div className="text-xs lg:text-sm font-bold uppercase tracking-wider text-muted-foreground">{stat.label}</div>
+                  <div className="text-xs lg:text-sm font-bold uppercase tracking-wider text-[#6E6F71]">{stat.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -213,16 +213,16 @@ const AboutSection = () => {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group relative bg-white rounded-xl p-6 border border-blue-100/50 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/20"
+              className="group relative bg-white rounded-xl p-6 border border-[#E2E4E6] hover:border-[#E30016] transition-all duration-300 hover:shadow-lg hover:shadow-red-900/5"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#E30016]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
               
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-white shadow-lg border border-blue-50/50 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-white shadow-md border border-[#E2E4E6] flex items-center justify-center mb-5 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
                   <feature.icon size={28} stroke={`url(#${feature.iconColor})`} strokeWidth={2} />
                 </div>
-                <h3 className="font-bold text-xl text-foreground mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                <h3 className="font-bold text-xl text-[#4B4D4F] mb-3">{feature.title}</h3>
+                <p className="text-[#6E6F71] leading-relaxed">{feature.desc}</p>
               </div>
             </div>
           ))}

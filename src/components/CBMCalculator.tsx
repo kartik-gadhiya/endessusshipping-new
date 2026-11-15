@@ -82,24 +82,24 @@ const CBMCalculator = () => {
         {/* Section Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[hsl(205_92%_23%)] to-[hsl(186_100%_50%)] rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-[#E30016] rounded-lg flex items-center justify-center shadow-md shadow-red-900/20">
               <Package size={20} className="text-white" />
             </div>
-            <h2 className="text-3xl font-bold font-heading text-[hsl(205_92%_23%)]">
+            <h2 className="text-3xl font-black font-heading text-[#4B4D4F]">
               CBM Calculator
             </h2>
           </div>
-          <p className="ml-[3.25rem] text-gray-600">
+          <p className="ml-[3.25rem] text-[#6E6F71]">
             Calculate the cubic meter volume of your shipments instantly
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Calculator */}
           <div className="lg:col-span-2">
-            <Card className="border-0 shadow-lg bg-white">
+            <Card className="border border-[#E2E4E6] shadow-sm bg-white">
               <div className="p-8">
                 {/* Unit Selector */}
-                <div className="mb-8 p-4 bg-gradient-to-r from-[hsl(205_92%_23%)] to-[hsl(186_100%_50%)] rounded-lg">
+                <div className="mb-8 p-4 bg-[#4B4D4F] rounded-xl text-white">
                   <label className="text-white text-sm font-semibold block mb-3">
                     Select Measurement Unit
                   </label>
@@ -118,8 +118,8 @@ const CBMCalculator = () => {
                         }}
                         className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                           packages[0].unit === unit.value
-                            ? 'bg-white text-[hsl(205_92%_23%)]'
-                            : 'bg-white/30 text-white hover:bg-white/50'
+                            ? 'bg-[#E30016] text-white shadow-sm'
+                            : 'bg-white/10 text-white hover:bg-white/20'
                         }`}
                       >
                         {unit.label}
@@ -133,16 +133,16 @@ const CBMCalculator = () => {
                   {packages.map((item, index) => (
                     <div
                       key={item.id}
-                      className="border-2 border-gray-100 rounded-lg p-6 bg-gray-50 hover:border-[hsl(186_100%_50%)] transition-colors"
+                      className="border border-[#E2E4E6] rounded-xl p-6 bg-[#F8F9FA] hover:border-[#E30016] transition-colors"
                     >
                       <div className="flex justify-between items-center mb-4">
-                        <h3 className="font-semibold text-[hsl(205_92%_23%)] text-lg">
+                        <h3 className="font-bold text-[#4B4D4F] text-lg">
                           Package {index + 1}
                         </h3>
                         {packages.length > 1 && (
                           <button
                             onClick={() => removePackage(item.id)}
-                            className="p-2 hover:bg-red-100 rounded-lg transition-colors text-red-500"
+                            className="p-2 hover:bg-red-50 rounded-lg transition-colors text-[#E30016]"
                           >
                             <Trash2 size={20} />
                           </button>
@@ -157,7 +157,7 @@ const CBMCalculator = () => {
                           { key: 'quantity', label: 'QTY' },
                         ].map(({ key, label }) => (
                           <div key={key}>
-                            <label className="text-sm font-semibold text-gray-700 block mb-2">
+                            <label className="text-sm font-bold text-[#4B4D4F] block mb-2">
                               {label}
                             </label>
                             <Input
@@ -167,15 +167,15 @@ const CBMCalculator = () => {
                               onChange={(e) =>
                                 updatePackage(item.id, key as keyof PackageItem, e.target.value)
                               }
-                              className="border-2 border-gray-200 focus:border-[hsl(186_100%_50%)] focus:ring-0"
+                              className="border border-[#E2E4E6] bg-white text-[#4B4D4F] focus:border-[#E30016] focus-visible:ring-1 focus-visible:ring-[#E30016]"
                             />
                           </div>
                         ))}
                         <div>
-                          <label className="text-sm font-semibold text-gray-700 block mb-2">
+                          <label className="text-sm font-bold text-[#4B4D4F] block mb-2">
                             CBM
                           </label>
-                          <div className="px-4 py-2 bg-[hsl(36_87%_55%)] text-white rounded-lg font-bold text-center h-10 flex items-center justify-center">
+                          <div className="px-4 py-2 bg-[#E30016] text-white rounded-lg font-bold text-center h-10 flex items-center justify-center shadow-sm">
                             {calculateCBM(item).toFixed(6)}
                           </div>
                         </div>
@@ -200,32 +200,32 @@ const CBMCalculator = () => {
 
           {/* Summary Card */}
           <div>
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-[hsl(205_92%_23%)] to-[hsl(186_100%_50%)] text-white sticky top-8">
+            <Card className="border border-white/10 shadow-xl bg-[linear-gradient(160deg,#6E6F71_0%,#5A5B5D_55%,#4B4D4F_100%)] text-white sticky top-8">
               <div className="p-8">
-                <h2 className="text-2xl font-bold font-heading mb-8">Summary</h2>
+                <h2 className="text-2xl font-black font-heading mb-8">Summary</h2>
 
                 {/* Total QTY */}
                 <div className="mb-8">
-                  <p className="text-white/80 text-sm font-semibold mb-2 uppercase tracking-wide">
+                  <p className="text-[#9C9D9F] text-xs font-bold mb-2 uppercase tracking-wide">
                     Total Quantity
                   </p>
-                  <p className="text-5xl font-bold">{totalQTY.toFixed(0)}</p>
-                  <p className="text-white/60 text-xs mt-1">units</p>
+                  <p className="text-5xl font-black">{totalQTY.toFixed(0)}</p>
+                  <p className="text-[#9C9D9F] text-xs mt-1">units</p>
                 </div>
 
                 {/* Total CBM */}
                 <div className="mb-8">
-                  <p className="text-white/80 text-sm font-semibold mb-2 uppercase tracking-wide">
+                  <p className="text-[#9C9D9F] text-xs font-bold mb-2 uppercase tracking-wide">
                     Total CBM
                   </p>
-                  <p className="text-5xl font-bold">{totalCBM.toFixed(6)}</p>
-                  <p className="text-white/60 text-xs mt-1">cubic meters</p>
+                  <p className="text-5xl font-black text-[#E30016]">{totalCBM.toFixed(6)}</p>
+                  <p className="text-[#9C9D9F] text-xs mt-1">cubic meters</p>
                 </div>
 
                 {/* Info Box */}
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 mb-6">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-4 mb-6">
                   <p className="text-sm text-white/90">
-                    <span className="font-semibold">Estimated Weight:</span>
+                    <span className="font-bold text-white">Estimated Weight:</span>
                     <br />
                     Depends on product density
                   </p>
@@ -237,7 +237,7 @@ const CBMCalculator = () => {
                   variant="accent"
                   size="lg"
                   className={`w-full ${
-                    copied ? 'bg-green-500 hover:bg-green-600 scale-105' : ''
+                    copied ? 'bg-green-600 hover:bg-green-700 scale-105' : ''
                   }`}
                 >
                   {copied ? (
@@ -262,7 +262,7 @@ const CBMCalculator = () => {
                   }}
                   variant="ghost"
                   size="lg"
-                  className="mt-3 w-full bg-white/20 text-white hover:bg-white/30"
+                  className="mt-3 w-full bg-white/10 text-white hover:bg-white/20"
                 >
                   Clear All
                 </Button>
@@ -270,23 +270,23 @@ const CBMCalculator = () => {
             </Card>
 
             {/* Tips Card */}
-            <Card className="border-0 shadow-lg bg-white mt-6">
+            <Card className="border border-[#E2E4E6] shadow-sm bg-white mt-6">
               <div className="p-6">
-                <h3 className="mb-4 flex items-center gap-2 font-bold text-[hsl(205_92%_23%)]">
-                  <Lightbulb size={16} className="text-[hsl(36_87%_55%)]" />
+                <h3 className="mb-4 flex items-center gap-2 font-black text-[#4B4D4F]">
+                  <Lightbulb size={16} className="text-[#E30016]" />
                   Tips
                 </h3>
-                <ul className="space-y-3 text-sm text-gray-600">
+                <ul className="space-y-3 text-sm text-[#6E6F71]">
                   <li className="flex gap-2">
-                    <span className="text-[hsl(36_87%_55%)] font-bold">•</span>
+                    <span className="text-[#E30016] font-bold">•</span>
                     <span>Enter dimensions and quantity for accurate CBM calculation</span>
                   </li>
                   <li className="flex gap-2">
-                    <span className="text-[hsl(36_87%_55%)] font-bold">•</span>
+                    <span className="text-[#E30016] font-bold">•</span>
                     <span>All units will be converted to meters</span>
                   </li>
                   <li className="flex gap-2">
-                    <span className="text-[hsl(36_87%_55%)] font-bold">•</span>
+                    <span className="text-[#E30016] font-bold">•</span>
                     <span>Add multiple packages for complex shipments</span>
                   </li>
                 </ul>

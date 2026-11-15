@@ -180,23 +180,23 @@ const Gallery = () => {
 
       <main>
         <section className="relative overflow-hidden px-6 pb-20 pt-36 lg:px-12 lg:pb-24 lg:pt-40">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_11%_18%,rgba(34,211,238,0.18),transparent_27%),radial-gradient(circle_at_87%_7%,rgba(245,181,42,0.2),transparent_24%),linear-gradient(180deg,rgba(245,250,255,0.95)_0%,rgba(255,255,255,0.95)_54%,rgba(239,247,255,0.94)_100%)]" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_11%_18%,rgba(227,0,22,0.06),transparent_27%),radial-gradient(circle_at_87%_7%,rgba(156,157,159,0.1),transparent_24%),linear-gradient(180deg,#F8F9FA_0%,#FFFFFF_54%,#F4F5F7_100%)]" />
 
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.07fr_0.93fr] lg:items-end">
             <div className="gallery-hero-reveal">
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-primary">
-                <Camera size={14} className="text-accent" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#E2E4E6] bg-[#F4F5F7] px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] text-[#E30016]">
+                <Camera size={14} className="text-[#E30016]" />
                 Logistics In Action
               </span>
 
-              <h1 className="mt-6 text-balance text-5xl font-black leading-[1.02] text-[#102742] sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 text-balance text-5xl font-black leading-[1.02] text-[#4B4D4F] sm:text-6xl lg:text-7xl">
                 Gallery
-                <span className="bg-gradient-to-r from-primary via-blue-700 to-secondary bg-clip-text text-transparent">
+                <span className="text-[#E30016]">
                   {" "}That Shows Real Operations
                 </span>
               </h1>
 
-              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#496686] md:text-xl">
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#6E6F71] md:text-xl">
                 Explore snapshots from port handling, container movement, warehouse flow, and day-to-day freight execution
                 across our network.
               </p>
@@ -204,62 +204,62 @@ const Gallery = () => {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#gallery-grid"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-6 py-3 font-extrabold text-primary shadow-[0_12px_28px_rgba(243,173,31,0.34)]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#E30016] hover:bg-[#C40013] px-6 py-3 font-extrabold text-white shadow-md shadow-red-900/20"
                 >
                   Browse Photos
                   <ArrowRight size={18} />
                 </a>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center rounded-xl border border-[#d6e3f7] bg-white px-5 py-3 text-sm font-bold text-[#295078] transition-colors hover:border-primary/30 hover:text-primary"
+                  className="inline-flex items-center rounded-xl border border-[#E2E4E6] bg-white px-5 py-3 text-sm font-bold text-[#4B4D4F] transition-colors hover:border-[#9C9D9F] hover:bg-[#F4F5F7]"
                 >
                   Contact Team
                 </Link>
               </div>
             </div>
 
-            <div className="gallery-panel rounded-[1.9rem] border border-[#cbdcf5] bg-[linear-gradient(160deg,#ffffff_0%,#f2f8ff_56%,#edf5ff_100%)] p-6 shadow-[0_26px_62px_rgba(11,36,68,0.14)] lg:p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2e4f77]">Gallery Overview</p>
+            <div className="gallery-panel rounded-[1.9rem] border border-[#E2E4E6] bg-white p-6 shadow-sm lg:p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#E30016]">Gallery Overview</p>
 
               <div className="mt-5 grid gap-3">
-                <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+                <div className="flex items-center justify-between rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                       <Camera size={17} />
                     </span>
-                    <span className="text-sm font-semibold text-[#1a3c63]">Total Photos</span>
+                    <span className="text-sm font-bold text-[#4B4D4F]">Total Photos</span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{galleryImages.length} images</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{galleryImages.length} images</span>
                 </div>
 
-                <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+                <div className="flex items-center justify-between rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                       <Ship size={17} />
                     </span>
-                    <span className="text-sm font-semibold text-[#1a3c63]">Port Operations</span>
+                    <span className="text-sm font-bold text-[#4B4D4F]">Port Operations</span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{operationCount} shots</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{operationCount} shots</span>
                 </div>
 
-                <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+                <div className="flex items-center justify-between rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                       <Globe2 size={17} />
                     </span>
-                    <span className="text-sm font-semibold text-[#1a3c63]">Cargo Movement</span>
+                    <span className="text-sm font-bold text-[#4B4D4F]">Cargo Movement</span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">Multi-location</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">Multi-location</span>
                 </div>
 
-                <div className="flex items-center justify-between rounded-2xl border border-[#d5e3f6] bg-white/90 px-4 py-3">
+                <div className="flex items-center justify-between rounded-2xl border border-[#E2E4E6] bg-[#F8F9FA] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E30016]/10 text-[#E30016]">
                       <Warehouse size={17} />
                     </span>
-                    <span className="text-sm font-semibold text-[#1a3c63]">Container Handling</span>
+                    <span className="text-sm font-bold text-[#4B4D4F]">Container Handling</span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#4b688a]">{handlingCount} shots</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6E6F71]">{handlingCount} shots</span>
                 </div>
               </div>
             </div>
@@ -268,15 +268,15 @@ const Gallery = () => {
 
         <section id="gallery-grid" className="px-6 pb-24 lg:px-12 lg:pb-28">
           <div className="mx-auto max-w-7xl space-y-7">
-            <div className="gallery-toolbar rounded-[1.7rem] border border-[#d7e4f7] bg-white/88 p-5 shadow-[0_18px_46px_rgba(10,35,66,0.09)] md:p-6">
+            <div className="gallery-toolbar rounded-[1.7rem] border border-[#E2E4E6] bg-white p-5 shadow-sm md:p-6">
               <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
                 <div className="relative">
-                  <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#5f7a98]" />
+                  <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#9C9D9F]" />
                   <input
                     value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
                     placeholder="Search by operation or keyword"
-                    className="h-12 w-full rounded-xl border border-[#d7e4f7] bg-white pl-12 pr-4 text-sm font-medium text-[#27476b] outline-none transition-colors placeholder:text-[#7892ad] focus:border-primary/40"
+                    className="h-12 w-full rounded-xl border border-[#E2E4E6] bg-white pl-12 pr-4 text-sm font-medium text-[#4B4D4F] outline-none transition-colors placeholder:text-[#9C9D9F] focus:border-[#E30016]"
                   />
                 </div>
 
@@ -290,8 +290,8 @@ const Gallery = () => {
                         onClick={() => setActiveCategory(category)}
                         className={`rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-[0.11em] transition-colors ${
                           isActive
-                            ? "border-primary/35 bg-primary text-white"
-                            : "border-[#d5e3f6] bg-white text-[#35557c] hover:border-primary/30 hover:text-primary"
+                            ? "border-[#E30016] bg-[#E30016] text-white shadow-sm"
+                            : "border-[#E2E4E6] bg-white text-[#4B4D4F] hover:border-[#E30016] hover:text-[#E30016]"
                         }`}
                       >
                         {category}
@@ -303,9 +303,9 @@ const Gallery = () => {
             </div>
 
             {filteredImages.length === 0 ? (
-              <div className="gallery-card rounded-[1.6rem] border border-[#d7e4f7] bg-white/92 p-8 text-center shadow-[0_18px_44px_rgba(10,35,66,0.1)]">
-                <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#4b688a]">No Matching Photos</p>
-                <p className="mt-2 text-lg font-semibold text-[#1a3c63]">
+              <div className="gallery-card rounded-[1.6rem] border border-[#E2E4E6] bg-white p-8 text-center shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#6E6F71]">No Matching Photos</p>
+                <p className="mt-2 text-lg font-semibold text-[#4B4D4F]">
                   Try another keyword or choose a different category.
                 </p>
               </div>
@@ -315,7 +315,7 @@ const Gallery = () => {
                   <button
                     key={item.id}
                     onClick={() => setSelectedId(item.id)}
-                    className="gallery-card group relative overflow-hidden rounded-[1.3rem] border border-[#d8e7f8] bg-white/92 text-left shadow-[0_18px_40px_rgba(10,35,66,0.1)] transition-transform duration-300 hover:-translate-y-1"
+                    className="gallery-card group relative overflow-hidden rounded-[1.3rem] border border-[#E2E4E6] bg-white text-left shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:border-[#E30016]"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
@@ -328,15 +328,15 @@ const Gallery = () => {
                           event.currentTarget.src = "/placeholder.svg";
                         }}
                       />
-                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,37,71,0)_40%,rgba(8,37,71,0.76)_100%)]" />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(0,0,0,0.76)_100%)]" />
 
-                      <span className="absolute left-3 top-3 rounded-full border border-white/30 bg-white/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-white backdrop-blur-sm">
+                      <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-[#4B4D4F]/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-white backdrop-blur-sm">
                         {item.category}
                       </span>
                     </div>
 
                     <div className="p-3.5">
-                      <p className="text-sm font-bold text-[#183861]">{item.alt}</p>
+                      <p className="text-sm font-bold text-[#4B4D4F]">{item.alt}</p>
                     </div>
                   </button>
                 ))}
@@ -346,8 +346,8 @@ const Gallery = () => {
         </section>
 
         <section className="gallery-cta-reveal px-6 pb-24 lg:px-12">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#2b4f75] bg-[linear-gradient(160deg,#072447_0%,#0a315d_55%,#0a2342_100%)] p-8 text-white shadow-[0_30px_72px_rgba(3,15,34,0.44)] md:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">See More In Person</p>
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,#6E6F71_0%,#5A5B5D_55%,#4B4D4F_100%)] p-8 text-white shadow-2xl md:p-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E30016]">See More In Person</p>
             <h2 className="mt-4 text-balance text-4xl font-black leading-tight md:text-5xl">
               Let us walk you through our shipping capabilities
             </h2>
@@ -359,7 +359,7 @@ const Gallery = () => {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent via-yellow-400 to-accent px-8 py-4 font-extrabold text-primary shadow-[0_15px_34px_rgba(243,173,31,0.35)]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#E30016] hover:bg-[#C40013] px-8 py-4 font-extrabold text-white shadow-lg shadow-red-900/30"
               >
                 Talk to Our Team
                 <ArrowRight size={18} />
@@ -394,7 +394,7 @@ const Gallery = () => {
               onClick={(event) => event.stopPropagation()}
               className="mx-auto flex h-full w-full max-w-6xl flex-col justify-center"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/55 shadow-2xl">
+              <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#4B4D4F]/60 shadow-2xl">
                 <img
                   src={selectedImage.image}
                   alt={selectedImage.alt}
@@ -403,7 +403,7 @@ const Gallery = () => {
 
                 <button
                   onClick={closeLightbox}
-                  className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-[#4B4D4F]/50 text-white transition-colors hover:bg-[#4B4D4F]/70"
                   aria-label="Close preview"
                 >
                   <X size={18} />
@@ -411,7 +411,7 @@ const Gallery = () => {
 
                 <button
                   onClick={goToPrevious}
-                  className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/50 text-white transition-colors hover:bg-[#4B4D4F]/70"
                   aria-label="Previous image"
                 >
                   <ChevronLeft size={20} />
@@ -419,7 +419,7 @@ const Gallery = () => {
 
                 <button
                   onClick={goToNext}
-                  className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/60"
+                  className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#4B4D4F]/50 text-white transition-colors hover:bg-[#4B4D4F]/70"
                   aria-label="Next image"
                 >
                   <ChevronRight size={20} />

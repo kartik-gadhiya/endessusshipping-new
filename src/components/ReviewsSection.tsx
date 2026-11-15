@@ -9,7 +9,7 @@ const ReviewCard = ({ review, index }: { review: GoogleReview; index: number }) 
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
     viewport={{ once: true }}
-    className="glass-card bg-white dark:bg-card p-6 flex flex-col w-[320px] md:w-[360px] mx-3 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-300 border-t-2 border-t-accent/50"
+    className="glass-card bg-white p-6 flex flex-col w-[320px] md:w-[360px] mx-3 hover:shadow-2xl hover:shadow-red-900/10 hover:-translate-y-1 transition-all duration-300 border-t-2 border-t-[#E30016] border border-[#E2E4E6]"
   >
     <div className="flex items-center gap-4 mb-5">
       <img
@@ -17,24 +17,24 @@ const ReviewCard = ({ review, index }: { review: GoogleReview; index: number }) 
         alt={review.name}
         loading="lazy"
         decoding="async"
-        className="w-12 h-12 rounded-full object-cover border-2 border-accent/20"
+        className="w-12 h-12 rounded-full object-cover border-2 border-[#E2E4E6]"
       />
       <div>
-        <h4 className="font-bold text-foreground text-sm tracking-wide">{review.name}</h4>
-        <p className="text-xs text-muted-foreground">{review.date}</p>
+        <h4 className="font-bold text-[#4B4D4F] text-sm tracking-wide">{review.name}</h4>
+        <p className="text-xs text-[#6E6F71]">{review.date}</p>
       </div>
     </div>
     <div className="flex gap-1 mb-4">
       {Array.from({ length: review.rating }).map((_, i) => (
-        <Star key={i} size={16} className="fill-gold text-gold" />
+        <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
       ))}
     </div>
     {review.text ? (
-      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium flex-1">"{review.text}"</p>
+      <p className="text-sm text-[#6E6F71] leading-relaxed font-medium flex-1">"{review.text}"</p>
     ) : (
-      <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium flex-1 italic">This user only left a rating.</p>
+      <p className="text-sm text-[#9C9D9F] leading-relaxed font-medium flex-1 italic">This user only left a rating.</p>
     )}
-    <div className="mt-5 pt-4 border-t border-border flex items-center gap-2 text-xs text-muted-foreground/70 font-semibold uppercase tracking-wider">
+    <div className="mt-5 pt-4 border-t border-[#E2E4E6] flex items-center gap-2 text-xs text-[#6E6F71] font-semibold uppercase tracking-wider">
       <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -54,13 +54,13 @@ const ReviewsSection = () => {
   return (
     <section
       id="reviews"
-      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#eef5ff_0%,#f9fcff_55%,#edf4ff_100%)]"
+      className="section-padding relative overflow-hidden bg-[linear-gradient(180deg,#F8F9FA_0%,#FFFFFF_55%,#F4F5F7_100%)]"
       ref={ref}
     >
       <motion.div 
         animate={{ opacity: [0.03, 0.05, 0.03] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/20 via-background to-background"
+        className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#E30016]/5 via-background to-background"
       />
 
       <div className="max-w-7xl mx-auto relative z-10 home-section-shell">
@@ -71,11 +71,11 @@ const ReviewsSection = () => {
           className="text-center mb-16"
         >
           <span className="section-label">Testimonials</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 text-foreground tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mt-3 mb-4 text-[#4B4D4F] tracking-tight">
             What Our Clients Say
           </h2>
-          <div className="w-20 h-1.5 gradient-red rounded-full mx-auto mb-6 shadow-lg shadow-red/20" />
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto font-medium">
+          <div className="w-20 h-1.5 bg-gradient-to-r from-[#E30016] to-[#C40013] rounded-full mx-auto mb-6 shadow-md shadow-red-900/20" />
+          <p className="text-[#6E6F71] text-lg max-w-xl mx-auto font-medium">
             Join hundreds of satisfied businesses relying on our world-class freight solutions.
           </p>
         </motion.div>
@@ -88,23 +88,23 @@ const ReviewsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full max-w-sm lg:w-1/3 xl:w-1/4 flex-shrink-0"
           >
-            <div className="glass-card bg-white dark:bg-card p-8 flex flex-col items-center text-center shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <div className="glass-card bg-white p-8 flex flex-col items-center text-center shadow-xl hover:-translate-y-1 transition-all duration-300 border border-[#E2E4E6]">
               <img 
                 decoding="async" 
                 src="https://lh5.googleusercontent.com/p/AF1QipPYIpuUY0WbqtjsA5uilfhyO0hbbnnz9jYYp4ZN=w130-h130-p-k-no" 
                 alt="EN DESSUS GLOBAL FORWARDING PVT. LTD." 
                 loading="lazy"
-                className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-accent/20"
+                className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-[#E2E4E6]"
               />
-              <h3 className="font-extrabold text-foreground text-base tracking-wide mb-3">
+              <h3 className="font-extrabold text-[#4B4D4F] text-base tracking-wide mb-3">
                 EN DESSUS GLOBAL FORWARDING PVT. LTD.
               </h3>
               <div className="flex gap-1 mb-2">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={22} className="fill-gold text-gold" />
+                  <Star key={i} size={22} className="fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <p className="text-sm font-semibold text-foreground mb-6 opacity-90">{reviews.length}+ Google reviews</p>
+              <p className="text-sm font-semibold text-[#6E6F71] mb-6">{reviews.length}+ Google reviews</p>
               <a 
                 href="https://admin.trustindex.io/api/googleWriteReview?place-id=ChIJgbeWEtWEXjkRtPykcs9e-Sg" 
                 role="button" 
@@ -122,7 +122,7 @@ const ReviewsSection = () => {
           <div className="w-full lg:w-2/3 xl:w-3/4 flex overflow-hidden relative group [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] min-h-[250px]">
             {isLoading ? (
               <div className="w-full flex items-center justify-center">
-                <Loader2 size={40} className="animate-spin text-accent" />
+                <Loader2 size={40} className="animate-spin text-[#E30016]" />
               </div>
             ) : (
               <>
