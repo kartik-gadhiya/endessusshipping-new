@@ -47,10 +47,10 @@ const Navbar = () => {
       className="fixed left-0 right-0 top-3 z-50 px-4 sm:px-6"
     >
       <div
-        className={`mx-auto flex h-20 max-w-7xl items-center justify-between rounded-2xl border px-4 shadow-md transition-all duration-500 sm:px-6 ${
+        className={`mx-auto flex h-20 max-w-7xl items-center justify-between rounded-2xl border px-4 transition-all duration-300 sm:px-6 ${
           scrolled
-            ? "border-[#9C9D9F]/40 bg-white/98 backdrop-blur-lg shadow-[0_12px_36px_rgba(110,111,113,0.12)]"
-            : "border-white/20 bg-[#4B4D4F]/55 backdrop-blur-md shadow-[0_10px_28px_rgba(75,77,79,0.2)]"
+            ? "border-[#E2E4E6] bg-white shadow-[0_12px_36px_rgba(110,111,113,0.12)]"
+            : "border-[#E2E4E6] bg-white shadow-[0_10px_28px_rgba(110,111,113,0.08)]"
         }`}
       >
         <Link to="/" className="group flex items-center gap-3">
@@ -62,7 +62,7 @@ const Navbar = () => {
             fetchPriority="high"
             width={195}
             height={65}
-            className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
 
@@ -77,8 +77,8 @@ const Navbar = () => {
                     to={item.href}
                     className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] transition-all duration-300 ${
                       isActive
-                        ? "bg-[#E30016] text-white shadow-md shadow-red-900/25"
-                        : "text-[#E30016] hover:bg-[#E30016] hover:text-white"
+                        ? "bg-[#E30016] text-white shadow-md shadow-red-900/20"
+                        : "text-[#6E6F71] hover:bg-red-50/60 hover:text-[#E30016]"
                     }`}
                   >
                     {item.label}
@@ -94,7 +94,7 @@ const Navbar = () => {
                 onClick={() => handleNavClick(item)}
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] text-[#E30016] hover:bg-[#E30016] hover:text-white transition-all duration-300"
+                className="inline-flex items-center rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] text-[#6E6F71] hover:bg-red-50/60 hover:text-[#E30016] transition-all duration-300"
               >
                 {item.label}
               </motion.a>
@@ -124,7 +124,7 @@ const Navbar = () => {
         <motion.button
           onClick={() => setMobileOpen((prev) => !prev)}
           whileTap={{ scale: 0.92 }}
-          className="rounded-xl p-2 text-[#E30016] hover:bg-[#E30016]/10 transition-colors lg:hidden"
+          className="rounded-xl p-2 text-[#6E6F71] hover:text-[#E30016] hover:bg-[#F4F5F7] transition-colors lg:hidden"
           aria-label="Toggle navigation"
         >
           {mobileOpen ? <X size={26} /> : <Menu size={26} />}
@@ -138,7 +138,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="mx-auto mt-2 max-w-7xl overflow-hidden rounded-2xl border border-white/20 bg-[#4B4D4F]/95 px-4 py-4 shadow-2xl backdrop-blur-xl lg:hidden text-white"
+            className="mx-auto mt-2 max-w-7xl overflow-hidden rounded-2xl border border-[#E2E4E6] bg-white px-4 py-4 shadow-2xl lg:hidden text-[#6E6F71]"
           >
             <div className="grid gap-2">
               {navItems.map((item) => {
@@ -150,10 +150,10 @@ const Navbar = () => {
                       key={item.label}
                       to={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`rounded-xl px-3 py-2.5 text-sm font-bold tracking-[0.08em] transition-colors ${
+                      className={`rounded-xl px-3.5 py-2.5 text-sm font-bold tracking-[0.08em] transition-colors ${
                         isActive
                           ? "bg-[#E30016] text-white shadow-sm"
-                          : "text-[#E30016] hover:bg-[#E30016] hover:text-white"
+                          : "text-[#6E6F71] hover:bg-red-50/60 hover:text-[#E30016]"
                       }`}
                     >
                       {item.label}
@@ -166,7 +166,7 @@ const Navbar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={() => handleNavClick(item)}
-                    className="rounded-xl px-3 py-2.5 text-sm font-bold tracking-[0.08em] text-[#E30016] hover:bg-[#E30016] hover:text-white transition-colors"
+                    className="rounded-xl px-3.5 py-2.5 text-sm font-bold tracking-[0.08em] text-[#6E6F71] hover:bg-red-50/60 hover:text-[#E30016] transition-colors"
                   >
                     {item.label}
                   </a>
@@ -179,7 +179,7 @@ const Navbar = () => {
                 <Button
                   variant="accent"
                   size="lg"
-                  className="w-full bg-[#E30016] hover:bg-[#C40013] text-white font-bold"
+                  className="w-full bg-[#E30016] hover:bg-[#C40013] text-white font-bold shadow-md shadow-red-900/20"
                 >
                   Get a Quote
                 </Button>
