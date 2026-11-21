@@ -1,18 +1,18 @@
-name: Deploy to Server on Merge to Main
+name: Deploy Development Environment on Push to Dev
 
 on:
   push:
     branches:
-      - main
+      - dev
   workflow_dispatch:
 
 concurrency:
-  group: production-deployment
+  group: development-deployment
   cancel-in-progress: false
 
 jobs:
   deploy:
-    name: Execute Production Deployment
+    name: Execute Development Deployment
     runs-on: ubuntu-latest
 
     # Connect GitHub Environment
@@ -28,7 +28,7 @@ jobs:
           if [ -z "$SERVER_HOST" ] || \
              [ -z "$SERVER_USER" ] || \
              [ -z "$SERVER_SSH_KEY" ]; then
-            echo "::error::Missing Production Environment secrets."
+            echo "::error::Missing Required Deployment secrets."
             exit 1
           fi
 
@@ -45,16 +45,18 @@ jobs:
           script: |
             set -e
 
-            TARGET_DIR="/var/www/endessusshipping"
+            TARGET_DIR="/var/www/endessusshipping-dev"
 
-            echo "Deploying to ${TARGET_DIR}"
+            echo "Deploying to development directory: ${TARGET_DIR}"
 
             cd "${TARGET_DIR}"
 
+            git config --global --add safe.directory "${TARGET_DIR}" 2>/dev/null || true
+
             chmod +x scripts/deploy.sh
 
-            echo "Starting deployment on main..."
+            echo "Starting deployment on dev..."
 
-            ./scripts/deploy.sh main
+            ./scripts/deploy.sh dev
 
-            echo "Deployment completed successfully."
+            echo "Development deployment completed successfully."
