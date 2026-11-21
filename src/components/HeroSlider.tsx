@@ -185,7 +185,7 @@ const HeroSlider = () => {
 
 
       <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
-        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-black/40 px-3 py-2.5 shadow-[0_18px_35px_rgba(0,0,0,0.35)] backdrop-blur-[3px] mb-4">
+        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-black/25 px-3 py-2.5 shadow-[0_18px_35px_rgba(0,0,0,0.35)] mb-4">
           <button
             onClick={() => scrollToSection("#about")}
             className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-3 py-1.5 text-xs font-bold tracking-[0.14em] text-white/90 transition-colors hover:bg-white/15 hover:text-white"
@@ -219,7 +219,7 @@ const HeroSlider = () => {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#1a1c1e]/40" />
+      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#1a1c1e]/20" />
     </section>
   );
 };
