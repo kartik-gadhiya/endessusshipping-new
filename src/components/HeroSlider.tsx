@@ -52,9 +52,9 @@ const HeroSlider = () => {
   const titlePhrases = slide.titlePhrases;
 
   return (
-    <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#6E6F71] lg:min-h-[860px]">
+    <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#1a1c1e] lg:min-h-[860px]">
       <video
-        className="absolute inset-0 h-full w-full object-cover brightness-[1.02] contrast-[1.08] saturate-[1.08]"
+        className="absolute inset-0 h-full w-full object-cover brightness-[1.04] contrast-[1.04]"
         autoPlay
         muted
         playsInline
@@ -66,8 +66,8 @@ const HeroSlider = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(20,23,26,0.65)_0%,rgba(35,38,42,0.38)_45%,rgba(45,48,52,0.12)_100%)]" />
-      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(227,0,22,0.06),transparent_40%),radial-gradient(circle_at_14%_84%,rgba(156,157,159,0.06),transparent_35%)]" />
+      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(15,20,25,0.25)_0%,rgba(25,30,36,0.1)_50%,transparent_100%)]" />
+      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(227,0,22,0.04),transparent_40%),radial-gradient(circle_at_14%_84%,rgba(156,157,159,0.04),transparent_35%)]" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-6 pb-32 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
         <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
@@ -84,13 +84,13 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: -18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md"
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-4 py-2"
               >
                 <Anchor size={15} className="text-[#E30016]" />
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">{slide.tag}</span>
               </motion.div>
 
-              <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl lg:max-w-3xl">
+              <h1 className="text-balance text-4xl font-black leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl lg:max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
                 {titlePhrases.map((phrase, i) => (
                   <motion.span
                     key={phrase + i}
@@ -112,7 +112,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55, duration: 0.45 }}
-                className="mt-6 max-w-2xl rounded-2xl border border-white/15 bg-[#4B4D4F]/70 px-5 py-3 text-lg font-medium leading-relaxed text-white drop-shadow-[0_2px_14px_rgba(75,77,79,0.3)] backdrop-blur-sm md:text-xl"
+                className="mt-6 max-w-2xl rounded-2xl border border-white/10 bg-black/20 px-5 py-3 text-lg font-medium leading-relaxed text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.3)] md:text-xl"
               >
                 {slide.subtitle}
               </motion.p>
@@ -121,7 +121,7 @@ const HeroSlider = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.68, duration: 0.45 }}
-                className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 md:text-base lg:max-w-xl"
+                className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)] md:text-base lg:max-w-xl"
               >
                 {slide.blurb}
               </motion.p>
@@ -144,7 +144,7 @@ const HeroSlider = () => {
                   href="#contact"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white hover:text-[#6E6F71]"
+                  className="inline-flex min-h-[52px] w-fit items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/35 bg-white/10 px-7 py-3.5 text-lg font-bold text-white transition-all hover:bg-white hover:text-[#6E6F71]"
                 >
                   Request a Quote
                 </motion.a>
@@ -185,7 +185,7 @@ const HeroSlider = () => {
 
 
       <div className="absolute bottom-10 left-1/2 z-[46] -translate-x-1/2 md:bottom-12 lg:bottom-12">
-        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#4B4D4F]/85 px-3 py-2.5 shadow-[0_18px_35px_rgba(75,77,79,0.35)] backdrop-blur-md mb-4">
+        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-black/40 px-3 py-2.5 shadow-[0_18px_35px_rgba(0,0,0,0.35)] backdrop-blur-[3px] mb-4">
           <button
             onClick={() => scrollToSection("#about")}
             className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-3 py-1.5 text-xs font-bold tracking-[0.14em] text-white/90 transition-colors hover:bg-white/15 hover:text-white"
@@ -219,7 +219,7 @@ const HeroSlider = () => {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#4B4D4F]/40" />
+      <div className="absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent to-[#1a1c1e]/40" />
     </section>
   );
 };
