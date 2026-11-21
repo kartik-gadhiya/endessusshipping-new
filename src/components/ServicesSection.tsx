@@ -1,5 +1,5 @@
-import { useRef, MouseEvent } from "react";
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight, Ship, Plane, Truck, FileCheck, Package, Anchor } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -50,49 +50,12 @@ const SVGIconGradients = () => (
 );
 
 const TiltCard = ({ service, index, inView }: { service: typeof services[0]; index: number; inView: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
     <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer border border-[#E2E4E6] hover:border-[#E30016] transition-all duration-300 bg-white shadow-md hover:shadow-2xl hover:shadow-red-900/10"
+      className="group relative flex flex-col h-full rounded-2xl overflow-hidden border border-[#E2E4E6] hover:border-[#E30016] transition-colors duration-300 bg-white shadow-md hover:shadow-xl"
     >
       {/* Image Section */}
       <div className="aspect-video overflow-hidden relative">
@@ -103,41 +66,36 @@ const TiltCard = ({ service, index, inView }: { service: typeof services[0]; ind
           decoding="async"
           width={600}
           height={338}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#4B4D4F]/85 via-[#6E6F71]/40 to-transparent group-hover:from-[#4B4D4F]/95 group-hover:via-[#6E6F71]/60 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#4B4D4F]/85 via-[#6E6F71]/40 to-transparent" />
         
         {/* Icon Badge */}
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 10, y: -2 }}
-          className="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-md rounded-xl flex items-center justify-center shadow-xl border border-white/20 group-hover:border-[#E30016] transition-all duration-300"
+        <div
+          className="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-md rounded-xl flex items-center justify-center shadow-md border border-white/20 group-hover:border-[#E30016] transition-colors duration-300"
         >
           <service.icon size={26} stroke={`url(#${service.iconColor})`} strokeWidth={2.5} />
-        </motion.div>
+        </div>
       </div>
 
       {/* Content Section */}
-      <div className="p-6 relative">
+      <div className="p-6 relative flex flex-col flex-grow">
         <div className="mb-3">
           <p className="text-xs font-bold text-[#6E6F71] tracking-widest uppercase mb-1">{service.subtitle}</p>
           <h3 className="text-lg font-bold text-[#4B4D4F] leading-tight group-hover:text-[#E30016] transition-colors">{service.title}</h3>
         </div>
         
-        <p className="text-[#6E6F71] text-sm leading-relaxed mb-5 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+        <p className="text-[#6E6F71] text-sm leading-relaxed mb-5 line-clamp-3">
           {service.desc}
         </p>
 
-        <Link to={`/services#${service.id}`}>
-          <motion.div
-            className="inline-flex items-center gap-2 text-[#E30016] font-bold text-sm hover:gap-3 transition-all opacity-0 group-hover:opacity-100 duration-300"
-          >
-            Learn More
-            <motion.div whileHover={{ x: 4 }}>
-              <ArrowRight size={16} />
-            </motion.div>
-          </motion.div>
-        </Link>
+        <div className="mt-auto pt-2">
+          <Link to={`/services#${service.id}`} className="inline-flex items-center gap-2 text-[#E30016] font-bold text-sm hover:gap-3 transition-all">
+            Read More
+            <ArrowRight size={16} />
+          </Link>
+        </div>
 
         {/* Hover accent line */}
         <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#E30016] to-[#9C9D9F] rounded-full w-0 group-hover:w-full transition-all duration-300" />
