@@ -54,7 +54,7 @@ const HeroSlider = () => {
   return (
     <section className="relative h-[95vh] min-h-[800px] w-full overflow-hidden bg-[#6E6F71] lg:min-h-[860px]">
       <video
-        className="absolute inset-0 h-full w-full scale-[1.02] object-cover brightness-[1.08] contrast-[1.05] saturate-[1.05]"
+        className="absolute inset-0 h-full w-full object-cover brightness-[1.02] contrast-[1.08] saturate-[1.08]"
         autoPlay
         muted
         playsInline
@@ -66,8 +66,8 @@ const HeroSlider = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(75,77,79,0.92)_0%,rgba(110,111,113,0.82)_45%,rgba(110,111,113,0.55)_100%)]" />
-      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(227,0,22,0.12),transparent_38%),radial-gradient(circle_at_14%_84%,rgba(156,157,159,0.12),transparent_32%)]" />
+      <div className="absolute inset-0 z-[5] bg-[linear-gradient(110deg,rgba(20,23,26,0.65)_0%,rgba(35,38,42,0.38)_45%,rgba(45,48,52,0.12)_100%)]" />
+      <div className="absolute inset-0 z-[6] bg-[radial-gradient(circle_at_80%_20%,rgba(227,0,22,0.06),transparent_40%),radial-gradient(circle_at_14%_84%,rgba(156,157,159,0.06),transparent_35%)]" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-6 pb-32 pt-28 lg:px-12 lg:pb-24 lg:pt-32">
         <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
