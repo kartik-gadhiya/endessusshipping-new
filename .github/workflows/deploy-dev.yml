@@ -15,7 +15,7 @@ jobs:
     name: Execute Development Deployment
     runs-on: ubuntu-latest
 
-    # Connect GitHub Environment
+    # Connect GitHub Environment for secrets
     environment: Production
 
     steps:

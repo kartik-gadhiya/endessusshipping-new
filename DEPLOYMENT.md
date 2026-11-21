@@ -1,30 +1,42 @@
 # Automated Deployment & Notification Guide
 
-This repository is configured with an automated CI/CD deployment pipeline that automatically pulls latest changes, installs dependencies, builds the production bundle, and dispatches email notifications (Success/Failed) to multiple configured recipients whenever code is merged and pushed to the `main` branch.
+This repository is configured with automated CI/CD deployment pipelines that automatically pull latest changes, install dependencies, build the application bundle, and dispatch email notifications (Success/Failed) to multiple configured recipients.
+
+### Dual Pipeline Architecture
+1. **Development Environment (`dev` branch)**:
+   - Triggers on push to `dev` (or manual `workflow_dispatch`).
+   - Workflow: `.github/workflows/deploy-dev.yml`
+   - Target directory on server: `/var/www/endessusshipping-dev`
+   - Target domain: `dev.endessusshipping.com`
+   - Executes: `./scripts/deploy.sh dev`
+   - Concurrency group: `development-deployment`
+
+2. **Production Environment (`main` branch)**:
+   - Triggers on push to `main` (or manual `workflow_dispatch`).
+   - Workflow: `.github/workflows/deploy-production.yml`
+   - Target directory on server: `/var/www/endessusshipping`
+   - Target domain: `endessusshipping.com`
+   - Executes: `./scripts/deploy.sh main`
+   - Concurrency group: `production-deployment`
 
 ---
 
 ## 1. Architecture Overview
 
 ```
-[ Developer merges / pushes to main ]
-               │
-               ▼
-[ GitHub Actions (.github/workflows/deploy.yml) ]  OR  [ GitHub Webhook (/webhook/deploy) ]
-               │
-               ▼
-[ Server executes scripts/deploy.sh ]
-   ├─ 1. Git fetch & checkout main
-   ├─ 2. Git pull origin main
-   ├─ 3. npm install (dependency sync)
-   ├─ 4. npm run build (generates dist/)
-   └─ 5. Verifies build output
-               │
-               ▼
-[ scripts/send-deployment-email.mjs ]
-   ├─ Reads DEPLOY_NOTIFY_EMAILS from .env
-   ├─ Reads SMTP config from .env
-   └─ Sends rich HTML status email to all recipients
+[ Developer merges / pushes to dev ]  ──────► [ .github/workflows/deploy-dev.yml ]
+                                                      │ (SSH)
+                                                      ▼
+                                          [ /var/www/endessusshipping-dev ]
+                                          └─ ./scripts/deploy.sh dev
+                                             └─ dev.endessusshipping.com
+
+[ Developer merges / pushes to main ] ─────► [ .github/workflows/deploy-production.yml ]
+                                                      │ (SSH)
+                                                      ▼
+                                          [ /var/www/endessusshipping ]
+                                          └─ ./scripts/deploy.sh main
+                                             └─ endessusshipping.com
 ```
 
 ---

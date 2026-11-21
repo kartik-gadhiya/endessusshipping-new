@@ -28,6 +28,19 @@ TARGET_BRANCH="${1:-main}"
 START_TIME="$(date +%s)"
 HOSTNAME_NAME="$(hostname 2>/dev/null || echo "server")"
 
+# Configure environment-specific properties (domain, project name, PM2 process)
+if [ "${TARGET_BRANCH}" = "dev" ] || [[ "${PROJECT_ROOT}" == *"-dev"* ]]; then
+    DEPLOY_ENV="development"
+    DEPLOY_DOMAIN="dev.endessusshipping.com"
+    DEPLOY_PROJECT="En Dessus Shipping (Dev)"
+    PM2_PROCESS="endessus-dev"
+else
+    DEPLOY_ENV="production"
+    DEPLOY_DOMAIN="endessusshipping.com"
+    DEPLOY_PROJECT="En Dessus Shipping"
+    PM2_PROCESS="endessus"
+fi
+
 # ==============================================================================
 # 2. Configure logging
 # ==============================================================================
@@ -42,10 +55,12 @@ exec > >(tee -a "${LOG_FILE}") 2>&1
 
 echo "================================================================="
 echo "  Starting Automated Deployment"
-echo "  Date:       $(date)"
-echo "  Target:     ${TARGET_BRANCH}"
-echo "  Directory:  ${PROJECT_ROOT}"
-echo "  Host:       ${HOSTNAME_NAME}"
+echo "  Date:         $(date)"
+echo "  Target:       ${TARGET_BRANCH}"
+echo "  Environment:  ${DEPLOY_ENV}"
+echo "  Domain:       ${DEPLOY_DOMAIN}"
+echo "  Directory:    ${PROJECT_ROOT}"
+echo "  Host:         ${HOSTNAME_NAME}"
 echo "================================================================="
 
 # ==============================================================================
@@ -129,8 +144,8 @@ send_notification() {
 
     node "${SCRIPT_DIR}/send-deployment-email.mjs" \
         --repo="kartik-gadhiya/endessusshipping-new" \
-        --domain="endessusshipping.com" \
-        --project="En Dessus Shipping" \
+        --domain="${DEPLOY_DOMAIN}" \
+        --project="${DEPLOY_PROJECT}" \
         --status="${status}" \
         --branch="${TARGET_BRANCH}" \
         --commit="${commit_hash}" \
@@ -284,8 +299,28 @@ BUILD_SIZE="$(du -sh dist | cut -f1)"
 
 echo "Build verification passed."
  
-echo "Optimizing static assets and pre-compressing with Brotli/Gzip..."
-/usr/local/bin/optimize-static-assets.sh "${PROJECT_ROOT}/dist"
+# ==============================================================================
+# Optimize static assets conditionally
+# ==============================================================================
+
+if [ "${DEPLOY_ENV}" = "development" ] || [ "${TARGET_BRANCH}" = "dev" ] || [[ "${PROJECT_ROOT}" == *"-dev"* ]]; then
+    echo "Development deployment: Skipping heavy image optimization for fast deployment."
+elif [ "${SKIP_IMAGE_OPTIMIZATION:-false}" = "true" ]; then
+    echo "Image optimization skipped via SKIP_IMAGE_OPTIMIZATION."
+else
+    # Check if any image files changed in the latest commit
+    IMAGES_CHANGED="$(git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -E '\.(png|jpg|jpeg|webp|svg|ico|avif)$' || true)"
+    if [ -n "${IMAGES_CHANGED}" ] || [ "${FORCE_IMAGE_OPTIMIZATION:-false}" = "true" ]; then
+        echo "Image files modified in release. Running asset optimization..."
+        if [ -x "/usr/local/bin/optimize-static-assets.sh" ]; then
+            /usr/local/bin/optimize-static-assets.sh "${PROJECT_ROOT}/dist"
+        else
+            echo "Optimization script /usr/local/bin/optimize-static-assets.sh not executable or not found."
+        fi
+    else
+        echo "No image modifications detected in current commit. Skipping image optimization for fast deployment."
+    fi
+fi
 
 echo "Build directory: dist/"
 echo "Build size:      ${BUILD_SIZE}"
@@ -299,19 +334,22 @@ echo "[6/7] Checking application process..."
 
 if command -v pm2 >/dev/null 2>&1; then
 
-    if pm2 describe endessus >/dev/null 2>&1; then
+    TARGET_PM2_NAME="${PM2_PROCESS}"
+    if ! pm2 describe "${TARGET_PM2_NAME}" >/dev/null 2>&1; then
+        if pm2 describe endessus >/dev/null 2>&1; then
+            TARGET_PM2_NAME="endessus"
+        else
+            TARGET_PM2_NAME=""
+        fi
+    fi
 
-        echo "Reloading PM2 process 'endessus'..."
-
-        pm2 reload endessus --update-env
-
+    if [ -n "${TARGET_PM2_NAME}" ]; then
+        echo "Reloading PM2 process '${TARGET_PM2_NAME}'..."
+        pm2 reload "${TARGET_PM2_NAME}" --update-env
         echo "PM2 process reloaded successfully."
-
     else
-
-        echo "PM2 process 'endessus' not found."
+        echo "PM2 process '${PM2_PROCESS}' not found."
         echo "Skipping PM2 reload."
-
     fi
 
 else
