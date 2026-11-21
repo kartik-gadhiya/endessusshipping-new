@@ -128,6 +128,9 @@ send_notification() {
     fi
 
     node "${SCRIPT_DIR}/send-deployment-email.mjs" \
+        --repo="kartik-gadhiya/endessusshipping-new" \
+        --domain="endessusshipping.com" \
+        --project="En Dessus Shipping" \
         --status="${status}" \
         --branch="${TARGET_BRANCH}" \
         --commit="${commit_hash}" \
@@ -280,6 +283,10 @@ fi
 BUILD_SIZE="$(du -sh dist | cut -f1)"
 
 echo "Build verification passed."
+ 
+echo "Optimizing static assets and pre-compressing with Brotli/Gzip..."
+/usr/local/bin/optimize-static-assets.sh "${PROJECT_ROOT}/dist"
+
 echo "Build directory: dist/"
 echo "Build size:      ${BUILD_SIZE}"
 
